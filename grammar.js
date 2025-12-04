@@ -407,6 +407,7 @@ module.exports = grammar({
       alias(':example:', $.example),
       alias(':exercise:', $.theorem),
       alias(':figure:', $.figure),
+      alias(':html:', $.html),
       alias(':itemize:', $.itemize),
       alias(':lemma:', $.lemma),
       alias(':p:', $.subproof),
@@ -418,6 +419,7 @@ module.exports = grammar({
       alias(':sketch:', $.sketch),
       alias(':step:', $.step),
       alias(':theorem:', $.theorem),
+      alias(':video:', $.video),
     ),
 
     metakey_text: $ => choice(

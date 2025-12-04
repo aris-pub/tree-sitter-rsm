@@ -2807,6 +2807,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":html:"
+          },
+          "named": true,
+          "value": "html"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":itemize:"
           },
           "named": true,
@@ -2901,6 +2910,15 @@
           },
           "named": true,
           "value": "theorem"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":video:"
+          },
+          "named": true,
+          "value": "video"
         }
       ]
     },

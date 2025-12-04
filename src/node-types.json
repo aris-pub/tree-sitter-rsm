@@ -132,6 +132,10 @@
             "named": true
           },
           {
+            "type": "html",
+            "named": true
+          },
+          {
             "type": "itemize",
             "named": true
           },
@@ -165,6 +169,10 @@
           },
           {
             "type": "theorem",
+            "named": true
+          },
+          {
+            "type": "video",
             "named": true
           }
         ]
@@ -1621,6 +1629,10 @@
     "named": true
   },
   {
+    "type": "html",
+    "named": true
+  },
+  {
     "type": "icon",
     "named": true
   },
@@ -1830,6 +1842,10 @@
   },
   {
     "type": "value",
+    "named": true
+  },
+  {
+    "type": "video",
     "named": true
   },
   {
