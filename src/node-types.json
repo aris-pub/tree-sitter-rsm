@@ -522,6 +522,14 @@
       "required": true,
       "types": [
         {
+          "type": "author_display_first",
+          "named": true
+        },
+        {
+          "type": "author_display_last",
+          "named": true
+        },
+        {
           "type": "date",
           "named": true
         },
@@ -599,6 +607,10 @@
           "named": true
         },
         {
+          "type": "author_note",
+          "named": true
+        },
+        {
           "type": "email",
           "named": true
         },
@@ -620,6 +632,10 @@
         },
         {
           "type": "name",
+          "named": true
+        },
+        {
+          "type": "orcid",
           "named": true
         },
         {
@@ -1556,6 +1572,18 @@
     "named": true
   },
   {
+    "type": "author_display_first",
+    "named": true
+  },
+  {
+    "type": "author_display_last",
+    "named": true
+  },
+  {
+    "type": "author_note",
+    "named": true
+  },
+  {
     "type": "bibliography",
     "named": true
   },
@@ -1705,6 +1733,10 @@
     "named": true
   },
   {
+    "type": "orcid",
+    "named": true
+  },
+  {
     "type": "paragraph_end",
     "named": false
   },
@@ -1803,10 +1835,6 @@
   {
     "type": "suppose",
     "named": true
-  },
-  {
-    "type": "text",
-    "named": false
   },
   {
     "type": "text",

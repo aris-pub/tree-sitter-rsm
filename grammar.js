@@ -424,12 +424,14 @@ module.exports = grammar({
 
     metakey_text: $ => choice(
       alias(':affiliation:', $.affiliation),
+      alias(':author-note:', $.author_note),
       alias(':email:', $.email),
       alias(':goal:', $.goal),
       alias(':icon:', $.icon),
       alias(':label:', $.label),
       alias(':lang:', $.lang),
       alias(':name:', $.name),
+      alias(':orcid:', $.orcid),
       alias(':reftext:', $.reftext),
       alias(':title:', $.title),
     ),
@@ -448,6 +450,8 @@ module.exports = grammar({
     ),
 
     metakey_any: $ => choice(
+      alias(':author-display-first:', $.author_display_first),
+      alias(':author-display-last:', $.author_display_last),
       alias(':date:', $.date),
       alias(':path:', $.path),
       alias(':scale:', $.scale),

@@ -2938,6 +2938,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":author-note:"
+          },
+          "named": true,
+          "value": "author_note"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":email:"
           },
           "named": true,
@@ -2987,6 +2996,15 @@
           },
           "named": true,
           "value": "name"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":orcid:"
+          },
+          "named": true,
+          "value": "orcid"
         },
         {
           "type": "ALIAS",
@@ -3084,6 +3102,24 @@
     "metakey_any": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":author-display-first:"
+          },
+          "named": true,
+          "value": "author_display_first"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":author-display-last:"
+          },
+          "named": true,
+          "value": "author_display_last"
+        },
         {
           "type": "ALIAS",
           "content": {
