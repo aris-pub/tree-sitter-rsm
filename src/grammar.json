@@ -156,12 +156,20 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "item"
+          "type": "PREC",
+          "value": 2,
+          "content": {
+            "type": "SYMBOL",
+            "name": "item"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "caption"
+          "type": "PREC",
+          "value": 2,
+          "content": {
+            "type": "SYMBOL",
+            "name": "caption"
+          }
         },
         {
           "type": "SEQ",
@@ -1036,7 +1044,7 @@
           "type": "TOKEN",
           "content": {
             "type": "STRING",
-            "value": ":item:"
+            "value": ":-:"
           }
         },
         {
@@ -1332,7 +1340,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "\\*"
+                      "value": "\\*\\*"
                     }
                   },
                   "named": true,
@@ -1350,7 +1358,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "STRING",
-                  "value": "*"
+                  "value": "**"
                 }
               }
             ]
@@ -1371,7 +1379,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "\\/"
+                      "value": "\\*"
                     }
                   },
                   "named": true,
@@ -1389,7 +1397,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "STRING",
-                  "value": "/"
+                  "value": "*"
                 }
               }
             ]

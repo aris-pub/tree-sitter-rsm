@@ -45,8 +45,8 @@ module.exports = grammar({
       '::')),
 
     paragraph: $ => choice(
-      $.item,
-      $.caption,
+      prec(2, $.item),
+      prec(2, $.caption),
       seq(optional(seq(
         field('tag', ':paragraph:'),
         field('meta', $.inlinemeta))),
@@ -175,7 +175,7 @@ module.exports = grammar({
       alias($.paragraph_end, 'paragraph_end')),
 
     item: $ => seq(
-      token(':item:'),
+      token(':-:'),
       optional(field('meta', $.inlinemeta)),
       repeat1($.paragraphcontent),
       alias($.paragraph_end, 'paragraph_end')),
@@ -206,15 +206,15 @@ module.exports = grammar({
         '::'),
 
       // Special spans have special open and close delimiters and support
-      // recursive parsing.  Note *foo* is equivalent to :span:{:strong:}foo::.
+      // recursive parsing.  Note **foo** is equivalent to :span:{:strong:}foo::.
       prec.right(
-        seq(field('tag', alias(token(/\*/), $.spanstrong)),
+        seq(field('tag', alias(token(/\*\*/), $.spanstrong)),
+          repeat($.inlinecontent),
+          token('**'))),
+      prec.right(
+        seq(field('tag', alias(token(/\*/), $.spanemphas)),
           repeat($.inlinecontent),
           token('*'))),
-      prec.right(
-        seq(field('tag', alias(token(/\//), $.spanemphas)),
-          repeat($.inlinecontent),
-          token('/'))),
 
       // References (including 'previous'), citations, and URLs have standard
       // delimiters but their content is parsed in a special way.

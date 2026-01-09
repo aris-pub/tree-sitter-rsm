@@ -1464,15 +1464,19 @@
     "named": false
   },
   {
+    "type": "**",
+    "named": false
+  },
+  {
     "type": ",",
     "named": false
   },
   {
-    "type": "/",
+    "type": ":",
     "named": false
   },
   {
-    "type": ":",
+    "type": ":-:",
     "named": false
   },
   {
@@ -1489,10 +1493,6 @@
   },
   {
     "type": ":caption:",
-    "named": false
-  },
-  {
-    "type": ":item:",
     "named": false
   },
   {
