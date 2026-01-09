@@ -1888,3 +1888,69 @@ Lorem ipsum.
         (metaval_text)))
     (paragraph
       (text))))
+================================================================================
+Author with new metakeys
+================================================================================
+
+:rsm:
+
+:author:
+  :name: Leo Torres
+  :affiliation: 1
+  :author-note: *
+  :orcid: 0000-0001-2345-6789
+  :email: leo@leotrs.com
+::
+
+:author:
+  :name: Jane Smith
+  :affiliation: 2
+  :orcid: 0000-0002-3456-7890
+::
+
+:author-display-first: 2
+:author-display-last: 5
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (author)
+    meta: (blockmeta
+      (pair
+        (metakey_text (name))
+        (metaval_text))
+      (pair
+        (metakey_text (affiliation))
+        (metaval_text))
+      (pair
+        (metakey_text (author_note))
+        (metaval_text))
+      (pair
+        (metakey_text (orcid))
+        (metaval_text))
+      (pair
+        (metakey_text (email))
+        (metaval_text))))
+  (block
+    tag: (author)
+    meta: (blockmeta
+      (pair
+        (metakey_text (name))
+        (metaval_text))
+      (pair
+        (metakey_text (affiliation))
+        (metaval_text))
+      (pair
+        (metakey_text (orcid))
+        (metaval_text))))
+  meta: (blockmeta
+    (pair
+      (metakey_any (author_display_first))
+      (metaval_any))
+    (pair
+      (metakey_any (author_display_last))
+      (metaval_any))))
+
