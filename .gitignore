@@ -109,3 +109,17 @@ Cargo.lock
 rsm.dylib
 rsm.dylib.dSYM/
 rsm.so.dSYM/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.Python
+env/
+venv/
+.venv/
+
+# uv
+uv.lock
