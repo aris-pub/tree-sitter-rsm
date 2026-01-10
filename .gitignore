@@ -109,6 +109,11 @@ Cargo.lock
 rsm.dylib
 rsm.dylib.dSYM/
 rsm.so.dSYM/
+libtree-sitter-rsm.a
+libtree-sitter-rsm.dylib
+libtree-sitter-rsm.so
+*.o
+*.pc
 
 # Python
 __pycache__/
