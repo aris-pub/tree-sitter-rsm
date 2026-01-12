@@ -1,0 +1,242 @@
+================================================================================
+Single article reference
+================================================================================
+
+:rsm:
+
+:references:
+@article{foo2024,
+  title = {My Title},
+  author = {John Doe},
+  year = {2024}
+}
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))))
+
+
+================================================================================
+Multiple references with different types
+================================================================================
+
+:rsm:
+
+:references:
+@article{foo2024,
+  title = {First Article},
+  author = {Jane Smith},
+  year = {2024},
+  journal = {Nature}
+}
+@book{bar2023,
+  title = {Great Book},
+  author = {Bob Jones},
+  year = {2023},
+  publisher = {Acme Press}
+}
+@software{baz2022,
+  title = {Cool Software},
+  author = {Alice Brown},
+  year = {2022},
+  url = {https://example.com}
+}
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))))
+
+
+================================================================================
+References with citation in text
+================================================================================
+
+:rsm:
+
+Text citing :cite: foo2024 :: and :cite: bar2023 ::.
+
+:references:
+@article{foo2024,
+  title = {First},
+  year = {2024}
+}
+@book{bar2023,
+  title = {Second},
+  year = {2023}
+}
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (cite)
+      targetlabels: (text))
+    (text)
+    (specialinline
+      tag: (cite)
+      targetlabels: (text))
+    (text))
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))))
+
+
+================================================================================
+Reference with all common fields
+================================================================================
+
+:rsm:
+
+:references:
+@article{complete2024,
+  title = {Complete Article},
+  author = {John Doe},
+  year = {2024},
+  journal = {Science Journal},
+  volume = {42},
+  number = {3},
+  doi = {10.1234/example},
+  url = {https://doi.org/10.1234/example}
+}
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))))
+
+
+================================================================================
+Empty references block
+================================================================================
+
+:rsm:
+
+Text without citations.
+
+:references:
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (references))

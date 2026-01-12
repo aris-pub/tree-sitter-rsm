@@ -86,6 +86,10 @@
               {
                 "type": "SYMBOL",
                 "name": "paragraph"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "references"
               }
             ]
           }
@@ -93,18 +97,6 @@
         {
           "type": "STRING",
           "value": "::"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "bibtex"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
     },
@@ -795,28 +787,6 @@
           {
             "type": "SYMBOL",
             "name": "table"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "tag",
-                "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "STRING",
-                    "value": ":bibliography:"
-                  },
-                  "named": true,
-                  "value": "bibliography"
-                }
-              },
-              {
-                "type": "STRING",
-                "value": "::"
-              }
-            ]
           },
           {
             "type": "SEQ",
@@ -2314,12 +2284,12 @@
         "name": "inlinecontent"
       }
     },
-    "bibtex": {
+    "references": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": ":bibtex:"
+          "value": ":references:"
         },
         {
           "type": "REPEAT",

@@ -71,21 +71,6 @@
     }
   },
   {
-    "type": "bibtex",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bibitem",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "block",
     "named": true,
     "fields": {
@@ -778,6 +763,21 @@
     }
   },
   {
+    "type": "references",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bibitem",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "section",
     "named": true,
     "fields": {
@@ -884,10 +884,6 @@
           "named": true
         },
         {
-          "type": "bibtex",
-          "named": true
-        },
-        {
           "type": "block",
           "named": true
         },
@@ -897,6 +893,10 @@
         },
         {
           "type": "paragraph",
+          "named": true
+        },
+        {
+          "type": "references",
           "named": true
         },
         {
@@ -930,10 +930,6 @@
         "types": [
           {
             "type": "algorithm",
-            "named": true
-          },
-          {
-            "type": "bibliography",
             "named": true
           },
           {
@@ -1488,10 +1484,6 @@
     "named": false
   },
   {
-    "type": ":bibtex:",
-    "named": false
-  },
-  {
     "type": ":caption:",
     "named": false
   },
@@ -1501,6 +1493,10 @@
   },
   {
     "type": ":paragraph:",
+    "named": false
+  },
+  {
+    "type": ":references:",
     "named": false
   },
   {
@@ -1581,10 +1577,6 @@
   },
   {
     "type": "author_note",
-    "named": true
-  },
-  {
-    "type": "bibliography",
     "named": true
   },
   {
@@ -1702,11 +1694,11 @@
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "metaval_list_item",
@@ -1835,6 +1827,10 @@
   {
     "type": "suppose",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "text",

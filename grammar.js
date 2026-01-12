@@ -34,9 +34,8 @@ module.exports = grammar({
       field('tag', ':rsm:'),
       optional(seq(field('tag', /# /), field('title', $.text))),
       optional(field('meta', $.blockmeta)),
-      repeat(choice($.section, $.appendix, $.mathblock, $.specialblock, $.block, $.paragraph)),
-      '::',
-      optional($.bibtex)),
+      repeat(choice($.section, $.appendix, $.mathblock, $.specialblock, $.block, $.paragraph, $.references)),
+      '::'),
 
     block: $ => prec(1, seq(
       field('tag', $.blocktag),
@@ -143,7 +142,6 @@ module.exports = grammar({
 
       // The following are NOT stamps because they could have meta, though they
       // cannot have content
-      seq(field('tag', alias(':bibliography:', $.bibliography)), '::'),
       seq(field('tag', alias(':toc:', $.toc)), '::'),
 
       // Math and code blocks have special open and close delimiters ($$) and
@@ -341,7 +339,7 @@ module.exports = grammar({
     /////////////////////////////////////////////////////////////
     // Bibliography stuff
     /////////////////////////////////////////////////////////////
-    bibtex: $ => seq(':bibtex:', repeat($.bibitem), '::'),
+    references: $ => seq(':references:', repeat($.bibitem), '::'),
 
     bibitem: $ => seq(
       '@',
