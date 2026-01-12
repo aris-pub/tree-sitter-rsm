@@ -250,10 +250,11 @@ Section with meta
 Author and abstract
 ================================================================================
 
-:rsm:
+:rsm: {
 :label: mylbl
 :title: The Perron non-backtracking eigenvalue after node addition
 :date: 2022-03-29
+}
 
 :author: {
   :name: Leo Torres
@@ -679,9 +680,9 @@ Enumerate
 
 :enumerate:
 
-  :item: Foo.
+  :-: Foo.
 
-  :item: Bar.
+  :-: Bar.
 
 ::
 
@@ -708,7 +709,7 @@ Enumerate no space before Halmos
 
 :enumerate:
 
-  :item: Foo.::
+  :-: Foo.::
 
 ::
 
@@ -730,9 +731,9 @@ Enumerate items with label
 
 :enumerate:
 
-  :item: {:label: one} Foo.
+  :-: {:label: one} Foo.
 
-  :item: {:label: two} Bar.
+  :-: {:label: two} Bar.
 
 ::
 
@@ -767,9 +768,9 @@ Itemize
 
 :itemize:
 
-  :item: Foo.
+  :-: Foo.
 
-  :item: Bar.
+  :-: Bar.
 
 ::
 
@@ -796,7 +797,7 @@ Itemize no space before Halmos
 
 :itemize:
 
-  :item: Foo.::
+  :-: Foo.::
 
 ::
 
@@ -818,9 +819,9 @@ Itemize items with label
 
 :itemize:
 
-  :item: {:label: one} Foo.
+  :-: {:label: one} Foo.
 
-  :item: {:label: two} Bar.
+  :-: {:label: two} Bar.
 
 ::
 
@@ -1059,7 +1060,7 @@ Strong half word
 
 :rsm:
 
-Bo:span:{:strong:}ld::.
+Bo :span:{:strong:}ld::.
 
 ::
 
@@ -1354,11 +1355,10 @@ Bo*ld.
 
 --------------------------------------------------------------------------------
 
-(source_file
-  (ERROR
-    (text)
-    (spanstrong)
-    (text)))
+(ERROR
+  (text)
+  (spanemphas)
+  (text))
 
 
 ================================================================================
@@ -1495,7 +1495,7 @@ ERROR: item in the wrong place
 
 ## Some section
 
-Lorem ipsum :item: Foo bar.
+Lorem ipsum :-: Foo bar.
 
 ::
 
@@ -1583,9 +1583,9 @@ Claimshort within item with meta
 
 :enumerate:
 
-  :item: {:label: one} :⊢: $2+2=4$::.
+  :-: {:label: one} :⊢: $2+2=4$::.
 
-  :item: {:label: two} :⊢: $3+3=6$::.
+  :-: {:label: two} :⊢: $3+3=6$::.
 
 ::
 
@@ -1699,12 +1699,15 @@ Mathblock with isclaim meta
 :rsm:
 
 $$
+{
 :isclaim:
+}
   2+2 = 4
 $$
 
-:mathblock:
+:mathblock: {
 :isclaim:
+}
   2+2 = 4
 ::
 
@@ -1913,12 +1916,15 @@ Lorem ipsum.
 Author with new metakeys
 ================================================================================
 
-:rsm:
+:rsm: {
+:author-display-first: 2
+:author-display-last: 5
+}
 
 :author: {
   :name: Leo Torres
   :affiliation: 1
-  :author-note: *
+  :author-note: \*
   :orcid: 0000-0001-2345-6789
   :email: leo@leotrs.com
 }
@@ -1931,14 +1937,18 @@ Author with new metakeys
 }
 ::
 
-:author-display-first: 2
-:author-display-last: 5
-
 ::
 
 --------------------------------------------------------------------------------
 
 (source_file
+  meta: (blockmeta
+    (pair
+      (metakey_any (author_display_first))
+      (metaval_any))
+    (pair
+      (metakey_any (author_display_last))
+      (metaval_any)))
   (block
     tag: (author)
     meta: (blockmeta
@@ -1968,12 +1978,5 @@ Author with new metakeys
         (metaval_text))
       (pair
         (metakey_text (orcid))
-        (metaval_text))))
-  meta: (blockmeta
-    (pair
-      (metakey_any (author_display_first))
-      (metaval_any))
-    (pair
-      (metakey_any (author_display_last))
-      (metaval_any))))
+        (metaval_text)))))
 

@@ -222,13 +222,20 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
       }
 
       // Single colon - check if it looks like a tag opening (and preceded by whitespace)
-      if (last_was_whitespace && (iswalnum(lexer->lookahead) || lexer->lookahead == '|' || lexer->lookahead == '-')) {
-        // Looks like a tag (:theorem:, :|-:, :author-note:), stop TEXT here
+      if (last_was_whitespace && (iswalnum(lexer->lookahead) || lexer->lookahead == '|' || lexer->lookahead == '-' || lexer->lookahead == 0x22A2)) {
+        // Looks like a tag (:theorem:, :|-:, :⊢:, :author-note:), stop TEXT here
         // mark_end was already called before the :, so we're good
         return (count > 0) ? success(lexer, TEXT) : failure(lexer);
       }
 
-      // Single colon not part of :: or tag, consume it (e.g., "3:1")
+      // Check if it's a standalone colon delimiter (space-colon-space for table columns)
+      if (last_was_whitespace && iswspace(lexer->lookahead)) {
+        // It's a delimiter like " : ", stop TEXT here
+        // mark_end was already called before the :, so we're good
+        return (count > 0) ? success(lexer, TEXT) : failure(lexer);
+      }
+
+      // Single colon not part of :: or tag or delimiter, consume it (e.g., "3:1")
       // We called mark_end but don't want to use it, so consume and mark again
       count++;  // the : counts as non-whitespace
       // Now process the current lookahead (char after :)

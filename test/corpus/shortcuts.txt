@@ -65,8 +65,10 @@ Code block with shortcut and meta
 :rsm:
 
 ```
+{
   :label: some-code
   :types: python
+}
 
   comp = [abs(x) for x in range(10)]
 
@@ -118,8 +120,10 @@ Mathblock with shortcut and meta
 :rsm:
 
 $$
+{
   :label: some-math
   :types: foo
+}
 
   \int_a^bu\frac{d^2v}{dx^2}\,dx
   =\left.u\frac{dv}{dx}\right|_a^b
@@ -304,7 +308,7 @@ Span strong with shortcut
 
 :rsm:
 
-*shortcut*.
+**shortcut**.
 
 ::
 
@@ -324,7 +328,7 @@ Span emphas with shortcut
 
 :rsm:
 
-/shortcut/.
+*shortcut*.
 
 ::
 
@@ -344,7 +348,7 @@ Span strong and emphas with shortcut
 
 :rsm:
 
-*/shortcut/*.
+** *shortcut* **.
 
 ::
 
@@ -361,12 +365,12 @@ Span strong and emphas with shortcut
 
 
 ================================================================================
-Span strong and emphas with shortcut reversed
+Span emphas and strong with shortcut
 ================================================================================
 
 :rsm:
 
-/*shortcut*/.
+* **shortcut** *.
 
 ::
 
@@ -388,7 +392,7 @@ Strong half word with shortcut
 
 :rsm:
 
-Bo*ld*.
+Bo**ld**.
 
 ::
 

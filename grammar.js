@@ -207,11 +207,11 @@ module.exports = grammar({
 
       // Special spans have special open and close delimiters and support
       // recursive parsing.  Note **foo** is equivalent to :span:{:strong:}foo::.
-      prec.right(
+      prec.right(2,
         seq(field('tag', alias(token(/\*\*/), $.spanstrong)),
           repeat($.inlinecontent),
           token('**'))),
-      prec.right(
+      prec.right(1,
         seq(field('tag', alias(token(/\*/), $.spanemphas)),
           repeat($.inlinecontent),
           token('*'))),
