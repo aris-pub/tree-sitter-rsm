@@ -1687,3 +1687,56 @@ Author with new metakeys
       (pair
         (metakey_text (orcid))
         (metaval_text)))))
+
+
+================================================================================
+Manuscript with colon in title
+================================================================================
+
+# My Title: A Subtitle
+
+Lorem ipsum.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (paragraph
+    (text)))
+
+
+================================================================================
+Construct tag at start of line after paragraph text
+================================================================================
+
+:let: $G$ be a simple graph::.  We will prove a fact.
+:define: $L(G) := |E(G)|$, where $E(G)$ is the set of edges::.
+
+More text here.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (construct
+      tag: (let)
+      (specialinline
+        tag: (math)
+        (asis_text))
+      (text))
+    (text)
+    (construct
+      tag: (define)
+      (specialinline
+        tag: (math)
+        (asis_text))
+      (text)
+      (specialinline
+        tag: (math)
+        (asis_text))
+      (text))
+    (text))
+  (paragraph
+    (text)))

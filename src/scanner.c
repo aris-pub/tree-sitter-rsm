@@ -162,10 +162,15 @@ static bool scan_paragraph_end(void *payload, TSLexer *lexer) {
     } else {
       skip_whitespace(lexer);
       if (lexer->lookahead == ':') {
+	// Mark end here BEFORE advancing, so if it's not :: we can reset to this position
 	lexer->mark_end(lexer);
 	lexer->advance(lexer, false);
 	if (lexer->lookahead == ':') {
+	  // Found ::. The end is marked before the first :, so we don't consume the ::
 	  return success(lexer, PARAGRAPH_END);
+	} else {
+	  // NOT ::. We marked end before the :, so lexer should reset to there
+	  return failure(lexer);
 	}
       }
       return failure(lexer);
@@ -185,13 +190,37 @@ static bool scan_paragraph_end(void *payload, TSLexer *lexer) {
 
 static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
+  int newlines_consumed = 0;
   while (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
     lexer->advance(lexer, true);
+    newlines_consumed++;
   }
 
   int count = 0;
   bool escape_next = false;
   bool last_was_whitespace = true;  // true initially (after newlines or at start)
+
+  // Special check: if we start at a colon (e.g., at beginning of line after newlines),
+  // check if it looks like a tag pattern or delimiter and fail immediately if so
+  if (lexer->lookahead == ':') {
+    int32_t saved_lookahead = lexer->lookahead;
+    lexer->mark_end(lexer);
+    lexer->advance(lexer, false);
+    bool looks_like_tag = (lexer->lookahead == ':' ||  // ::
+                           iswalnum(lexer->lookahead) ||  // :word:
+                           lexer->lookahead == '|' ||     // :|-:
+                           lexer->lookahead == '-' ||     // :-:
+                           lexer->lookahead == 0x22A2 ||  // :⊢:
+                           iswspace(lexer->lookahead));   // : (space-colon-space delimiter)
+    if (looks_like_tag) {
+      // Don't consume this as TEXT - let the grammar match the tag/delimiter
+      return failure(lexer);
+    }
+    // Not a tag or delimiter, so we need to continue parsing text that starts with ':'
+    // We already advanced, so adjust count and continue
+    count++;  // count the ':' we just passed
+    last_was_whitespace = false;
+  }
   while (
 	 escape_next ||
 	 (
@@ -256,6 +285,8 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   }
 
   if (count > 0) {
+    // Mark the end position at the current location (after consuming all text)
+    lexer->mark_end(lexer);
     return success(lexer, TEXT);
   } else {
     return failure(lexer);
@@ -417,11 +448,14 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
 
   if (looking_for_paragraph_end_and_other(valid_symbols)) {
-    if (lexer->lookahead == ':') {
-      return scan_paragraph_end(payload, lexer);
-    } else {
-      return scan_paragraph_end(payload, lexer) || scan_arbitrary_text(payload, lexer);
+    // Try paragraph_end first
+    bool found_end = scan_paragraph_end(payload, lexer);
+    if (found_end) {
+      return true;
     }
+    // paragraph_end failed. Don't try scan_arbitrary_text because scan_paragraph_end
+    // may have corrupted the lexer state. Just return false and let parser retry.
+    return false;
   }
 
   if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
