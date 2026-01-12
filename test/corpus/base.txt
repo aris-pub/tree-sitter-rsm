@@ -103,8 +103,9 @@ Lorem ipsum.::
 Manuscript with title and paragraph
 ================================================================================
 
-:rsm:
+:rsm: {
   :title: My Title
+}
 
 Lorem ipsum.
 
@@ -125,8 +126,9 @@ Lorem ipsum.
 Manuscript with title
 ================================================================================
 
-:rsm:
+:rsm: {
   :title: My Title
+}
 
 ::
 
@@ -143,10 +145,11 @@ Manuscript with title
 Manuscript with title and meta
 ================================================================================
 
-:rsm:
+:rsm: {
   :label: mylbl
   :title: My Title
   :date: 2022-03-29
+}
 ::
 
 --------------------------------------------------------------------------------
@@ -191,8 +194,9 @@ Section with title
 
 :rsm:
 
-:section:
+:section: {
   :title: Section title
+}
 
   Foo.
 
@@ -216,9 +220,10 @@ Section with meta
 
 :rsm:
 
-:section:
+:section: {
   :title: Section title
   :types: {t1, t2}
+}
 
   Foo.
 
@@ -250,15 +255,17 @@ Author and abstract
 :title: The Perron non-backtracking eigenvalue after node addition
 :date: 2022-03-29
 
-:author:
+:author: {
   :name: Leo Torres
   :affiliation: Max Planck Institute for Mathematics in the Sciences
   :email: leo@leotrs.com
+}
 ::
 
-:abstract:
+:abstract: {
   :keywords: {spectral graph theory, non-backtracking, interlacing}
   :msc: {05C50, 05C82, 15A18, 15B99}
+}
 
   Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem
   ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem
@@ -562,9 +569,10 @@ Block code no shortcut and meta
 
 :rsm:
 
-:codeblock:
+:codeblock: {
   :label: some-code
   :types: python
+}
 
   comp = [abs(x) for x in range(10)]
 
@@ -1076,7 +1084,9 @@ Reference
 :rsm:
 
 ## Foo
+{
   :label: lbl
+}
 
 Bar.
 
@@ -1109,7 +1119,9 @@ Reference with space
 :rsm:
 
 ## Foo
+{
   :label: lbl
+}
 
 Bar.
 
@@ -1142,7 +1154,9 @@ Reference with reftext
 :rsm:
 
 ## Foo
+{
   :label: lbl
+}
 
 Bar.
 
@@ -1176,7 +1190,9 @@ Reference with reftext with space
 :rsm:
 
 ## Foo
+{
   :label: lbl
+}
 
 Bar.
 
@@ -1387,8 +1403,9 @@ Figure with meta and caption
 
 :rsm:
 
-:figure:
+:figure: {
   :path: assets/example.png
+}
 
   :caption: This is the figure caption.
 
@@ -1416,8 +1433,9 @@ Video
 
 :rsm:
 
-:video:
+:video: {
   :path: assets/demo.mp4
+}
 
   :caption: This is a video demonstration.
 
@@ -1445,8 +1463,9 @@ HTML Asset
 
 :rsm:
 
-:html:
+:html: {
   :path: assets/chart.html
+}
 
   :caption: Interactive visualization.
 
@@ -1768,9 +1787,10 @@ Section with icon
 
 :rsm:
 
-:section:
+:section: {
   :title: Section title
   :icon: bookmark
+}
 
   Foo.
 
@@ -1869,8 +1889,9 @@ Manuscript with top level paragraph and section
 
 Lorem ipsum.
 
-:section:
+:section: {
   :title: section title
+}
 
 Lorem ipsum.
 
@@ -1894,18 +1915,20 @@ Author with new metakeys
 
 :rsm:
 
-:author:
+:author: {
   :name: Leo Torres
   :affiliation: 1
   :author-note: *
   :orcid: 0000-0001-2345-6789
   :email: leo@leotrs.com
+}
 ::
 
-:author:
+:author: {
   :name: Jane Smith
   :affiliation: 2
   :orcid: 0000-0002-3456-7890
+}
 ::
 
 :author-display-first: 2

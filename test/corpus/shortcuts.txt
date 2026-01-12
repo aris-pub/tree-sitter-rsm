@@ -216,8 +216,10 @@ Section with shortcut and meta
 :rsm:
 
 ## Title
+{
   :label: sec
   :nonum:
+}
 
 Foo.
 
@@ -271,8 +273,10 @@ Subsection with shortcut and meta
 :section:
 
 ### Title
+{
   :label: sub
   :nonum:
+}
 
 Foo.
 

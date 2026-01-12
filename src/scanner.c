@@ -191,11 +191,11 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
 
   int count = 0;
   bool escape_next = false;
+  bool last_was_whitespace = true;  // true initially (after newlines or at start)
   while (
 	 escape_next ||
 	 (
-	  lexer->lookahead != ':'     // delimiter
-	  && lexer->lookahead != '\n' // newline
+	  lexer->lookahead != '\n' // newline
 	  && lexer->lookahead != '\r' // windows
 	  && lexer->lookahead != '{'  // inline meta
 	  && lexer->lookahead != '}'  // inline meta
@@ -208,9 +208,44 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
 	  && lexer->lookahead != '\0' // EOF
 	  )
 	 ) {
-    if (!iswspace(lexer->lookahead)) count++;
-    escape_next = lexer->lookahead == '\\';
-    lexer->advance(lexer, false);
+    // Special handling for colon
+    if (lexer->lookahead == ':' && !escape_next) {
+      // Mark end BEFORE peeking ahead (in case we need to stop here)
+      lexer->mark_end(lexer);
+      // Now peek ahead to check what follows the colon
+      lexer->advance(lexer, false);
+
+      if (lexer->lookahead == ':') {
+        // It's :: (Halmos delimiter), stop TEXT here regardless of preceding whitespace
+        // mark_end was already called before first :, so we're good
+        return (count > 0) ? success(lexer, TEXT) : failure(lexer);
+      }
+
+      // Single colon - check if it looks like a tag opening (and preceded by whitespace)
+      if (last_was_whitespace && (iswalnum(lexer->lookahead) || lexer->lookahead == '|' || lexer->lookahead == '-')) {
+        // Looks like a tag (:theorem:, :|-:, :author-note:), stop TEXT here
+        // mark_end was already called before the :, so we're good
+        return (count > 0) ? success(lexer, TEXT) : failure(lexer);
+      }
+
+      // Single colon not part of :: or tag, consume it (e.g., "3:1")
+      // We called mark_end but don't want to use it, so consume and mark again
+      count++;  // the : counts as non-whitespace
+      // Now process the current lookahead (char after :)
+      if (!iswspace(lexer->lookahead)) count++;
+      last_was_whitespace = iswspace(lexer->lookahead);
+      escape_next = lexer->lookahead == '\\';
+      lexer->advance(lexer, false);
+      // Mark end again at current position to override the earlier mark
+      lexer->mark_end(lexer);
+      // Continue loop with next character
+    } else {
+      // Normal character processing
+      if (!iswspace(lexer->lookahead)) count++;
+      last_was_whitespace = iswspace(lexer->lookahead);
+      escape_next = lexer->lookahead == '\\';
+      lexer->advance(lexer, false);
+    }
   }
 
   if (count > 0) {

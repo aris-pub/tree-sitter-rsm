@@ -254,7 +254,10 @@ module.exports = grammar({
           alias($.inlinemetapair, $.pair))),
       '}'),
 
-    blockmeta: $ => repeat1(alias($.pair, $.pair)),
+    blockmeta: $ => seq(
+      '{',
+      repeat1(alias($.pair, $.pair)),
+      '}'),
 
     inlinemetapair: $ => choice(
       seq($.metakey_text, alias($.metaval_text_inline, $.metaval_text)),
