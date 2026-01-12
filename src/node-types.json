@@ -854,16 +854,6 @@
           }
         ]
       },
-      "tag": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ":rsm:",
-            "named": false
-          }
-        ]
-      },
       "title": {
         "multiple": false,
         "required": false,
@@ -1497,10 +1487,6 @@
   },
   {
     "type": ":references:",
-    "named": false
-  },
-  {
-    "type": ":rsm:",
     "named": false
   },
   {

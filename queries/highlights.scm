@@ -1,8 +1,6 @@
 ;; Sections
 (source_file
- ":rsm:" @punctuation
- title: (text) @heading
- "::" @punctuation)
+ title: (text) @heading)
 (section
  title: (text) @heading)
 (subsection

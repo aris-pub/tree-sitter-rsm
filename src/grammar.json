@@ -6,14 +6,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "tag",
-          "content": {
-            "type": "STRING",
-            "value": ":rsm:"
-          }
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
@@ -93,10 +85,6 @@
               }
             ]
           }
-        },
-        {
-          "type": "STRING",
-          "value": "::"
         }
       ]
     },

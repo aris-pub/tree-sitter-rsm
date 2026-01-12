@@ -2,8 +2,6 @@
 Single article reference
 ================================================================================
 
-:rsm:
-
 :references:
 @article{foo2024,
   title = {My Title},
@@ -12,7 +10,6 @@ Single article reference
 }
 ::
 
-::
 
 --------------------------------------------------------------------------------
 
@@ -36,8 +33,6 @@ Single article reference
 Multiple references with different types
 ================================================================================
 
-:rsm:
-
 :references:
 @article{foo2024,
   title = {First Article},
@@ -59,7 +54,6 @@ Multiple references with different types
 }
 ::
 
-::
 
 --------------------------------------------------------------------------------
 
@@ -116,8 +110,6 @@ Multiple references with different types
 References with citation in text
 ================================================================================
 
-:rsm:
-
 Text citing :cite: foo2024 :: and :cite: bar2023 ::.
 
 :references:
@@ -131,7 +123,6 @@ Text citing :cite: foo2024 :: and :cite: bar2023 ::.
 }
 ::
 
-::
 
 --------------------------------------------------------------------------------
 
@@ -171,8 +162,6 @@ Text citing :cite: foo2024 :: and :cite: bar2023 ::.
 Reference with all common fields
 ================================================================================
 
-:rsm:
-
 :references:
 @article{complete2024,
   title = {Complete Article},
@@ -186,7 +175,6 @@ Reference with all common fields
 }
 ::
 
-::
 
 --------------------------------------------------------------------------------
 
@@ -225,14 +213,11 @@ Reference with all common fields
 Empty references block
 ================================================================================
 
-:rsm:
-
 Text without citations.
 
 :references:
 ::
 
-::
 
 --------------------------------------------------------------------------------
 

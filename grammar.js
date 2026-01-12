@@ -31,11 +31,9 @@ module.exports = grammar({
     // Main building blocks: manuscript, block, paragraph, inline
     ////////////////////////////////////////////////////////////////////////
     source_file: $ => seq(
-      field('tag', ':rsm:'),
       optional(seq(field('tag', /# /), field('title', $.text))),
       optional(field('meta', $.blockmeta)),
-      repeat(choice($.section, $.appendix, $.mathblock, $.specialblock, $.block, $.paragraph, $.references)),
-      '::'),
+      repeat(choice($.section, $.appendix, $.mathblock, $.specialblock, $.block, $.paragraph, $.references))),
 
     block: $ => prec(1, seq(
       field('tag', $.blocktag),
