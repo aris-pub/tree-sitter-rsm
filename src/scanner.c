@@ -159,6 +159,9 @@ static bool scan_paragraph_end(void *payload, TSLexer *lexer) {
     skip_carriage_return(lexer);
     if (lexer->lookahead == '\n') {
       return success(lexer, PARAGRAPH_END);
+    } else if (lexer->lookahead == '\0') {
+      // EOF after newline is a valid paragraph end
+      return success(lexer, PARAGRAPH_END);
     } else {
       skip_whitespace(lexer);
       if (lexer->lookahead == ':') {
