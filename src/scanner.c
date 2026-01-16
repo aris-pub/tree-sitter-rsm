@@ -296,14 +296,19 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   }
 }
 
-static bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
+static bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal, bool check_colon) {
   debug_log("trying ASIS_TEXT\n");
   skip_whitespace(lexer);
   // ASIS_TEXT usually occurs in the content of special tags such as :math:, :code: or
   // their block forms :mathblock: and :codeblock:.  It cannot start with an open brace
-  // or a colon because that means there is a meta region to be parsed before the
-  // content actually starts.
-  if (lexer->lookahead == '{' || lexer->lookahead == ':') {
+  // because that means there is a meta region to be parsed before the content starts.
+  // For halmos-terminated content (:code:...::), it also cannot start with a colon
+  // because that indicates a meta region. But for backtick/dollar terminated content
+  // (`code` or $math$), a colon immediately after the delimiter is valid content.
+  if (lexer->lookahead == '{') {
+    return false;
+  }
+  if (check_colon && lexer->lookahead == ':') {
     return false;
   }
   int count = 0;
@@ -319,7 +324,8 @@ static bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
 }
 
 static bool scan_asis_dollar_text(void *payload, TSLexer *lexer) {
-  if (scan_asis_text(payload, lexer, '$')) {
+  // Don't check for colon - $:foo$ is valid math content
+  if (scan_asis_text(payload, lexer, '$', false)) {
     return success(lexer, ASIS_DOLLAR_TEXT);
   } else {
     return failure(lexer);
@@ -327,7 +333,8 @@ static bool scan_asis_dollar_text(void *payload, TSLexer *lexer) {
 }
 
 static bool scan_asis_backtick_text(void *payload, TSLexer *lexer) {
-  if (scan_asis_text(payload, lexer, '`')) {
+  // Don't check for colon - `:foo` is valid code content
+  if (scan_asis_text(payload, lexer, '`', false)) {
     return success(lexer, ASIS_BACKTICK_TEXT);
   } else {
     return failure(lexer);
