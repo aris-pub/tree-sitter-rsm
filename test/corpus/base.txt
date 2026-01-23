@@ -111,7 +111,7 @@ Section with meta
 
 :section: {
   :title: Section title
-  :types: {t1, t2}
+  :class: {t1, t2}
 }
 
   Foo.
@@ -126,7 +126,7 @@ Section with meta
         (metakey_text (title))
         (metaval_text))
       (pair
-        (metakey_list (types))
+        (metakey_list (class))
         (metaval_list
           (metaval_list_item)
           (metaval_list_item))))
@@ -424,7 +424,7 @@ Block code no shortcut and meta
 
 :codeblock: {
   :label: some-code
-  :types: python
+  :class: python
 }
 
   comp = [abs(x) for x in range(10)]
@@ -442,7 +442,7 @@ Block code no shortcut and meta
         (metakey_text (label))
    (metaval_text))
       (pair
-        (metakey_list (types))
+        (metakey_list (class))
         (metaval_list
           (metaval_list_item))))
     (asis_text)))
@@ -1267,7 +1267,7 @@ Lorem ipsum :-: Foo bar.
 List meta pair inside inline meta region
 ================================================================================
 
-Foo :span: {:types: {t1, t2}} bar :: baz.
+Foo :span: {:class: {t1, t2}} bar :: baz.
 
 
 --------------------------------------------------------------------------------
@@ -1279,7 +1279,7 @@ Foo :span: {:types: {t1, t2}} bar :: baz.
       tag: (span)
       meta: (inlinemeta
         (pair
-          (metakey_list (types))
+          (metakey_list (class))
           (metaval_list
             (metaval_list_item)
             (metaval_list_item))))

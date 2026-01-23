@@ -565,15 +565,15 @@
       "required": true,
       "types": [
         {
+          "type": "class",
+          "named": true
+        },
+        {
           "type": "keywords",
           "named": true
         },
         {
           "type": "msc",
-          "named": true
-        },
-        {
-          "type": "types",
           "named": true
         }
       ]
@@ -1578,6 +1578,10 @@
     "named": true
   },
   {
+    "type": "class",
+    "named": true
+  },
+  {
     "type": "code",
     "named": true
   },
@@ -1680,11 +1684,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "metaval_list_item",
@@ -1823,10 +1827,6 @@
     "named": true
   },
   {
-    "type": "text",
-    "named": false
-  },
-  {
     "type": "then",
     "named": true
   },
@@ -1840,10 +1840,6 @@
   },
   {
     "type": "toc",
-    "named": true
-  },
-  {
-    "type": "types",
     "named": true
   },
   {

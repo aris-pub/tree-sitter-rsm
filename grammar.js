@@ -445,7 +445,7 @@ module.exports = grammar({
     metakey_list: $ => choice(
       alias(':keywords:', $.keywords),
       alias(':msc:', $.msc),
-      alias(':types:', $.types),
+      alias(':class:', $.class),
     ),
 
     metakey_any: $ => choice(

@@ -3071,10 +3071,10 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":types:"
+            "value": ":class:"
           },
           "named": true,
-          "value": "types"
+          "value": "class"
         }
       ]
     },
