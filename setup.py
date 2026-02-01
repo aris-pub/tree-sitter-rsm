@@ -41,11 +41,10 @@ setup(
             ],
             extra_compile_args=(["-std=c11"] if system() != "Windows" else []),
             define_macros=[
-                ("Py_LIMITED_API", "0x03080000"),
                 ("PY_SSIZE_T_CLEAN", None),
             ],
             include_dirs=["src"],
-            py_limited_api=True,
+            py_limited_api=False,
         )
     ],
     cmdclass={"build": Build, "bdist_wheel": BdistWheel},
