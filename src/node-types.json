@@ -97,6 +97,10 @@
             "named": true
           },
           {
+            "type": "config",
+            "named": true
+          },
+          {
             "type": "corollary",
             "named": true
           },
@@ -515,7 +519,11 @@
           "named": true
         },
         {
-          "type": "date",
+          "type": "numbering",
+          "named": true
+        },
+        {
+          "type": "override_date",
           "named": true
         },
         {
@@ -524,6 +532,14 @@
         },
         {
           "type": "scale",
+          "named": true
+        },
+        {
+          "type": "theme",
+          "named": true
+        },
+        {
+          "type": "toc_depth",
           "named": true
         }
       ]
@@ -1593,11 +1609,11 @@
     "named": true
   },
   {
-    "type": "corollary",
+    "type": "config",
     "named": true
   },
   {
-    "type": "date",
+    "type": "corollary",
     "named": true
   },
   {
@@ -1713,7 +1729,15 @@
     "named": true
   },
   {
+    "type": "numbering",
+    "named": true
+  },
+  {
     "type": "orcid",
+    "named": true
+  },
+  {
+    "type": "override_date",
     "named": true
   },
   {
@@ -1825,8 +1849,8 @@
     "named": true
   },
   {
-    "type": "text",
-    "named": false
+    "type": "theme",
+    "named": true
   },
   {
     "type": "then",
@@ -1842,6 +1866,10 @@
   },
   {
     "type": "toc",
+    "named": true
+  },
+  {
+    "type": "toc_depth",
     "named": true
   },
   {

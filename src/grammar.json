@@ -2731,6 +2731,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":config:"
+          },
+          "named": true,
+          "value": "config"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":corollary:"
           },
           "named": true,
@@ -3102,10 +3111,19 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":date:"
+            "value": ":numbering:"
           },
           "named": true,
-          "value": "date"
+          "value": "numbering"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":override-date:"
+          },
+          "named": true,
+          "value": "override_date"
         },
         {
           "type": "ALIAS",
@@ -3124,6 +3142,24 @@
           },
           "named": true,
           "value": "scale"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":theme:"
+          },
+          "named": true,
+          "value": "theme"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":toc-depth:"
+          },
+          "named": true,
+          "value": "toc_depth"
         }
       ]
     },

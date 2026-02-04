@@ -1,0 +1,189 @@
+================================================================================
+Config block with all settings
+================================================================================
+
+# Title
+
+:config: {
+  :toc-depth: 3
+  :numbering: section
+  :theme: blue
+  :override-date: 2024-01-15
+  :author-display-first: emphasized
+  :author-display-last: corresponding
+}
+::
+
+Content.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_any (toc_depth)) (metaval_any))
+      (pair (metakey_any (numbering)) (metaval_any))
+      (pair (metakey_any (theme)) (metaval_any))
+      (pair (metakey_any (override_date)) (metaval_any))
+      (pair (metakey_any (author_display_first)) (metaval_any))
+      (pair (metakey_any (author_display_last)) (metaval_any))))
+  (paragraph
+    (text)))
+
+
+================================================================================
+Config block with single setting
+================================================================================
+
+# Title
+
+:config: {
+  :numbering: document
+}
+::
+
+Content.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_any (numbering)) (metaval_any))))
+  (paragraph
+    (text)))
+
+
+================================================================================
+Config block with toc-depth only
+================================================================================
+
+# Title
+
+:config: {
+  :toc-depth: 2
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_any (toc_depth)) (metaval_any)))))
+
+
+================================================================================
+Config block with override-date
+================================================================================
+
+# Document
+
+:config: {
+  :override-date: 2024-12-25
+}
+::
+
+## Section
+
+Content here.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_any (override_date)) (metaval_any))))
+  (section
+    title: (text)
+    (paragraph
+      (text))))
+
+
+================================================================================
+Config block with theme
+================================================================================
+
+# Title
+
+:config: {
+  :theme: dark
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_any (theme)) (metaval_any)))))
+
+
+================================================================================
+Config block with author display settings
+================================================================================
+
+# Paper
+
+:config: {
+  :author-display-first: emphasized
+  :author-display-last: corresponding
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_any (author_display_first)) (metaval_any))
+      (pair (metakey_any (author_display_last)) (metaval_any)))))
+
+
+================================================================================
+Config block can appear anywhere
+================================================================================
+
+# Title
+
+## Introduction
+
+Some content.
+
+:config: {
+  :numbering: section
+}
+::
+
+## Methods
+
+More content.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (section
+    title: (text)
+    (paragraph
+      (text))
+    (block
+      tag: (config)
+      meta: (blockmeta
+        (pair (metakey_any (numbering)) (metaval_any)))))
+  (section
+    title: (text)
+    (paragraph
+      (text))))

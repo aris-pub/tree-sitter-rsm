@@ -400,6 +400,7 @@ module.exports = grammar({
     blocktag: $ => choice(
       alias(':abstract:', $.abstract),
       alias(':author:', $.author),
+      alias(':config:', $.config),
       alias(':corollary:', $.corollary),
       alias(':definition:', $.definition),
       alias(':enumerate:', $.enumerate),
@@ -451,9 +452,12 @@ module.exports = grammar({
     metakey_any: $ => choice(
       alias(':author-display-first:', $.author_display_first),
       alias(':author-display-last:', $.author_display_last),
-      alias(':date:', $.date),
+      alias(':numbering:', $.numbering),
+      alias(':override-date:', $.override_date),
       alias(':path:', $.path),
       alias(':scale:', $.scale),
+      alias(':theme:', $.theme),
+      alias(':toc-depth:', $.toc_depth),
     ),
 
     // It is important that comment appears at the end so that other rules will be
