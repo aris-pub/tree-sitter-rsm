@@ -3102,6 +3102,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":typography:"
+          },
+          "named": true,
+          "value": "typography"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":author-display-first:"
           },
           "named": true,

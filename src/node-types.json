@@ -545,6 +545,10 @@
         {
           "type": "toc_depth",
           "named": true
+        },
+        {
+          "type": "typography",
+          "named": true
         }
       ]
     }
@@ -1857,6 +1861,10 @@
     "named": true
   },
   {
+    "type": "text",
+    "named": false
+  },
+  {
     "type": "theme",
     "named": true
   },
@@ -1878,6 +1886,10 @@
   },
   {
     "type": "toc_depth",
+    "named": true
+  },
+  {
+    "type": "typography",
     "named": true
   },
   {
