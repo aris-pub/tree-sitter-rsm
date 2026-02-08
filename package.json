@@ -1,7 +1,8 @@
 {
+  "version": "0.8.0",
   "devDependencies": {
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "0.22.4"
+    "tree-sitter-cli": "^0.24.0"
   },
   "main": "bindings/node",
   "types": "bindings/node",
