@@ -3093,6 +3093,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":accent:"
+          },
+          "named": true,
+          "value": "accent"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":author-display-first:"
           },
           "named": true,

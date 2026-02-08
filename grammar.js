@@ -450,6 +450,7 @@ module.exports = grammar({
     ),
 
     metakey_any: $ => choice(
+      alias(':accent:', $.accent),
       alias(':author-display-first:', $.author_display_first),
       alias(':author-display-last:', $.author_display_last),
       alias(':numbering:', $.numbering),

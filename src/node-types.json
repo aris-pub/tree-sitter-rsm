@@ -511,6 +511,10 @@
       "required": true,
       "types": [
         {
+          "type": "accent",
+          "named": true
+        },
+        {
           "type": "author_display_first",
           "named": true
         },
@@ -1549,6 +1553,10 @@
     "named": true
   },
   {
+    "type": "accent",
+    "named": true
+  },
+  {
     "type": "affiliation",
     "named": true
   },
@@ -1698,11 +1706,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "metaval_list_item",
