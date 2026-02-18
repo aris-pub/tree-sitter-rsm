@@ -424,6 +424,7 @@ module.exports = grammar({
 
     metakey_text: $ => choice(
       alias(':affiliation:', $.affiliation),
+      alias(':alt:', $.alt),
       alias(':author-note:', $.author_note),
       alias(':email:', $.email),
       alias(':goal:', $.goal),
@@ -451,6 +452,7 @@ module.exports = grammar({
 
     metakey_any: $ => choice(
       alias(':accent:', $.accent),
+      alias(':dark:', $.dark),
       alias(':lang:', $.lang),
       alias(':typography:', $.typography),
       alias(':author-display-first:', $.author_display_first),
@@ -459,6 +461,7 @@ module.exports = grammar({
       alias(':override-date:', $.override_date),
       alias(':path:', $.path),
       alias(':scale:', $.scale),
+      alias(':static:', $.static),
       alias(':theme:', $.theme),
       alias(':toc-depth:', $.toc_depth),
     ),

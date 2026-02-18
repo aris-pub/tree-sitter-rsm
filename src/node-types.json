@@ -523,6 +523,10 @@
           "named": true
         },
         {
+          "type": "dark",
+          "named": true
+        },
+        {
           "type": "lang",
           "named": true
         },
@@ -540,6 +544,10 @@
         },
         {
           "type": "scale",
+          "named": true
+        },
+        {
+          "type": "static",
           "named": true
         },
         {
@@ -617,6 +625,10 @@
       "types": [
         {
           "type": "affiliation",
+          "named": true
+        },
+        {
+          "type": "alt",
           "named": true
         },
         {
@@ -870,6 +882,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "meta": {
         "multiple": false,
@@ -1573,6 +1586,10 @@
     "named": true
   },
   {
+    "type": "alt",
+    "named": true
+  },
+  {
     "type": "asis_text",
     "named": true
   },
@@ -1630,6 +1647,10 @@
   },
   {
     "type": "corollary",
+    "named": true
+  },
+  {
+    "type": "dark",
     "named": true
   },
   {
@@ -1714,11 +1735,11 @@
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "metaval_list_item",
@@ -1837,6 +1858,10 @@
     "named": true
   },
   {
+    "type": "static",
+    "named": true
+  },
+  {
     "type": "step",
     "named": true
   },
@@ -1855,10 +1880,6 @@
   {
     "type": "suppose",
     "named": true
-  },
-  {
-    "type": "text",
-    "named": false
   },
   {
     "type": "text",

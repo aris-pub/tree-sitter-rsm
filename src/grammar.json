@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "rsm",
   "rules": {
     "source_file": {
@@ -2925,6 +2926,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":alt:"
+          },
+          "named": true,
+          "value": "alt"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":author-note:"
           },
           "named": true,
@@ -3102,6 +3112,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":dark:"
+          },
+          "named": true,
+          "value": "dark"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":lang:"
           },
           "named": true,
@@ -3169,6 +3188,15 @@
           },
           "named": true,
           "value": "scale"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":static:"
+          },
+          "named": true,
+          "value": "static"
         },
         {
           "type": "ALIAS",
