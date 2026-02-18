@@ -62,8 +62,7 @@ Code block with shortcut
 --------------------------------------------------------------------------------
 
 (source_file
-  (specialblock
-    tag: (codeblock)
+  (codeblock
     (asis_text)))
 
 
@@ -85,8 +84,7 @@ Code block with shortcut and meta
 --------------------------------------------------------------------------------
 
 (source_file
-  (specialblock
-    tag: (codeblock)
+  (codeblock
     meta: (blockmeta
       (pair
 	(metakey_text (label))

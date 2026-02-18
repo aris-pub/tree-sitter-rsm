@@ -33,7 +33,7 @@ module.exports = grammar({
     source_file: $ => seq(
       optional(seq(field('tag', /# /), field('title', $.text))),
       optional(field('meta', $.blockmeta)),
-      repeat(choice($.section, $.appendix, $.mathblock, $.specialblock, $.block, $.paragraph, $.references))),
+      repeat(choice($.section, $.appendix, $.mathblock, $.codeblock, $.specialblock, $.block, $.paragraph, $.references))),
 
     block: $ => prec(1, seq(
       field('tag', $.blocktag),
@@ -76,11 +76,11 @@ module.exports = grammar({
       seq(field('tag', /## /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsection)),
+        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph, $.subsection)),
       ),
       seq(field('tag', ':section:'),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsection)),
+        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph, $.subsection)),
       ),
     )),
 
@@ -89,12 +89,12 @@ module.exports = grammar({
         field('tag', /### /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsubsection)),
+        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph, $.subsubsection)),
       ),
       seq(
         field('tag', ':subsection:'),
         field('meta', $.blockmeta),
-        repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsubsection)),
+        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph, $.subsubsection)),
       )
     )),
 
@@ -103,12 +103,12 @@ module.exports = grammar({
         field('tag', /#### /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph)),
+        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph)),
       ),
       seq(
         field('tag', ':subsubsection:'),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph)),
+        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph)),
       )
     )),
 
@@ -133,6 +133,16 @@ module.exports = grammar({
         alias($.asis_halmos_text, $.asis_text),
         '::')),
 
+    codeblock: $ => choice(
+      seq(token(/```/),
+        field('meta', optional($.blockmeta)),
+        alias($.asis_three_backticks_text, $.asis_text),
+        /```/),
+      seq(token(':codeblock:'),
+        field('meta', optional($.blockmeta)),
+        alias($.asis_halmos_text, $.asis_text),
+        '::')),
+
     specialblock: $ => prec.right(1, choice(
       $.table,
 
@@ -141,18 +151,6 @@ module.exports = grammar({
       // The following are NOT stamps because they could have meta, though they
       // cannot have content
       seq(field('tag', alias(':toc:', $.toc)), '::'),
-
-      // Math and code blocks have special open and close delimiters ($$) and
-      // (```) respesctively AND their content is taken as-is, i.e. they do not
-      // support recursive parsing.
-      seq(field('tag', alias(token(/```/), $.codeblock)),
-        field('meta', optional($.blockmeta)),
-        alias($.asis_three_backticks_text, $.asis_text),
-        /```/),
-      seq(field('tag', alias(token(':codeblock:'), $.codeblock)),
-        field('meta', optional($.blockmeta)),
-        alias($.asis_halmos_text, $.asis_text),
-        '::'),
 
       // Algorithms have standard open and close delimiters and have as-is
       // (i.e. not recursive) content.
@@ -360,11 +358,11 @@ module.exports = grammar({
     /////////////////////////////////////////////////////////////
     // Content choices
     /////////////////////////////////////////////////////////////
-    blockcontent: $ => choice($.specialblock, $.mathblock, $.block, $.paragraph),
+    blockcontent: $ => choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph),
 
     _paragraphcontent_no_special: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
-    paragraphcontent: $ => choice($.mathblock, $.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
+    paragraphcontent: $ => choice($.mathblock, $.codeblock, $.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
     inlinecontent: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 

@@ -463,12 +463,19 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
 
   if (looking_for_paragraph_end_and_other(valid_symbols)) {
     // Try paragraph_end first
+    int32_t first_char = lexer->lookahead;
     bool found_end = scan_paragraph_end(payload, lexer);
     if (found_end) {
       return true;
     }
-    // paragraph_end failed. Don't try scan_arbitrary_text because scan_paragraph_end
-    // may have corrupted the lexer state. Just return false and let parser retry.
+    // paragraph_end failed. scan_paragraph_end advances the lexer only when the
+    // first character is \n, \r, :, or \0. For all other characters it returns
+    // immediately without advancing, leaving the lexer state intact.
+    if (valid_symbols[TEXT] &&
+        first_char != '\n' && first_char != '\r' &&
+        first_char != ':' && first_char != '\0') {
+      return scan_arbitrary_text(payload, lexer);
+    }
     return false;
   }
 

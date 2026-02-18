@@ -405,8 +405,7 @@ Block code no shortcut
 --------------------------------------------------------------------------------
 
 (source_file
-  (specialblock
-    tag: (codeblock)
+  (codeblock
     (asis_text)))
 
 
@@ -427,8 +426,7 @@ Block code no shortcut and meta
 --------------------------------------------------------------------------------
 
 (source_file
-  (specialblock
-    tag: (codeblock)
+  (codeblock
     meta: (blockmeta
       (pair
         (metakey_text (label))
@@ -1808,3 +1806,95 @@ Proof step with text ending in escaped colon
           tag: (math)
           (asis_text))
         (text)))))
+
+
+================================================================================
+Paragraph does not end at codeblock keyword form
+================================================================================
+
+Foo.
+:codeblock:
+  x = 1
+::
+bar.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (codeblock
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Paragraph does not end at codeblock fence form
+================================================================================
+
+Foo.
+```
+x = 1
+```
+bar.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (codeblock
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Codeblock in paragraph keyword form with meta
+================================================================================
+
+Foo.
+:codeblock: {:label: ex}
+  x = 1
+::
+bar.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (codeblock
+      meta: (blockmeta
+        (pair
+          (metakey_text (label))
+          (metaval_text)))
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Codeblock in paragraph fence form with meta
+================================================================================
+
+Foo.
+```{:label: ex}
+x = 1
+```
+bar.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (codeblock
+      meta: (blockmeta
+        (pair
+          (metakey_text (label))
+          (metaval_text)))
+      (asis_text))
+    (text)))
