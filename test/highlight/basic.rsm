@@ -1,0 +1,71 @@
+% Comment
+% <- comment
+
+# Document Title
+  % <- markup.heading.1
+
+:theorem:
+% <- keyword
+Content with $math$.
+%             ^ markup.math
+::
+
+:proof:
+% <- keyword.function
+:assume: Hypothesis. ::
+% <- keyword.function
+:claim: Result. ::
+% <- keyword.function
+:qed:
+% <- constant.builtin
+::
+
+:lemma:
+% <- keyword
+Text.
+::
+
+:definition:
+% <- keyword
+Text.
+::
+
+:ref:label:: here.
+% <- function.builtin
+
+:cite:ref:: here.
+% <- function.builtin
+
+:url:http://example.com:: here.
+% <- function.builtin
+
+$$
+math block
+% <- markup.math
+$$
+
+```
+code block
+% <- markup.raw.block
+```
+
+:enumerate:
+% <- keyword.directive
+:-: Item
+::
+
+:abstract:
+% <- keyword.directive
+Text.
+::
+
+:references:
+% <- keyword.directive
+@book{id,
+ % <- type
+  title={T},
+% ^ property
+  year={Y}
+% ^ property
+}
+::
