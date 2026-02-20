@@ -1693,7 +1693,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "config",
@@ -1942,10 +1943,6 @@
   {
     "type": "text",
     "named": true
-  },
-  {
-    "type": "text",
-    "named": false
   },
   {
     "type": "theme",

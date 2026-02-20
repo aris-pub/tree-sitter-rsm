@@ -10,15 +10,15 @@ here](https://aris.pub).
 
 The two main files are `grammar.js` and `src/scanner.c` which implement the language
 grammar and the external scanner, respectively. The tests are defined in
-`test/corpus/*.txt`, and can be executed via `tree-sitter test`.
+`test/corpus/*.txt`, and can be executed via `npx tree-sitter test`.
 
 Compile the grammar locally by executing
 ```bash
-tree-sitter generate --abi 14
+npx tree-sitter generate --abi 14
 ```
 and build locally by executing
 ```bash
-tree-sitter build
+npx tree-sitter build
 ```
 
 Once development of a feature is complete, submit a PR.
@@ -29,7 +29,7 @@ The grammar is released as a PyPI package by following these
 [intructions](https://tree-sitter.github.io/tree-sitter/creating-parsers/6-publishing.html).
 At the time of writing, a summarized version of the instructions are the following:
 
-+ Bump the grammar version with `tree-sitter <version>` and commit the changes
++ Bump the grammar version with `npx tree-sitter version <version>` and commit the changes
   generated.
 + Tag the commit with `git tag -- v<version>`.
 + Push the commit and tag with `git push --tags origin main`.
