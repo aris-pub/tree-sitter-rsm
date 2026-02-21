@@ -3,7 +3,6 @@ from platform import system
 
 from setuptools import Extension, find_packages, setup
 from setuptools.command.build import build
-from wheel.bdist_wheel import bdist_wheel
 
 
 class Build(build):
@@ -12,14 +11,6 @@ class Build(build):
             dest = join(self.build_lib, "tree_sitter_rsm", "queries")
             self.copy_tree("queries", dest)
         super().run()
-
-
-class BdistWheel(bdist_wheel):
-    def get_tag(self):
-        python, abi, platform = super().get_tag()
-        if python.startswith("cp"):
-            python, abi = "cp38", "abi3"
-        return python, abi, platform
 
 
 setup(
@@ -47,6 +38,6 @@ setup(
             py_limited_api=False,
         )
     ],
-    cmdclass={"build": Build, "bdist_wheel": BdistWheel},
+    cmdclass={"build": Build},
     zip_safe=False,
 )
