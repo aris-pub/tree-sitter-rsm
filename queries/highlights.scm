@@ -14,20 +14,29 @@
 (source_file
   title: (text) @markup.heading.1)
 
-;; Section titles (## or :section:)
+;; Section titles — ## syntax (title field, no tag)
 (section
-  tag: _ @keyword
-  title: (text)? @markup.heading.2)
+  title: (text) @markup.heading.2)
 
-;; Subsection titles (### or :subsection:)
+;; Section titles — :section: syntax (tag field, no title)
+(section
+  tag: _ @keyword)
+
+;; Subsection titles — ### syntax
 (subsection
-  tag: _ @keyword
-  title: (text)? @markup.heading.3)
+  title: (text) @markup.heading.3)
 
-;; Subsubsection titles (#### or :subsubsection:)
+;; Subsection titles — :subsection: syntax
+(subsection
+  tag: _ @keyword)
+
+;; Subsubsection titles — #### syntax
 (subsubsection
-  tag: _ @keyword
-  title: (text)? @markup.heading.4)
+  title: (text) @markup.heading.4)
+
+;; Subsubsection titles — :subsubsection: syntax
+(subsubsection
+  tag: _ @keyword)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Block Tags (Mathematical Constructs)
