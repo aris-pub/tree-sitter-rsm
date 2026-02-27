@@ -213,6 +213,7 @@ module.exports = grammar({
       // References (including 'previous'), citations, and URLs have standard
       // delimiters but their content is parsed in a special way.
       seq(field('tag', alias(token(':ref:'), $.ref)),
+        field('meta', optional($.inlinemeta)),
         field('target', alias(token(/[^,:]+/), $.text)),
         optional(seq(',', field('reftext', $.text))),
         '::'),

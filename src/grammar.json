@@ -1396,6 +1396,22 @@
             },
             {
               "type": "FIELD",
+              "name": "meta",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "inlinemeta"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "FIELD",
               "name": "target",
               "content": {
                 "type": "ALIAS",
