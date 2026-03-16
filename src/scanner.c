@@ -238,7 +238,6 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
 	  && lexer->lookahead != '$'  // math region
 	  && lexer->lookahead != '`'  // code region
 	  && lexer->lookahead != '*'  // strong region
-	  && lexer->lookahead != '/'  // emphas region
 	  && lexer->lookahead != '#'  // section header
 	  && lexer->lookahead != '%'  // comment
 	  && lexer->lookahead != '\0' // EOF
