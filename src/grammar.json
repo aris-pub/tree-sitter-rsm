@@ -2427,15 +2427,23 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization"
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\s*=\\s*"
+                }
+              ]
+            }
           },
           "named": true,
           "value": "key"
-        },
-        {
-          "type": "STRING",
-          "value": "="
         },
         {
           "type": "STRING",
