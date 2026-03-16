@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "rsm",
   "rules": {
     "source_file": {
@@ -2338,7 +2339,7 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "book|article|software"
+                "value": "book|article|software|inproceedings|conference|misc|phdthesis|mastersthesis|techreport|incollection|unpublished"
               }
             },
             "named": true,
@@ -2428,7 +2429,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "title|author|year|publisher|journal|volume|number|doi|url|edition"
+            "value": "title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization"
           },
           "named": true,
           "value": "key"
@@ -3327,5 +3328,6 @@
     "paragraphcontent",
     "inlinecontent"
   ],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
