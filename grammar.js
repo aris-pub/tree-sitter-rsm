@@ -350,8 +350,7 @@ module.exports = grammar({
       '}'),
 
     bibitempair: $ => seq(
-      alias(/title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization/, $.key),
-      '=',
+      alias(token(seq(/title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization/, /\s*=\s*/)), $.key),
       '{',
       alias(/[^}]+?/, $.value),
       '}'),
