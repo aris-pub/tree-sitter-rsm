@@ -1075,6 +1075,72 @@ Bar.
 
 
 ================================================================================
+Reference preceded by opening parenthesis
+================================================================================
+
+## Foo
+{
+  :label: lbl
+}
+
+Bar.
+
+(:ref:lbl::).
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    title: (text)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (paragraph
+      (text))
+    (paragraph
+      (text)
+      (specialinline
+        tag: (ref)
+        target: (text))
+      (text))))
+
+
+================================================================================
+Reference preceded by punctuation
+================================================================================
+
+## Foo
+{
+  :label: lbl
+}
+
+Bar.
+
+See [:ref:lbl::].
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    title: (text)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (paragraph
+      (text))
+    (paragraph
+      (text)
+      (specialinline
+        tag: (ref)
+        target: (text))
+      (text))))
+
+
+================================================================================
 Escaped colon
 ================================================================================
 

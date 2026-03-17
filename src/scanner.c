@@ -195,6 +195,13 @@ static bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
+static bool is_punctuation(int32_t c) {
+  return c == '(' || c == '[' || c == '"' || c == '\'' ||
+         c == ')' || c == ']' || c == '.' || c == ',' ||
+         c == ';' || c == '!' || c == '?' || c == '/' ||
+         c == '-' || c == 0x2018 || c == 0x201C;  // Unicode quotes
+}
+
 static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
   int newlines_consumed = 0;
@@ -206,6 +213,7 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   int count = 0;
   bool escape_next = false;
   bool last_was_whitespace = true;  // true initially (after newlines or at start)
+  bool last_was_punctuation = false;
 
   // Special check: if we start at a colon (e.g., at beginning of line after newlines),
   // check if it looks like a tag pattern or delimiter and fail immediately if so
@@ -227,6 +235,7 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
     // We already advanced, so adjust count and continue
     count++;  // count the ':' we just passed
     last_was_whitespace = false;
+    last_was_punctuation = true;  // ':' is punctuation
   }
   while (
 	 escape_next ||
@@ -256,8 +265,9 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
         return (count > 0) ? success(lexer, TEXT) : failure(lexer);
       }
 
-      // Single colon - check if it looks like a tag opening (and preceded by whitespace)
-      if (last_was_whitespace && (iswalnum(lexer->lookahead) || lexer->lookahead == '|' || lexer->lookahead == '-' || lexer->lookahead == 0x22A2)) {
+      // Single colon - check if it looks like a tag opening.
+      // Tags can appear after whitespace OR after punctuation like ( [ "
+      if ((last_was_whitespace || last_was_punctuation) && (iswalnum(lexer->lookahead) || lexer->lookahead == '|' || lexer->lookahead == '-' || lexer->lookahead == 0x22A2)) {
         // Looks like a tag (:theorem:, :|-:, :⊢:, :author-note:), stop TEXT here
         // mark_end was already called before the :, so we're good
         return (count > 0) ? success(lexer, TEXT) : failure(lexer);
@@ -273,9 +283,11 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
       // Single colon not part of :: or tag or delimiter, consume it (e.g., "3:1")
       // We called mark_end but don't want to use it, so consume and mark again
       count++;  // the : counts as non-whitespace
+      last_was_punctuation = true;  // ':' is punctuation
       // Now process the current lookahead (char after :)
       if (!iswspace(lexer->lookahead)) count++;
       last_was_whitespace = iswspace(lexer->lookahead);
+      last_was_punctuation = !iswspace(lexer->lookahead) && is_punctuation(lexer->lookahead);
       escape_next = lexer->lookahead == '\\';
       lexer->advance(lexer, false);
       // Mark end again at current position to override the earlier mark
@@ -285,6 +297,7 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
       // Normal character processing
       if (!iswspace(lexer->lookahead)) count++;
       last_was_whitespace = iswspace(lexer->lookahead);
+      last_was_punctuation = !iswspace(lexer->lookahead) && is_punctuation(lexer->lookahead);
       escape_next = lexer->lookahead == '\\';
       lexer->advance(lexer, false);
     }
