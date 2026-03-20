@@ -439,6 +439,7 @@ module.exports = grammar({
       alias(':emphas:', $.emphas),
       alias(':isclaim:', $.isclaim),
       alias(':nonum:', $.nonum),
+      alias(':preamble:', $.preamble),
       alias(':strong:', $.strong),
     ),
 

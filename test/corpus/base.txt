@@ -1514,6 +1514,39 @@ $$
 
 
 ================================================================================
+Mathblock with preamble meta
+================================================================================
+
+$$
+{
+:preamble:
+}
+  \newcommand{\op}{\operatorname}
+$$
+
+:mathblock: {
+:preamble:
+}
+  \newcommand{\op}{\operatorname}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (mathblock
+    meta: (blockmeta
+      (pair
+        (metakey_bool (preamble))))
+    (asis_text))
+  (mathblock
+    meta: (blockmeta
+      (pair
+        (metakey_bool (preamble))))
+    (asis_text)))
+
+
+================================================================================
 Whitespace after block halmos
 ================================================================================
 

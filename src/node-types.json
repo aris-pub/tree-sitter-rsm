@@ -624,6 +624,10 @@
           "named": true
         },
         {
+          "type": "preamble",
+          "named": true
+        },
+        {
           "type": "strong",
           "named": true
         }
@@ -1784,11 +1788,11 @@
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "metaval_list_item",
@@ -1836,6 +1840,10 @@
   },
   {
     "type": "pick",
+    "named": true
+  },
+  {
+    "type": "preamble",
     "named": true
   },
   {
