@@ -3103,6 +3103,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":preamble:"
+          },
+          "named": true,
+          "value": "preamble"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":strong:"
           },
           "named": true,
