@@ -148,10 +148,6 @@ module.exports = grammar({
 
 
 
-      // The following are NOT stamps because they could have meta, though they
-      // cannot have content
-      seq(field('tag', alias(':toc:', $.toc)), '::'),
-
       // Algorithms have standard open and close delimiters and have as-is
       // (i.e. not recursive) content.
       seq(field('tag', alias(token(":algorithm:"), $.algorithm)),
@@ -417,6 +413,7 @@ module.exports = grammar({
       alias(':sketch:', $.sketch),
       alias(':step:', $.step),
       alias(':theorem:', $.theorem),
+      alias(':toc:', $.toc),
       alias(':video:', $.video),
     ),
 
@@ -463,6 +460,7 @@ module.exports = grammar({
       alias(':static:', $.static),
       alias(':theme:', $.theme),
       alias(':toc-depth:', $.toc_depth),
+      alias(':view:', $.view),
     ),
 
     // It is important that comment appears at the end so that other rules will be

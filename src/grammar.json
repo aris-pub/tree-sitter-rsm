@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "rsm",
   "rules": {
     "source_file": {
@@ -889,28 +890,6 @@
           {
             "type": "SYMBOL",
             "name": "table"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "tag",
-                "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "STRING",
-                    "value": ":toc:"
-                  },
-                  "named": true,
-                  "value": "toc"
-                }
-              },
-              {
-                "type": "STRING",
-                "value": "::"
-              }
-            ]
           },
           {
             "type": "SEQ",
@@ -2949,6 +2928,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":toc:"
+          },
+          "named": true,
+          "value": "toc"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":video:"
           },
           "named": true,
@@ -3270,6 +3258,15 @@
           },
           "named": true,
           "value": "toc_depth"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":view:"
+          },
+          "named": true,
+          "value": "view"
         }
       ]
     },
@@ -3344,5 +3341,6 @@
     "paragraphcontent",
     "inlinecontent"
   ],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

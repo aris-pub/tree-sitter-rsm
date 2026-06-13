@@ -161,6 +161,10 @@
             "named": true
           },
           {
+            "type": "toc",
+            "named": true
+          },
+          {
             "type": "video",
             "named": true
           }
@@ -599,6 +603,10 @@
         {
           "type": "typography",
           "named": true
+        },
+        {
+          "type": "view",
+          "named": true
         }
       ]
     }
@@ -932,6 +940,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "meta": {
         "multiple": false,
@@ -1014,17 +1023,13 @@
           {
             "type": "algorithm",
             "named": true
-          },
-          {
-            "type": "toc",
-            "named": true
           }
         ]
       }
     },
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "asis_text",
@@ -1692,7 +1697,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "config",
@@ -1947,10 +1953,6 @@
     "named": true
   },
   {
-    "type": "text",
-    "named": false
-  },
-  {
     "type": "theme",
     "named": true
   },
@@ -1988,6 +1990,10 @@
   },
   {
     "type": "video",
+    "named": true
+  },
+  {
+    "type": "view",
     "named": true
   },
   {
