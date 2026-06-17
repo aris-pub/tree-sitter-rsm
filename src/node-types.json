@@ -940,7 +940,6 @@
   {
     "type": "source_file",
     "named": true,
-    "root": true,
     "fields": {
       "meta": {
         "multiple": false,
@@ -1022,6 +1021,10 @@
         "types": [
           {
             "type": "algorithm",
+            "named": true
+          },
+          {
+            "type": "notation",
             "named": true
           }
         ]
@@ -1697,8 +1700,7 @@
   },
   {
     "type": "comment",
-    "named": true,
-    "extra": true
+    "named": true
   },
   {
     "type": "config",
@@ -1794,11 +1796,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "metaval_list_item",
@@ -1818,6 +1820,10 @@
   },
   {
     "type": "nonum",
+    "named": true
+  },
+  {
+    "type": "notation",
     "named": true
   },
   {
@@ -1951,6 +1957,10 @@
   {
     "type": "text",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "theme",

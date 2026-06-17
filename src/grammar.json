@@ -1,5 +1,4 @@
 {
-  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "rsm",
   "rules": {
     "source_file": {
@@ -908,6 +907,56 @@
                   },
                   "named": true,
                   "value": "algorithm"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "meta",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "blockmeta"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "asis_halmos_text"
+                },
+                "named": true,
+                "value": "asis_text"
+              },
+              {
+                "type": "STRING",
+                "value": "::"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "tag",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "STRING",
+                      "value": ":notation:"
+                    }
+                  },
+                  "named": true,
+                  "value": "notation"
                 }
               },
               {
@@ -3341,6 +3390,5 @@
     "paragraphcontent",
     "inlinecontent"
   ],
-  "supertypes": [],
-  "reserved": {}
+  "supertypes": []
 }

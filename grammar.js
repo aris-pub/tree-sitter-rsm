@@ -153,6 +153,13 @@ module.exports = grammar({
       seq(field('tag', alias(token(":algorithm:"), $.algorithm)),
         field('meta', optional($.blockmeta)),
         alias($.asis_halmos_text, $.asis_text),
+        '::'),
+
+      // Notation declares reader-rebindable macros as raw lines
+      // (\macro $default$ label), parsed by the transformer.
+      seq(field('tag', alias(token(":notation:"), $.notation)),
+        field('meta', optional($.blockmeta)),
+        alias($.asis_halmos_text, $.asis_text),
         '::'))),
 
     // Special paragraphs are not grouped inside a single $.specialparagraph rule

@@ -1,0 +1,40 @@
+================================================================================
+Notation block
+================================================================================
+
+# T
+
+:notation:
+  \eig $\lambda$ general eigenvalue
+  \specrad $\lambda_1$ spectral radius
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (specialblock
+    tag: (notation)
+    (asis_text)))
+
+================================================================================
+Notation block with meta
+================================================================================
+
+# T
+
+:notation: {
+  :label: notn
+}
+  \eig $\lambda$ general eigenvalue
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (specialblock
+    tag: (notation)
+    meta: (blockmeta
+      (pair (metakey_text (label)) (metaval_text)))
+    (asis_text)))
