@@ -3113,6 +3113,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":collapsed:"
+          },
+          "named": true,
+          "value": "collapsed"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":emphas:"
           },
           "named": true,

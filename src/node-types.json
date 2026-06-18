@@ -620,6 +620,10 @@
       "required": true,
       "types": [
         {
+          "type": "collapsed",
+          "named": true
+        },
+        {
           "type": "emphas",
           "named": true
         },
@@ -1696,6 +1700,10 @@
   },
   {
     "type": "code",
+    "named": true
+  },
+  {
+    "type": "collapsed",
     "named": true
   },
   {

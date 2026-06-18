@@ -440,6 +440,7 @@ module.exports = grammar({
     ),
 
     metakey_bool: $ => choice(
+      alias(':collapsed:', $.collapsed),
       alias(':emphas:', $.emphas),
       alias(':isclaim:', $.isclaim),
       alias(':nonum:', $.nonum),
