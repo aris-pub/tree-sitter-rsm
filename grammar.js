@@ -434,6 +434,7 @@ module.exports = grammar({
       alias(':label:', $.label),
       alias(':lang:', $.lang),
       alias(':name:', $.name),
+      alias(':of:', $.of),
       alias(':orcid:', $.orcid),
       alias(':reftext:', $.reftext),
       alias(':title:', $.title),

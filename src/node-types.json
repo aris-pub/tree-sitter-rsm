@@ -714,6 +714,10 @@
           "named": true
         },
         {
+          "type": "of",
+          "named": true
+        },
+        {
           "type": "orcid",
           "named": true
         },
@@ -1804,11 +1808,11 @@
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "metaval_list_item",
@@ -1840,6 +1844,10 @@
   },
   {
     "type": "numbering",
+    "named": true
+  },
+  {
+    "type": "of",
     "named": true
   },
   {

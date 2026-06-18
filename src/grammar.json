@@ -3081,6 +3081,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":of:"
+          },
+          "named": true,
+          "value": "of"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":orcid:"
           },
           "named": true,
