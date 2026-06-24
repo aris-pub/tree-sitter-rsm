@@ -1,0 +1,46 @@
+================================================================================
+Calc chain with relation steps and justifications
+================================================================================
+
+:calc:
+
+  :step: $f(x) = a$
+
+    :p: Because the first reason. ::
+
+  ::
+
+  :step: $= b$
+
+    :p: Because the second reason. ::
+
+  ::
+
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (calc)
+    (block
+      tag: (step)
+      (paragraph
+        (specialinline
+          tag: (math)
+          (asis_text)))
+      (block
+        tag: (subproof)
+        (paragraph
+          (text))))
+    (block
+      tag: (step)
+      (paragraph
+        (specialinline
+          tag: (math)
+          (asis_text)))
+      (block
+        tag: (subproof)
+        (paragraph
+          (text))))))

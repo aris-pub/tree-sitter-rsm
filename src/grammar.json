@@ -2806,6 +2806,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":calc:"
+          },
+          "named": true,
+          "value": "calc"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":config:"
           },
           "named": true,

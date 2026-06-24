@@ -97,6 +97,10 @@
             "named": true
           },
           {
+            "type": "calc",
+            "named": true
+          },
+          {
             "type": "config",
             "named": true
           },
@@ -1684,6 +1688,10 @@
   },
   {
     "type": "author_note",
+    "named": true
+  },
+  {
+    "type": "calc",
     "named": true
   },
   {
