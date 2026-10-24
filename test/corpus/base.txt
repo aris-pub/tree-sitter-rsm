@@ -2050,3 +2050,22 @@ Itemize with nested depth markers
     (paragraph
       (item
         (text)))))
+
+
+================================================================================
+Escaped colon in a meta value
+================================================================================
+
+:paragraph: {:title: Task #1\: Masked LM}
+  Body text.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (inlinemeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text)))
+    (text)))
