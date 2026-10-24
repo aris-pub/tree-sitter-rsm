@@ -2885,7 +2885,7 @@
             "value": ":exercise:"
           },
           "named": true,
-          "value": "theorem"
+          "value": "exercise"
         },
         {
           "type": "ALIAS",
@@ -2939,7 +2939,7 @@
             "value": ":porism:"
           },
           "named": true,
-          "value": "theorem"
+          "value": "porism"
         },
         {
           "type": "ALIAS",
@@ -2948,7 +2948,7 @@
             "value": ":problem:"
           },
           "named": true,
-          "value": "theorem"
+          "value": "problem"
         },
         {
           "type": "ALIAS",
