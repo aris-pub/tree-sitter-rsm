@@ -225,3 +225,53 @@ Text without citations.
   (paragraph
     (text))
   (references))
+
+
+================================================================================
+Webpage reference
+================================================================================
+
+:references:
+@webpage{site1,
+  title = {A Resource},
+  url = {https://example.com}
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))))
+
+
+================================================================================
+Reference with verbatim field
+================================================================================
+
+:references:
+@misc{raw1,
+  verbatim = {Doe, J. Unparsed ref. 2021.}
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value)))))
