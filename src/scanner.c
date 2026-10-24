@@ -502,6 +502,15 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
 	   && lexer->lookahead != ','
 	   && lexer->lookahead != '\0'
 	   ) {
+      // A backslash escapes the next character (e.g. \: for a literal colon in
+      // a meta value), so consume both and keep scanning past it.
+      if (lexer->lookahead == '\\') {
+        lexer->advance(lexer, false);
+        if (lexer->lookahead != '\0') {
+          lexer->advance(lexer, false);
+        }
+        continue;
+      }
       lexer->advance(lexer, false);
     }
     if (lexer->lookahead == ',' || lexer->lookahead == '}') {
