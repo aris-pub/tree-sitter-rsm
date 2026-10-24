@@ -476,6 +476,24 @@
     "type": "item",
     "named": true,
     "fields": {
+      "marker": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": ":---:",
+            "named": false
+          },
+          {
+            "type": ":--:",
+            "named": false
+          },
+          {
+            "type": ":-:",
+            "named": false
+          }
+        ]
+      },
       "meta": {
         "multiple": false,
         "required": false,
@@ -1576,6 +1594,14 @@
   },
   {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": ":---:",
+    "named": false
+  },
+  {
+    "type": ":--:",
     "named": false
   },
   {

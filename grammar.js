@@ -171,8 +171,12 @@ module.exports = grammar({
       repeat1($.paragraphcontent),
       alias($.paragraph_end, 'paragraph_end')),
 
+    // The marker's dash count is the nesting depth: :-: level 1, :--: level 2,
+    // :---: level 3. Three levels only; the Python side reads the marker and
+    // groups items into a tree. A deeper marker never appears as a token, so
+    // :----: cannot form an item.
     item: $ => seq(
-      token(':-:'),
+      field('marker', choice(':-:', ':--:', ':---:')),
       optional(field('meta', $.inlinemeta)),
       repeat1($.paragraphcontent),
       alias($.paragraph_end, 'paragraph_end')),
