@@ -343,7 +343,7 @@ module.exports = grammar({
 
     bibitem: $ => seq(
       '@',
-      field('kind', alias(token(/book|article|software|inproceedings|conference|misc|phdthesis|mastersthesis|techreport|incollection|unpublished/), $.kind)),
+      field('kind', alias(token(/book|article|software|inproceedings|conference|misc|phdthesis|mastersthesis|techreport|incollection|unpublished|webpage/), $.kind)),
       '{',
       field('label', alias(token(/[^,]+?/), $.label)),
       ',',
@@ -353,7 +353,7 @@ module.exports = grammar({
       '}'),
 
     bibitempair: $ => seq(
-      alias(token(seq(/title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization/, /\s*=\s*/)), $.key),
+      alias(token(seq(/title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization|verbatim/, /\s*=\s*/)), $.key),
       '{',
       alias(/[^}]+?/, $.value),
       '}'),

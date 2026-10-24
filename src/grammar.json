@@ -2366,7 +2366,7 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "book|article|software|inproceedings|conference|misc|phdthesis|mastersthesis|techreport|incollection|unpublished"
+                "value": "book|article|software|inproceedings|conference|misc|phdthesis|mastersthesis|techreport|incollection|unpublished|webpage"
               }
             },
             "named": true,
@@ -2461,7 +2461,7 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization"
+                  "value": "title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization|verbatim"
                 },
                 {
                   "type": "PATTERN",
