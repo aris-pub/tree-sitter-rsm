@@ -330,7 +330,7 @@ module.exports = grammar({
     td: $ => seq(
       field('tag', token(':td:')),
       field('meta', optional($.inlinemeta)),
-      $.tdcontent,
+      optional($.tdcontent),
       '::'),
 
     tdcontent: $ => repeat1($.inlinecontent),

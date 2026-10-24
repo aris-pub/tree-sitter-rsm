@@ -2314,8 +2314,16 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "tdcontent"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "tdcontent"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
