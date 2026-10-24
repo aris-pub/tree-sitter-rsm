@@ -2069,3 +2069,23 @@ Escaped colon in a meta value
           (title))
         (metaval_text)))
     (text)))
+
+
+================================================================================
+Problem environment uses its own tag
+================================================================================
+
+:problem:
+
+  A problem statement.
+
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (problem)
+    (paragraph
+      (text))))

@@ -121,6 +121,10 @@
             "named": true
           },
           {
+            "type": "exercise",
+            "named": true
+          },
+          {
             "type": "figure",
             "named": true
           },
@@ -134,6 +138,14 @@
           },
           {
             "type": "lemma",
+            "named": true
+          },
+          {
+            "type": "porism",
+            "named": true
+          },
+          {
+            "type": "problem",
             "named": true
           },
           {
@@ -1789,6 +1801,10 @@
     "named": true
   },
   {
+    "type": "exercise",
+    "named": true
+  },
+  {
     "type": "figure",
     "named": true
   },
@@ -1905,6 +1921,10 @@
     "named": true
   },
   {
+    "type": "porism",
+    "named": true
+  },
+  {
     "type": "preamble",
     "named": true
   },
@@ -1922,6 +1942,10 @@
   },
   {
     "type": "previous",
+    "named": true
+  },
+  {
+    "type": "problem",
     "named": true
   },
   {
