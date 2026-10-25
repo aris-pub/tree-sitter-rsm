@@ -3253,6 +3253,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":citation-style:"
+          },
+          "named": true,
+          "value": "citation_style"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":dark:"
           },
           "named": true,

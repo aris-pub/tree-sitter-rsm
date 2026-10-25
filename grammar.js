@@ -462,6 +462,7 @@ module.exports = grammar({
 
     metakey_any: $ => choice(
       alias(':accent:', $.accent),
+      alias(':citation-style:', $.citation_style),
       alias(':dark:', $.dark),
       alias(':lang:', $.lang),
       alias(':typography:', $.typography),

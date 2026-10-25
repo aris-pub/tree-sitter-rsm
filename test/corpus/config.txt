@@ -187,3 +187,28 @@ More content.
     title: (text)
     (paragraph
       (text))))
+
+
+================================================================================
+Config block with citation-style
+================================================================================
+
+# Title
+
+:config: {
+  :citation-style: parens-author-year
+}
+::
+
+Content.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_any (citation_style)) (metaval_any))))
+  (paragraph
+    (text)))

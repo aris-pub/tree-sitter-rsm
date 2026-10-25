@@ -599,6 +599,10 @@
           "named": true
         },
         {
+          "type": "citation_style",
+          "named": true
+        },
+        {
           "type": "dark",
           "named": true
         },
@@ -1734,6 +1738,10 @@
   },
   {
     "type": "case",
+    "named": true
+  },
+  {
+    "type": "citation_style",
     "named": true
   },
   {
