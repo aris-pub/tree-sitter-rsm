@@ -182,11 +182,15 @@ module.exports = grammar({
       alias($.paragraph_end, 'paragraph_end')),
 
     specialinline: $ => choice(
-      // Prev* are special bc they have no content and no Halmos (they are stamps)
-      alias(token(':prev:'), $.prev),
-      alias(token(':prev2:'), $.prev2),
-      alias(token(':prev3:'), $.prev3),
+      $._formatinline,
+      $._refinline,
+    ),
 
+    // Formatting inlines (math, code, and the span shortcuts) are the subset of
+    // special inlines that is also allowed inside a link's reftext. They are kept
+    // in their own rule so reftext can reference them without the reference/link
+    // tags below.
+    _formatinline: $ => choice(
       // Math and code inlines have special open and close delimimters ($) and (`)
       // respectively AND as-is content.
       seq(field('tag', alias(token(/\$/), $.math)),
@@ -216,13 +220,23 @@ module.exports = grammar({
         seq(field('tag', alias(token(/\*/), $.spanemphas)),
           repeat($.inlinecontent),
           token('*'))),
+    ),
+
+    // Reference, citation, URL, and previous* inlines. These are excluded from a
+    // link's reftext so links cannot nest inside a link's display text.
+    _refinline: $ => choice(
+      // Prev* are special bc they have no content and no Halmos (they are stamps)
+      alias(token(':prev:'), $.prev),
+      alias(token(':prev2:'), $.prev2),
+      alias(token(':prev3:'), $.prev3),
 
       // References (including 'previous'), citations, and URLs have standard
-      // delimiters but their content is parsed in a special way.
+      // delimiters but their content is parsed in a special way. The reftext of
+      // :ref: and :url: accepts inline markup (see $._reftext_inline).
       seq(field('tag', alias(token(':ref:'), $.ref)),
         field('meta', optional($.inlinemeta)),
         field('target', alias(token(/[^,:]+/), $.text)),
-        optional(seq(',', field('reftext', $.text))),
+        optional(seq(',', field('reftext', repeat($._reftext_inline)))),
         '::'),
       seq(field('tag', alias(token(':previous:'), $.previous)),
         field('target', alias(token(/[0-9]+/), $.text)),
@@ -230,12 +244,23 @@ module.exports = grammar({
         '::'),
       seq(field('tag', alias(token(':url:'), $.url)),
         field('target', alias(token(/(https:\/\/|http:\/\/)?[^\s,:]+?/), $.text)),
-        optional(seq(',', field('reftext', $.text))),
+        optional(seq(',', field('reftext', repeat($._reftext_inline)))),
         '::'),
       seq(field('tag', alias(token(':cite:'), $.cite)),
         field('targetlabels', alias(token(/[^:]+/), $.text)),
         optional(seq(',', field('reftext', $.text))),
         '::'),
+    ),
+
+    // Inline content allowed inside a link's reftext: everything an ordinary
+    // paragraph holds except the reference/link tags. The formatting inlines are
+    // aliased to specialinline so they appear exactly as they would in body text.
+    _reftext_inline: $ => choice(
+      alias($._formatinline, $.specialinline),
+      $.inline,
+      $.specialconstruct,
+      $.construct,
+      $.text,
     ),
 
     specialconstruct: $ => choice(

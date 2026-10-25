@@ -1,0 +1,184 @@
+================================================================================
+URL reftext with emphasis shortcut
+================================================================================
+
+:url:https://x.org, *emph*::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (url)
+      target: (text)
+      reftext: (specialinline
+        tag: (spanemphas)
+        (text)))
+    (text)))
+
+
+================================================================================
+URL reftext with strong shortcut
+================================================================================
+
+:url:https://x.org, **strong**::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (url)
+      target: (text)
+      reftext: (specialinline
+        tag: (spanstrong)
+        (text)))
+    (text)))
+
+
+================================================================================
+URL reftext with inline math
+================================================================================
+
+:url:https://x.org, $x+1$::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (url)
+      target: (text)
+      reftext: (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+URL reftext with inline code
+================================================================================
+
+:url:https://x.org, `grep`::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (url)
+      target: (text)
+      reftext: (specialinline
+        tag: (code)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+Ref reftext with strong shortcut and surrounding text
+================================================================================
+
+:ref:lbl, the **main** section::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text)
+      reftext: (text)
+      reftext: (specialinline
+        tag: (spanstrong)
+        (text))
+      reftext: (text))
+    (text)))
+
+
+================================================================================
+URL reftext mixing text and markup
+================================================================================
+
+:url:https://x.org, On *Lipschitz* $\ell_2$::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (url)
+      target: (text)
+      reftext: (text)
+      reftext: (specialinline
+        tag: (spanemphas)
+        (text))
+      reftext: (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+URL reftext with span tag between text
+================================================================================
+
+:url:https://x.org, a :span:boxed:: part::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (url)
+      target: (text)
+      reftext: (text)
+      reftext: (inline
+        tag: (span)
+        (text))
+      reftext: (text))
+    (text)))
+
+
+================================================================================
+URL reftext span closer abuts link closer
+================================================================================
+
+:url:x, :span:foo::::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (url)
+      target: (text)
+      reftext: (inline
+        tag: (span)
+        (text)))
+    (text)))
+
+
+================================================================================
+URL reftext plain text still parses
+================================================================================
+
+:url:https://x.org,the site::.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (url)
+      target: (text)
+      reftext: (text))
+    (text)))
