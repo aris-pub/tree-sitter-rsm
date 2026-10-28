@@ -432,10 +432,6 @@
             "named": true
           },
           {
-            "type": "note",
-            "named": true
-          },
-          {
             "type": "span",
             "named": true
           }
@@ -1070,14 +1066,22 @@
             "named": true
           },
           {
+            "type": "aside",
+            "named": true
+          },
+          {
             "type": "notation",
+            "named": true
+          },
+          {
+            "type": "note",
             "named": true
           }
         ]
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -1085,7 +1089,35 @@
           "named": true
         },
         {
+          "type": "codeblock",
+          "named": true
+        },
+        {
+          "type": "construct",
+          "named": true
+        },
+        {
+          "type": "inline",
+          "named": true
+        },
+        {
+          "type": "mathblock",
+          "named": true
+        },
+        {
+          "type": "specialconstruct",
+          "named": true
+        },
+        {
+          "type": "specialinline",
+          "named": true
+        },
+        {
           "type": "table",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         }
       ]
@@ -1152,6 +1184,10 @@
         "required": false,
         "types": [
           {
+            "type": "aside",
+            "named": true
+          },
+          {
             "type": "cite",
             "named": true
           },
@@ -1161,6 +1197,10 @@
           },
           {
             "type": "math",
+            "named": true
+          },
+          {
+            "type": "note",
             "named": true
           },
           {
@@ -1722,6 +1762,10 @@
   },
   {
     "type": "alt",
+    "named": true
+  },
+  {
+    "type": "aside",
     "named": true
   },
   {

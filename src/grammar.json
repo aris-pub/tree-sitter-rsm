@@ -989,6 +989,72 @@
                 "value": "::"
               }
             ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "tag",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "STRING",
+                          "value": ":note:"
+                        }
+                      },
+                      "named": true,
+                      "value": "note"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "STRING",
+                          "value": ":aside:"
+                        }
+                      },
+                      "named": true,
+                      "value": "aside"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "meta",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "blockmeta"
+                }
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "paragraphcontent"
+                }
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "paragraph_end"
+                },
+                "named": false,
+                "value": "paragraph_end"
+              },
+              {
+                "type": "STRING",
+                "value": "::"
+              }
+            ]
           }
         ]
       }
@@ -1714,6 +1780,64 @@
                   "type": "BLANK"
                 }
               ]
+            },
+            {
+              "type": "STRING",
+              "value": "::"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "tag",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "STRING",
+                        "value": ":note:"
+                      }
+                    },
+                    "named": true,
+                    "value": "note"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "STRING",
+                        "value": ":aside:"
+                      }
+                    },
+                    "named": true,
+                    "value": "aside"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "target",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[^\\s,:{}]+"
+                  }
+                },
+                "named": true,
+                "value": "text"
+              }
             },
             {
               "type": "STRING",
@@ -2836,15 +2960,6 @@
           },
           "named": true,
           "value": "draft"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":note:"
-          },
-          "named": true,
-          "value": "note"
         },
         {
           "type": "ALIAS",

@@ -160,6 +160,17 @@ module.exports = grammar({
       seq(field('tag', alias(token(":notation:"), $.notation)),
         field('meta', optional($.blockmeta)),
         alias($.asis_halmos_text, $.asis_text),
+        '::'),
+
+      // A note or aside definition holds one paragraph's content. Its meta block
+      // (carrying the label) is required: the opening brace after the tag is what
+      // tells a definition apart from a call, which takes a bare label instead.
+      seq(field('tag', choice(
+            alias(token(':note:'), $.note),
+            alias(token(':aside:'), $.aside))),
+        field('meta', $.blockmeta),
+        repeat1($.paragraphcontent),
+        alias($.paragraph_end, 'paragraph_end'),
         '::'))),
 
     // Special paragraphs are not grouped inside a single $.specialparagraph rule
@@ -249,6 +260,15 @@ module.exports = grammar({
       seq(field('tag', alias(token(':cite:'), $.cite)),
         field('targetlabels', alias(token(/[^:]+/), $.text)),
         optional(seq(',', field('reftext', $.text))),
+        '::'),
+
+      // A note or aside call takes only the label of its definition. Whitespace,
+      // braces and commas are excluded from the label so that inline content or
+      // a meta block after the tag is a parse error.
+      seq(field('tag', choice(
+            alias(token(':note:'), $.note),
+            alias(token(':aside:'), $.aside))),
+        field('target', alias(token(/[^\s,:{}]+/), $.text)),
         '::'),
     ),
 
@@ -423,7 +443,6 @@ module.exports = grammar({
 
     inlinetag: $ => choice(
       alias(':draft:', $.draft),
-      alias(':note:', $.note),
       alias(':span:', $.span),
     ),
 

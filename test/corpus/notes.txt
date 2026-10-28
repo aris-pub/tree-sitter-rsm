@@ -1,0 +1,348 @@
+================================================================================
+Note call at the end of a sentence
+================================================================================
+
+Some paragraph with a note at the end. :note:my-note::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (note)
+      target: (text))))
+
+
+================================================================================
+Aside call in the middle of a sentence
+================================================================================
+
+Some text :aside:my_aside-2:: and more text.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (aside)
+      target: (text))
+    (text)))
+
+
+================================================================================
+Note call at the start of a paragraph
+================================================================================
+
+:note:first:: starts this paragraph.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (note)
+      target: (text))
+    (text)))
+
+
+================================================================================
+Note call inside a table cell
+================================================================================
+
+:table:
+  :tbody:
+    :tr: cell :note:n1:: : other ::
+  ::
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    (table
+      body: (tbody
+        (trshort
+          (tdcontent
+            (text)
+            (specialinline
+              tag: (note)
+              target: (text)))
+          (tdcontent
+            (text)))))))
+
+
+================================================================================
+Note definition on one line
+================================================================================
+
+:note: {:label: my-note} this is the note's contents ::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (note)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (text)))
+
+
+================================================================================
+Aside definition on one line
+================================================================================
+
+:aside: {:label: my-aside} this is the aside's contents ::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (aside)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (text)))
+
+
+================================================================================
+Note definition over several lines with inline markup
+================================================================================
+
+:note: {
+  :label: long-note
+}
+  A note with *emphasis*, $x+1$ and
+  a :ref:sec-1:: on a second line.
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (note)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (text)
+    (specialinline
+      tag: (spanemphas)
+      (text))
+    (text)
+    (specialinline
+      tag: (math)
+      (asis_text))
+    (text)
+    (text)
+    (specialinline
+      tag: (ref)
+      target: (text))
+    (text)))
+
+
+================================================================================
+Note definition with display math and a code block
+================================================================================
+
+:note: {:label: math-note}
+  Before the math
+  $$
+  x = 1
+  $$
+  and a code block
+  ```
+  y = 2
+  ```
+  after.
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (note)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (text)
+    (mathblock
+      (asis_text))
+    (text)
+    (codeblock
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Call and definition together
+================================================================================
+
+Some paragraph with a note at the end. :note:my-note::
+
+:note: {:label: my-note} this is the note's contents ::
+
+Another paragraph.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (note)
+      target: (text)))
+  (specialblock
+    tag: (note)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (text))
+  (paragraph
+    (text)))
+
+
+================================================================================
+Aside definition inside a block
+================================================================================
+
+:theorem:
+  A claim. :aside:a1::
+
+  :aside: {:label: a1} the aside ::
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    (paragraph
+      (text)
+      (specialinline
+        tag: (aside)
+        target: (text)))
+    (specialblock
+      tag: (aside)
+      meta: (blockmeta
+        (pair
+          (metakey_text (label))
+          (metaval_text)))
+      (text))))
+
+
+================================================================================
+Note definition inside a section
+================================================================================
+
+## Intro
+
+Text. :note:n::
+
+:note: {:label: n} the note ::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    title: (text)
+    (paragraph
+      (text)
+      (specialinline
+        tag: (note)
+        target: (text)))
+    (specialblock
+      tag: (note)
+      meta: (blockmeta
+        (pair
+          (metakey_text (label))
+          (metaval_text)))
+      (text))))
+
+
+================================================================================
+ERROR: note definition without its meta block
+:error
+================================================================================
+
+:note: this is not allowed ::
+
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+ERROR: aside definition without its meta block
+:error
+================================================================================
+
+:aside: this is not allowed ::
+
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+ERROR: inline content in a note call
+:error
+================================================================================
+
+Some text :note: inline content here :: and more.
+
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+ERROR: inline content in an aside call
+:error
+================================================================================
+
+Some text :aside: inline content here :: and more.
+
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+ERROR: meta block in a call
+:error
+================================================================================
+
+Some text :note:{:label: x} content :: and more.
+
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+ERROR: note definition with two paragraphs
+:error
+================================================================================
+
+:note: {:label: two}
+  First paragraph.
+
+  Second paragraph.
+::
+
+
+--------------------------------------------------------------------------------
+
