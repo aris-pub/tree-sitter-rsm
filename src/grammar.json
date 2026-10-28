@@ -3484,6 +3484,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":minimap:"
+          },
+          "named": true,
+          "value": "minimap"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":numbering:"
           },
           "named": true,

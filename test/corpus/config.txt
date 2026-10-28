@@ -212,3 +212,28 @@ Content.
       (pair (metakey_any (citation_style)) (metaval_any))))
   (paragraph
     (text)))
+
+
+================================================================================
+Config block with minimap
+================================================================================
+
+# Title
+
+:config: {
+  :minimap: false
+}
+::
+
+Content.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_any (minimap)) (metaval_any))))
+  (paragraph
+    (text)))

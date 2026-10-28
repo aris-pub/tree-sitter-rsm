@@ -607,6 +607,10 @@
           "named": true
         },
         {
+          "type": "minimap",
+          "named": true
+        },
+        {
           "type": "numbering",
           "named": true
         },
@@ -1934,6 +1938,10 @@
   },
   {
     "type": "metaval_list_item",
+    "named": true
+  },
+  {
+    "type": "minimap",
     "named": true
   },
   {
