@@ -1477,6 +1477,33 @@ Table of Contents with meta
 
 
 ================================================================================
+Table of Contents with orientation
+================================================================================
+
+:toc: {
+  :view: tree,
+  :orientation: horizontal
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (toc)
+    meta: (blockmeta
+      (pair
+        (metakey_any
+          (view))
+        (metaval_any))
+      (pair
+        (metakey_any
+          (orientation))
+        (metaval_any)))))
+
+
+================================================================================
 Space after closing mathblock should be allowed
 ================================================================================
 

@@ -3502,6 +3502,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":orientation:"
+          },
+          "named": true,
+          "value": "orientation"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":override-date:"
           },
           "named": true,

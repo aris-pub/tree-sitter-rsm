@@ -615,6 +615,10 @@
           "named": true
         },
         {
+          "type": "orientation",
+          "named": true
+        },
+        {
           "type": "override_date",
           "named": true
         },
@@ -1978,6 +1982,10 @@
   },
   {
     "type": "orcid",
+    "named": true
+  },
+  {
+    "type": "orientation",
     "named": true
   },
   {

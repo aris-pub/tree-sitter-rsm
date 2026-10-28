@@ -517,6 +517,7 @@ module.exports = grammar({
       alias(':author-display-last:', $.author_display_last),
       alias(':minimap:', $.minimap),
       alias(':numbering:', $.numbering),
+      alias(':orientation:', $.orientation),
       alias(':override-date:', $.override_date),
       alias(':path:', $.path),
       alias(':scale:', $.scale),
