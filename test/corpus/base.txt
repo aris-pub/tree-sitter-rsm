@@ -1481,7 +1481,7 @@ Table of Contents with orientation
 ================================================================================
 
 :toc: {
-  :view: tree,
+  :view: tree
   :orientation: horizontal
 }
 ::
