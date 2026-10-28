@@ -71,7 +71,7 @@
 ;; Inline Tags
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[(draft) (note) (span)] @keyword.modifier
+[(draft) (note) (aside) (span)] @keyword.modifier
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Special Inlines
@@ -91,6 +91,11 @@
 (ref) @function.builtin
 (specialinline
   tag: (ref)
+  target: (text) @string.special)
+
+;; Note and aside calls
+(specialinline
+  tag: [(note) (aside)]
   target: (text) @string.special)
 
 ;; Citations

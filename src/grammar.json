@@ -1042,13 +1042,21 @@
                 }
               },
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "paragraph_end"
-                },
-                "named": false,
-                "value": "paragraph_end"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "paragraph_end"
+                    },
+                    "named": false,
+                    "value": "paragraph_end"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
               },
               {
                 "type": "STRING",

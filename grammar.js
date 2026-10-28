@@ -165,12 +165,15 @@ module.exports = grammar({
       // A note or aside definition holds one paragraph's content. Its meta block
       // (carrying the label) is required: the opening brace after the tag is what
       // tells a definition apart from a call, which takes a bare label instead.
+      // The paragraph end is optional because the scanner does not find one
+      // between an inline tag and a Halmos on the same line (as in "$x$ ::").
+      // A blank line still ends the paragraph, so a second paragraph is an error.
       seq(field('tag', choice(
             alias(token(':note:'), $.note),
             alias(token(':aside:'), $.aside))),
         field('meta', $.blockmeta),
         repeat1($.paragraphcontent),
-        alias($.paragraph_end, 'paragraph_end'),
+        optional(alias($.paragraph_end, 'paragraph_end')),
         '::'))),
 
     // Special paragraphs are not grouped inside a single $.specialparagraph rule

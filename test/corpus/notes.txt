@@ -116,6 +116,40 @@ Aside definition on one line
 
 
 ================================================================================
+Note definition ending in inline math on the same line as the Halmos
+================================================================================
+
+:note: {:label: m} the value of $x$ ::
+
+:aside: {:label: r} see :ref:sec-1:: ::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (note)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (text)
+    (specialinline
+      tag: (math)
+      (asis_text)))
+  (specialblock
+    tag: (aside)
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (text)
+    (specialinline
+      tag: (ref)
+      target: (text))))
+
+
+================================================================================
 Note definition over several lines with inline markup
 ================================================================================
 
