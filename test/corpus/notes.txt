@@ -16,7 +16,7 @@ Some paragraph with a note at the end. :note:my-note::
 
 
 ================================================================================
-Aside call in the middle of a sentence
+Aside call without a phrase
 ================================================================================
 
 Some text :aside:my_aside-2:: and more text.
@@ -30,6 +30,93 @@ Some text :aside:my_aside-2:: and more text.
     (specialinline
       tag: (aside)
       target: (text))
+    (text)))
+
+
+================================================================================
+Aside call with a plain phrase
+================================================================================
+
+We map into :aside:hilbert,some Euclidean space:: such that it works.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (aside)
+      target: (text)
+      phrase: (text))
+    (text)))
+
+
+================================================================================
+Aside call with inline markup in the phrase
+================================================================================
+
+We map into :aside:hilbert,some *Euclidean* **space**:: here.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (aside)
+      target: (text)
+      phrase: (text)
+      phrase: (specialinline
+        tag: (spanemphas)
+        (text))
+      phrase: (specialinline
+        tag: (spanstrong)
+        (text)))
+    (text)))
+
+
+================================================================================
+Aside call with math in the phrase
+================================================================================
+
+We map into :aside:hilbert,the space $\mathbb{R}^m$:: here.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (aside)
+      target: (text)
+      phrase: (text)
+      phrase: (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+Aside call with a phrase that is only math
+================================================================================
+
+We map into :aside:hilbert,$\mathbb{R}^m$:: here.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (aside)
+      target: (text)
+      phrase: (specialinline
+        tag: (math)
+        (asis_text)))
     (text)))
 
 
@@ -350,6 +437,17 @@ ERROR: inline content in an aside call
 ================================================================================
 
 Some text :aside: inline content here :: and more.
+
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+ERROR: phrase in a note call
+:error
+================================================================================
+
+Some text :note:x,some words:: and more.
 
 
 --------------------------------------------------------------------------------
