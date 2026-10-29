@@ -1161,6 +1161,32 @@
           }
         ]
       },
+      "phrase": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "construct",
+            "named": true
+          },
+          {
+            "type": "inline",
+            "named": true
+          },
+          {
+            "type": "specialconstruct",
+            "named": true
+          },
+          {
+            "type": "specialinline",
+            "named": true
+          },
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      },
       "reftext": {
         "multiple": true,
         "required": false,

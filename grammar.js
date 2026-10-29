@@ -265,13 +265,18 @@ module.exports = grammar({
         optional(seq(',', field('reftext', $.text))),
         '::'),
 
-      // A note or aside call takes only the label of its definition. Whitespace,
-      // braces and commas are excluded from the label so that inline content or
-      // a meta block after the tag is a parse error.
-      seq(field('tag', choice(
-            alias(token(':note:'), $.note),
-            alias(token(':aside:'), $.aside))),
+      // A note call takes only the label of its definition. Whitespace, braces
+      // and commas are excluded from the label so that inline content or a meta
+      // block after the tag is a parse error.
+      seq(field('tag', alias(token(':note:'), $.note)),
         field('target', alias(token(/[^\s,:{}]+/), $.text)),
+        '::'),
+      // An aside call also names the phrase the aside is about, after a comma,
+      // as :ref: does for its link text. The phrase is optional here so that a
+      // call without one parses and RSM can report it with a clear message.
+      seq(field('tag', alias(token(':aside:'), $.aside)),
+        field('target', alias(token(/[^\s,:{}]+/), $.text)),
+        optional(seq(',', field('phrase', repeat1($._reftext_inline)))),
         '::'),
     ),
 
