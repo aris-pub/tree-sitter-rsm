@@ -486,6 +486,7 @@ module.exports = grammar({
       alias(':alt:', $.alt),
       alias(':author-note:', $.author_note),
       alias(':email:', $.email),
+      alias(':eyebrow:', $.eyebrow),
       alias(':goal:', $.goal),
       alias(':icon:', $.icon),
       alias(':label:', $.label),
