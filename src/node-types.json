@@ -736,6 +736,10 @@
           "named": true
         },
         {
+          "type": "eyebrow",
+          "named": true
+        },
+        {
           "type": "goal",
           "named": true
         },
@@ -1904,6 +1908,10 @@
   },
   {
     "type": "exercise",
+    "named": true
+  },
+  {
+    "type": "eyebrow",
     "named": true
   },
   {

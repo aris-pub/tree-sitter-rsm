@@ -3296,6 +3296,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":eyebrow:"
+          },
+          "named": true,
+          "value": "eyebrow"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":goal:"
           },
           "named": true,
