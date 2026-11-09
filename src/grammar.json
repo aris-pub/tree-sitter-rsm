@@ -3341,6 +3341,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":blockname:"
+          },
+          "named": true,
+          "value": "blockname"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":email:"
           },
           "named": true,

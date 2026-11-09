@@ -732,6 +732,10 @@
           "named": true
         },
         {
+          "type": "blockname",
+          "named": true
+        },
+        {
           "type": "email",
           "named": true
         },
@@ -1832,6 +1836,10 @@
   },
   {
     "type": "author_note",
+    "named": true
+  },
+  {
+    "type": "blockname",
     "named": true
   },
   {

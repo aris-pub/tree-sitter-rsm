@@ -195,8 +195,8 @@
 
 ;; Meta keys - text values
 [
-  (affiliation) (alt) (author_note) (email) (eyebrow) (goal) (icon)
-  (label) (lang) (name) (orcid) (reftext) (title)
+  (affiliation) (alt) (author_note) (blockname) (email) (eyebrow) (goal)
+  (icon) (label) (lang) (name) (orcid) (reftext) (title)
 ] @property
 
 ;; Meta keys - boolean values

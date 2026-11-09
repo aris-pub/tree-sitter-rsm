@@ -80,6 +80,58 @@ Manuscript with title and eyebrow
 
 
 ================================================================================
+Remark with blockname
+================================================================================
+
+:remark: {
+  :blockname: Hint
+  :nonum:
+}
+
+  What does inversion make of them?
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (remark)
+    meta: (blockmeta
+      (pair
+        (metakey_text (blockname))
+        (metaval_text))
+      (pair
+        (metakey_bool (nonum))))
+    (paragraph
+      (text))))
+
+
+================================================================================
+Remark with blockname in inline meta
+================================================================================
+
+:remark: {:blockname: Key idea, :label: k}
+  Invert at the point of tangency.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (remark)
+    meta: (blockmeta
+      (pair
+        (metakey_text (blockname))
+        (metaval_text))
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+
+================================================================================
 Section
 ================================================================================
 
