@@ -1246,6 +1246,10 @@
             "named": true
           },
           {
+            "type": "rawhtml",
+            "named": true
+          },
+          {
             "type": "ref",
             "named": true
           },
@@ -2080,6 +2084,10 @@
   },
   {
     "type": "qed",
+    "named": true
+  },
+  {
+    "type": "rawhtml",
     "named": true
   },
   {

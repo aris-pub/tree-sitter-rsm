@@ -87,6 +87,11 @@
   tag: (code) @operator
   (asis_text) @markup.raw)
 
+;; Raw HTML delimiters and content
+(specialinline
+  tag: (rawhtml) @operator
+  (asis_text) @markup.raw)
+
 ;; References
 (ref) @function.builtin
 (specialinline

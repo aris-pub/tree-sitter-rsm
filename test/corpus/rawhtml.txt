@@ -1,0 +1,220 @@
+================================================================================
+Raw HTML inline
+================================================================================
+
+A :rawhtml: <b>bold</b> :: B.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (rawhtml)
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Raw HTML inline with alt, followed by punctuation
+================================================================================
+
+Consider :rawhtml:{:alt: $C_0$} <mtp-display model="pappus" name="c0"></mtp-display> ::, more.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (rawhtml)
+      meta: (inlinemeta
+        (pair
+          (metakey_text (alt))
+          (metaval_text)))
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Raw HTML body with RSM delimiters, entities, quotes and a single colon
+================================================================================
+
+:rawhtml: <span title="a: b">$x$ *y* **z** `w` &amp; 'q' < ></span> ::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (specialinline
+      tag: (rawhtml)
+      (asis_text))))
+
+
+================================================================================
+Raw HTML body over several lines
+================================================================================
+
+Before :rawhtml:
+<svg width="10" height="10">
+  <circle r="4"></circle>
+</svg>
+:: after.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (rawhtml)
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Raw HTML inside span, strong and emphasis
+================================================================================
+
+:span: a :rawhtml: <i>x</i> :: b :: **c :rawhtml: <i>y</i> :: d** *e :rawhtml: <i>z</i> ::*
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (inline
+      tag: (span)
+      (text)
+      (specialinline
+        tag: (rawhtml)
+        (asis_text))
+      (text))
+    (specialinline
+      tag: (spanstrong)
+      (text)
+      (specialinline
+        tag: (rawhtml)
+        (asis_text))
+      (text))
+    (specialinline
+      tag: (spanemphas)
+      (text)
+      (specialinline
+        tag: (rawhtml)
+        (asis_text)))))
+
+
+================================================================================
+Raw HTML inside a theorem, a list item and a caption
+================================================================================
+
+:theorem:
+  Text :rawhtml: <b>t</b> ::.
+::
+
+:itemize:
+  :-: Item :rawhtml: <b>i</b> ::.
+::
+
+:figure: {
+  :path: a.png
+}
+  :caption: Caption :rawhtml: <b>c</b> ::.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    (paragraph
+      (text)
+      (specialinline
+        tag: (rawhtml)
+        (asis_text))
+      (text)))
+  (block
+    tag: (itemize)
+    (paragraph
+      (item
+        (text)
+        (specialinline
+          tag: (rawhtml)
+          (asis_text))
+        (text))))
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_any (path))
+        (metaval_any)))
+    (paragraph
+      (caption
+        (text)
+        (specialinline
+          tag: (rawhtml)
+          (asis_text))
+        (text)))))
+
+
+================================================================================
+ERROR: raw HTML with an empty body
+================================================================================
+
+Empty :rawhtml: :: here.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (ERROR
+      (rawhtml))
+    (text)))
+
+
+================================================================================
+ERROR: raw HTML in the reftext of a url
+================================================================================
+
+See :url:https://example.com, :rawhtml: <b>x</b> ::::.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (url)
+      target: (text)
+      (MISSING "::"))
+    (specialinline
+      tag: (rawhtml)
+      (asis_text)))
+  (ERROR)
+  (paragraph
+    (text)))
+
+
+================================================================================
+ERROR: raw HTML in the reftext of a ref
+================================================================================
+
+See :ref:lbl, a :rawhtml: <b>x</b> ::::.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialinline
+      tag: (ref)
+      target: (text)
+      reftext: (text)
+      (MISSING "::"))
+    (specialinline
+      tag: (rawhtml)
+      (asis_text)))
+  (ERROR)
+  (paragraph
+    (text)))

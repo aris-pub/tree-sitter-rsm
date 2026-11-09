@@ -198,7 +198,16 @@ module.exports = grammar({
     specialinline: $ => choice(
       $._formatinline,
       $._refinline,
+      $._rawinline,
     ),
+
+    // Raw HTML is written into the page as is, so it is kept out of
+    // $._formatinline: a link's reftext must not hold it. Like :code:, its
+    // content runs up to the first Halmos, so the HTML cannot contain "::".
+    _rawinline: $ => seq(field('tag', alias(token(':rawhtml:'), $.rawhtml)),
+      field('meta', optional($.inlinemeta)),
+      alias($.asis_halmos_text, $.asis_text),
+      '::'),
 
     // Formatting inlines (math, code, and the span shortcuts) are the subset of
     // special inlines that is also allowed inside a link's reftext. They are kept

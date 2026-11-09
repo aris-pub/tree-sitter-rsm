@@ -1179,6 +1179,60 @@
         {
           "type": "SYMBOL",
           "name": "_refinline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_rawinline"
+        }
+      ]
+    },
+    "_rawinline": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "tag",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "STRING",
+                "value": ":rawhtml:"
+              }
+            },
+            "named": true,
+            "value": "rawhtml"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "meta",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "inlinemeta"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "asis_halmos_text"
+          },
+          "named": true,
+          "value": "asis_text"
+        },
+        {
+          "type": "STRING",
+          "value": "::"
         }
       ]
     },

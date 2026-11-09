@@ -49,6 +49,10 @@ code block
 % <- markup.raw.block
 ```
 
+:rawhtml: <b>raw</b> ::
+% <- operator
+%          ^ markup.raw
+
 :enumerate:
 % <- keyword.directive
 :-: Item
