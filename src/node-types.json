@@ -662,6 +662,10 @@
       "required": true,
       "types": [
         {
+          "type": "as_paragraph",
+          "named": true
+        },
+        {
           "type": "collapsed",
           "named": true
         },
@@ -1811,6 +1815,10 @@
     "named": true
   },
   {
+    "type": "as_paragraph",
+    "named": true
+  },
+  {
     "type": "aside",
     "named": true
   },
@@ -1980,11 +1988,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "metaval_list_item",

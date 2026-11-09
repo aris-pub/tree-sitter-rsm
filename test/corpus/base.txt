@@ -1316,6 +1316,112 @@ Figure with meta and caption
 
 
 ================================================================================
+Figure as paragraph
+================================================================================
+
+:figure: {
+  :as-paragraph:
+  :path: assets/example.png
+  :alt: An example.
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_bool (as_paragraph)))
+      (pair
+        (metakey_any (path))
+        (metaval_any))
+      (pair
+        (metakey_text (alt))
+        (metaval_text)))))
+
+
+================================================================================
+Figure as paragraph inside a remark
+================================================================================
+
+:remark: {
+  :blockname: Hint
+}
+
+  Under inversion, the chain becomes a stack of circles.
+
+  :figure: {
+    :as-paragraph:
+    :path: figs/images.png
+  }
+  ::
+
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (remark)
+    meta: (blockmeta
+      (pair
+        (metakey_text (blockname))
+        (metaval_text)))
+    (paragraph
+      (text))
+    (block
+      tag: (figure)
+      meta: (blockmeta
+        (pair
+          (metakey_bool (as_paragraph)))
+        (pair
+          (metakey_any (path))
+          (metaval_any))))))
+
+
+================================================================================
+Html and video as paragraph
+================================================================================
+
+:html: {
+  :as-paragraph:
+  :path: assets/widget.html
+}
+::
+
+:video: {
+  :as-paragraph:
+  :path: assets/demo.mp4
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (html)
+    meta: (blockmeta
+      (pair
+        (metakey_bool (as_paragraph)))
+      (pair
+        (metakey_any (path))
+        (metaval_any))))
+  (block
+    tag: (video)
+    meta: (blockmeta
+      (pair
+        (metakey_bool (as_paragraph)))
+      (pair
+        (metakey_any (path))
+        (metaval_any)))))
+
+
+================================================================================
 Video
 ================================================================================
 

@@ -509,7 +509,12 @@ module.exports = grammar({
     ),
 
     metakey_bool: $ => choice(
+      // :as-paragraph: comes after :collapsed: on purpose. When a meta block is
+      // empty ({ }), error recovery inserts the first key of this list as a
+      // MISSING node, and an inserted :as-paragraph: would change how the block
+      // is laid out and numbered.
       alias(':collapsed:', $.collapsed),
+      alias(':as-paragraph:', $.as_paragraph),
       alias(':emphas:', $.emphas),
       alias(':isclaim:', $.isclaim),
       alias(':nonum:', $.nonum),

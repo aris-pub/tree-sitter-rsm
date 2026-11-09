@@ -200,7 +200,7 @@
 ] @property
 
 ;; Meta keys - boolean values
-[(emphas) (isclaim) (nonum) (strong)] @property
+[(as_paragraph) (emphas) (isclaim) (nonum) (strong)] @property
 
 ;; Meta keys - list values
 [(keywords) (msc) (class)] @property
