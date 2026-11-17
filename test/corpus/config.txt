@@ -7,10 +7,9 @@ Config block with all settings
 :config: {
   :toc-depth: 3
   :numbering: section
-  :theme: blue
   :override-date: 2024-01-15
-  :author-display-first: emphasized
-  :author-display-last: corresponding
+  :author-display-first: 3
+  :author-display-last: 1
 }
 ::
 
@@ -23,12 +22,11 @@ Content.
   (block
     tag: (config)
     meta: (blockmeta
-      (pair (metakey_any (toc_depth)) (metaval_any))
-      (pair (metakey_any (numbering)) (metaval_any))
-      (pair (metakey_any (theme)) (metaval_any))
-      (pair (metakey_any (override_date)) (metaval_any))
-      (pair (metakey_any (author_display_first)) (metaval_any))
-      (pair (metakey_any (author_display_last)) (metaval_any))))
+      (pair (metakey_number (toc_depth)) (metaval_number))
+      (pair (metakey_word (numbering)) (metaval_word))
+      (pair (metakey_date (override_date)) (metaval_date))
+      (pair (metakey_number (author_display_first)) (metaval_number))
+      (pair (metakey_number (author_display_last)) (metaval_number))))
   (paragraph
     (text)))
 
@@ -53,7 +51,7 @@ Content.
   (block
     tag: (config)
     meta: (blockmeta
-      (pair (metakey_any (numbering)) (metaval_any))))
+      (pair (metakey_word (numbering)) (metaval_word))))
   (paragraph
     (text)))
 
@@ -76,7 +74,7 @@ Config block with toc-depth only
   (block
     tag: (config)
     meta: (blockmeta
-      (pair (metakey_any (toc_depth)) (metaval_any)))))
+      (pair (metakey_number (toc_depth)) (metaval_number)))))
 
 
 ================================================================================
@@ -101,32 +99,11 @@ Content here.
   (block
     tag: (config)
     meta: (blockmeta
-      (pair (metakey_any (override_date)) (metaval_any))))
+      (pair (metakey_date (override_date)) (metaval_date))))
   (section
     title: (text)
     (paragraph
       (text))))
-
-
-================================================================================
-Config block with theme
-================================================================================
-
-# Title
-
-:config: {
-  :theme: dark
-}
-::
-
---------------------------------------------------------------------------------
-
-(source_file
-  title: (text)
-  (block
-    tag: (config)
-    meta: (blockmeta
-      (pair (metakey_any (theme)) (metaval_any)))))
 
 
 ================================================================================
@@ -136,8 +113,8 @@ Config block with author display settings
 # Paper
 
 :config: {
-  :author-display-first: emphasized
-  :author-display-last: corresponding
+  :author-display-first: 3
+  :author-display-last: 1
 }
 ::
 
@@ -148,8 +125,8 @@ Config block with author display settings
   (block
     tag: (config)
     meta: (blockmeta
-      (pair (metakey_any (author_display_first)) (metaval_any))
-      (pair (metakey_any (author_display_last)) (metaval_any)))))
+      (pair (metakey_number (author_display_first)) (metaval_number))
+      (pair (metakey_number (author_display_last)) (metaval_number)))))
 
 
 ================================================================================
@@ -182,7 +159,7 @@ More content.
     (block
       tag: (config)
       meta: (blockmeta
-        (pair (metakey_any (numbering)) (metaval_any)))))
+        (pair (metakey_word (numbering)) (metaval_word)))))
   (section
     title: (text)
     (paragraph
@@ -209,19 +186,19 @@ Content.
   (block
     tag: (config)
     meta: (blockmeta
-      (pair (metakey_any (citation_style)) (metaval_any))))
+      (pair (metakey_word (citation_style)) (metaval_word))))
   (paragraph
     (text)))
 
 
 ================================================================================
-Config block with minimap
+Config block with no-minimap
 ================================================================================
 
 # Title
 
 :config: {
-  :minimap: false
+  :no-minimap:
 }
 ::
 
@@ -234,6 +211,6 @@ Content.
   (block
     tag: (config)
     meta: (blockmeta
-      (pair (metakey_any (minimap)) (metaval_any))))
+      (pair (metakey_bool (no_minimap)))))
   (paragraph
     (text)))

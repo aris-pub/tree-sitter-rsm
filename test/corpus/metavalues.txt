@@ -1,0 +1,272 @@
+================================================================================
+Path value in one-line block meta stops at the brace
+================================================================================
+
+:figure: {:path: a.png}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path)))))
+
+================================================================================
+Path value with spaces in multi-line block meta
+================================================================================
+
+:figure: {
+  :path: my figs/a b.png
+  :dark: dark figs/a b.png
+  :static: static/a.png
+  :label: f
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path))
+      (pair
+        (metakey_path
+          (dark))
+        (metaval_path))
+      (pair
+        (metakey_path
+          (static))
+        (metaval_path))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))))
+
+================================================================================
+Number, word and date values in multi-line block meta
+================================================================================
+
+:config: {
+  :toc-depth: 2
+  :author-display-first: 3
+  :author-display-last: 1
+  :accent: red
+  :citation-style: parens-author-year
+  :lang: en-US
+  :numbering: none
+  :typography: serif
+  :override-date: 2024-01-15
+  :no-minimap:
+}
+::
+
+:figure: {
+  :path: a.png
+  :scale: 0.5
+}
+::
+
+:toc: {
+  :view: tree
+  :orientation: horizontal
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair
+        (metakey_number
+          (toc_depth))
+        (metaval_number))
+      (pair
+        (metakey_number
+          (author_display_first))
+        (metaval_number))
+      (pair
+        (metakey_number
+          (author_display_last))
+        (metaval_number))
+      (pair
+        (metakey_word
+          (accent))
+        (metaval_word))
+      (pair
+        (metakey_word
+          (citation_style))
+        (metaval_word))
+      (pair
+        (metakey_word
+          (lang))
+        (metaval_word))
+      (pair
+        (metakey_word
+          (numbering))
+        (metaval_word))
+      (pair
+        (metakey_word
+          (typography))
+        (metaval_word))
+      (pair
+        (metakey_date
+          (override_date))
+        (metaval_date))
+      (pair
+        (metakey_bool
+          (no_minimap)))))
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path))
+      (pair
+        (metakey_number
+          (scale))
+        (metaval_number))))
+  (block
+    tag: (toc)
+    meta: (blockmeta
+      (pair
+        (metakey_word
+          (view))
+        (metaval_word))
+      (pair
+        (metakey_word
+          (orientation))
+        (metaval_word)))))
+
+================================================================================
+Number, word and date values in one-line block meta
+================================================================================
+
+:figure: {:scale: 2}
+::
+
+:toc: {:view: tree}
+::
+
+:config: {:override-date: 2024-01-15}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_number
+          (scale))
+        (metaval_number))))
+  (block
+    tag: (toc)
+    meta: (blockmeta
+      (pair
+        (metakey_word
+          (view))
+        (metaval_word))))
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair
+        (metakey_date
+          (override_date))
+        (metaval_date)))))
+
+================================================================================
+Word value in inline meta stops at the comma
+================================================================================
+
+A :span: {:lang: en, :label: x} hi :: and :code:{:lang: python} x = 1 ::.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (inline
+      tag: (span)
+      meta: (inlinemeta
+        (pair
+          (metakey_word
+            (lang))
+          (metaval_word))
+        (pair
+          (metakey_text
+            (label))
+          (metaval_text)))
+      (text))
+    (text)
+    (specialinline
+      tag: (code)
+      meta: (inlinemeta
+        (pair
+          (metakey_word
+            (lang))
+          (metaval_word)))
+      (asis_text))
+    (text)))
+
+================================================================================
+Path value in inline meta stops at the comma
+================================================================================
+
+A :span: {:path: my dir/a.png, :label: x} hi ::.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (inline
+      tag: (span)
+      meta: (inlinemeta
+        (pair
+          (metakey_path
+            (path))
+          (metaval_path))
+        (pair
+          (metakey_text
+            (label))
+          (metaval_text)))
+      (text))
+    (text)))
+
+================================================================================
+Number value of the wrong shape is a parse error
+================================================================================
+
+:figure: {
+  :path: a.png
+  :scale: abc
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path))
+      (ERROR
+        (metakey_number
+          (scale))
+        (text)))))

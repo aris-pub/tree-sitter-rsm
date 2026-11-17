@@ -346,22 +346,40 @@ module.exports = grammar({
 
     inlinemetapair: $ => choice(
       seq($.metakey_text, alias($.metaval_text_inline, $.metaval_text)),
-      seq($.metakey_any, alias($.metaval_any_inline, $.metaval_any)),
+      seq($.metakey_path, alias($.metaval_path_inline, $.metaval_path)),
+      seq($.metakey_number, $.metaval_number),
+      seq($.metakey_word, $.metaval_word),
+      seq($.metakey_date, $.metaval_date),
       seq($.metakey_list, alias($.metaval_list_inline, $.metaval_list)),
       $.metakey_bool),
 
     pair: $ => choice(
       seq($.metakey_text, $.metaval_text),
-      seq($.metakey_any, $.metaval_any),
+      seq($.metakey_path, $.metaval_path),
+      seq($.metakey_number, $.metaval_number),
+      seq($.metakey_word, $.metaval_word),
+      seq($.metakey_date, $.metaval_date),
       seq($.metakey_list, $.metaval_list),
       $.metakey_bool),
 
     /////////////////////////////////////////////////////////////
     // Meta pair types
     /////////////////////////////////////////////////////////////
-    metaval_any: $ => alias(token(/[^\S\r\n]*.+?\n/), 'text'),
+    // A path may contain spaces. It ends at the end of the line or at }, and
+    // in inline meta also at a comma.
+    metaval_path: $ => token(/[^}\n]+/),
 
-    metaval_any_inline: $ => alias(token(/[^\S\r\n]*[^,}\n]+?\n/), 'text'),
+    metaval_path_inline: $ => token(/[^,}\n]+/),
+
+    // Whole numbers and decimals. Python checks that the keys that take a
+    // count get a whole number.
+    metaval_number: $ => token(/\d+(\.\d+)?/),
+
+    // A single word. Python checks it against the allowed values of its key.
+    metaval_word: $ => token(/[^\s,{}]+/),
+
+    // YYYY-MM-DD. Python checks that it is a real date.
+    metaval_date: $ => token(/\d{4}-\d{2}-\d{2}/),
 
     metaval_text: $ => alias($.text, 'text'),
 
@@ -528,7 +546,6 @@ module.exports = grammar({
       alias(':goal:', $.goal),
       alias(':icon:', $.icon),
       alias(':label:', $.label),
-      alias(':lang:', $.lang),
       alias(':name:', $.name),
       alias(':of:', $.of),
       alias(':orcid:', $.orcid),
@@ -545,6 +562,7 @@ module.exports = grammar({
       alias(':as-paragraph:', $.as_paragraph),
       alias(':emphas:', $.emphas),
       alias(':isclaim:', $.isclaim),
+      alias(':no-minimap:', $.no_minimap),
       alias(':nonum:', $.nonum),
       alias(':preamble:', $.preamble),
       alias(':strong:', $.strong),
@@ -556,24 +574,31 @@ module.exports = grammar({
       alias(':class:', $.class),
     ),
 
-    metakey_any: $ => choice(
-      alias(':accent:', $.accent),
-      alias(':citation-style:', $.citation_style),
+    metakey_path: $ => choice(
       alias(':dark:', $.dark),
-      alias(':lang:', $.lang),
-      alias(':typography:', $.typography),
+      alias(':path:', $.path),
+      alias(':static:', $.static),
+    ),
+
+    metakey_number: $ => choice(
       alias(':author-display-first:', $.author_display_first),
       alias(':author-display-last:', $.author_display_last),
-      alias(':minimap:', $.minimap),
+      alias(':scale:', $.scale),
+      alias(':toc-depth:', $.toc_depth),
+    ),
+
+    metakey_word: $ => choice(
+      alias(':accent:', $.accent),
+      alias(':citation-style:', $.citation_style),
+      alias(':lang:', $.lang),
       alias(':numbering:', $.numbering),
       alias(':orientation:', $.orientation),
-      alias(':override-date:', $.override_date),
-      alias(':path:', $.path),
-      alias(':scale:', $.scale),
-      alias(':static:', $.static),
-      alias(':theme:', $.theme),
-      alias(':toc-depth:', $.toc_depth),
+      alias(':typography:', $.typography),
       alias(':view:', $.view),
+    ),
+
+    metakey_date: $ => choice(
+      alias(':override-date:', $.override_date),
     ),
 
     // It is important that comment appears at the end so that other rules will be

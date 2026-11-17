@@ -146,8 +146,8 @@ Raw HTML inside a theorem, a list item and a caption
     tag: (figure)
     meta: (blockmeta
       (pair
-        (metakey_any (path))
-        (metaval_any)))
+        (metakey_path (path))
+        (metaval_path)))
     (paragraph
       (caption
         (text)

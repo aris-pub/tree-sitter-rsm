@@ -2192,16 +2192,55 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "metakey_any"
+              "name": "metakey_path"
             },
             {
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "metaval_any_inline"
+                "name": "metaval_path_inline"
               },
               "named": true,
-              "value": "metaval_any"
+              "value": "metaval_path"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "metakey_number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "metaval_number"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "metakey_word"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "metaval_word"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "metakey_date"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "metaval_date"
             }
           ]
         },
@@ -2250,11 +2289,50 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "metakey_any"
+              "name": "metakey_path"
             },
             {
               "type": "SYMBOL",
-              "name": "metaval_any"
+              "name": "metaval_path"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "metakey_number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "metaval_number"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "metakey_word"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "metaval_word"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "metakey_date"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "metaval_date"
             }
           ]
         },
@@ -2277,29 +2355,40 @@
         }
       ]
     },
-    "metaval_any": {
-      "type": "ALIAS",
+    "metaval_path": {
+      "type": "TOKEN",
       "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "[^\\S\\r\\n]*.+?\\n"
-        }
-      },
-      "named": false,
-      "value": "text"
+        "type": "PATTERN",
+        "value": "[^}\\n]+"
+      }
     },
-    "metaval_any_inline": {
-      "type": "ALIAS",
+    "metaval_path_inline": {
+      "type": "TOKEN",
       "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "[^\\S\\r\\n]*[^,}\\n]+?\\n"
-        }
-      },
-      "named": false,
-      "value": "text"
+        "type": "PATTERN",
+        "value": "[^,}\\n]+"
+      }
+    },
+    "metaval_number": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\d+(\\.\\d+)?"
+      }
+    },
+    "metaval_word": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\s,{}]+"
+      }
+    },
+    "metaval_date": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\d{4}-\\d{2}-\\d{2}"
+      }
     },
     "metaval_text": {
       "type": "ALIAS",
@@ -3493,15 +3582,6 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":lang:"
-          },
-          "named": true,
-          "value": "lang"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
             "value": ":name:"
           },
           "named": true,
@@ -3588,6 +3668,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":no-minimap:"
+          },
+          "named": true,
+          "value": "no_minimap"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":nonum:"
           },
           "named": true,
@@ -3645,7 +3734,80 @@
         }
       ]
     },
-    "metakey_any": {
+    "metakey_path": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":dark:"
+          },
+          "named": true,
+          "value": "dark"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":path:"
+          },
+          "named": true,
+          "value": "path"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":static:"
+          },
+          "named": true,
+          "value": "static"
+        }
+      ]
+    },
+    "metakey_number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":author-display-first:"
+          },
+          "named": true,
+          "value": "author_display_first"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":author-display-last:"
+          },
+          "named": true,
+          "value": "author_display_last"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":scale:"
+          },
+          "named": true,
+          "value": "scale"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":toc-depth:"
+          },
+          "named": true,
+          "value": "toc_depth"
+        }
+      ]
+    },
+    "metakey_word": {
       "type": "CHOICE",
       "members": [
         {
@@ -3670,55 +3832,10 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":dark:"
-          },
-          "named": true,
-          "value": "dark"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
             "value": ":lang:"
           },
           "named": true,
           "value": "lang"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":typography:"
-          },
-          "named": true,
-          "value": "typography"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":author-display-first:"
-          },
-          "named": true,
-          "value": "author_display_first"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":author-display-last:"
-          },
-          "named": true,
-          "value": "author_display_last"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":minimap:"
-          },
-          "named": true,
-          "value": "minimap"
         },
         {
           "type": "ALIAS",
@@ -3742,55 +3859,10 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":override-date:"
+            "value": ":typography:"
           },
           "named": true,
-          "value": "override_date"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":path:"
-          },
-          "named": true,
-          "value": "path"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":scale:"
-          },
-          "named": true,
-          "value": "scale"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":static:"
-          },
-          "named": true,
-          "value": "static"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":theme:"
-          },
-          "named": true,
-          "value": "theme"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":toc-depth:"
-          },
-          "named": true,
-          "value": "toc_depth"
+          "value": "typography"
         },
         {
           "type": "ALIAS",
@@ -3800,6 +3872,20 @@
           },
           "named": true,
           "value": "view"
+        }
+      ]
+    },
+    "metakey_date": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":override-date:"
+          },
+          "named": true,
+          "value": "override_date"
         }
       ]
     },

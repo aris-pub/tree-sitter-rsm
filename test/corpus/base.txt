@@ -1308,8 +1308,8 @@ Figure with meta and caption
     tag: (figure)
     meta: (blockmeta
       (pair
-        (metakey_any (path))
-        (metaval_any)))
+        (metakey_path (path))
+        (metaval_path)))
     (paragraph
       (caption
         (text)))))
@@ -1336,8 +1336,8 @@ Figure as paragraph
       (pair
         (metakey_bool (as_paragraph)))
       (pair
-        (metakey_any (path))
-        (metaval_any))
+        (metakey_path (path))
+        (metaval_path))
       (pair
         (metakey_text (alt))
         (metaval_text)))))
@@ -1379,8 +1379,8 @@ Figure as paragraph inside a remark
         (pair
           (metakey_bool (as_paragraph)))
         (pair
-          (metakey_any (path))
-          (metaval_any))))))
+          (metakey_path (path))
+          (metaval_path))))))
 
 
 ================================================================================
@@ -1409,16 +1409,16 @@ Html and video as paragraph
       (pair
         (metakey_bool (as_paragraph)))
       (pair
-        (metakey_any (path))
-        (metaval_any))))
+        (metakey_path (path))
+        (metaval_path))))
   (block
     tag: (video)
     meta: (blockmeta
       (pair
         (metakey_bool (as_paragraph)))
       (pair
-        (metakey_any (path))
-        (metaval_any)))))
+        (metakey_path (path))
+        (metaval_path)))))
 
 
 ================================================================================
@@ -1441,8 +1441,8 @@ Video
     tag: (video)
     meta: (blockmeta
       (pair
-        (metakey_any (path))
-        (metaval_any)))
+        (metakey_path (path))
+        (metaval_path)))
     (paragraph
       (caption
         (text)))))
@@ -1468,8 +1468,8 @@ HTML Asset
     tag: (html)
     meta: (blockmeta
       (pair
-        (metakey_any (path))
-        (metaval_any)))
+        (metakey_path (path))
+        (metaval_path)))
     (paragraph
       (caption
         (text)))))
@@ -1647,9 +1647,9 @@ Table of Contents with meta
     tag: (toc)
     meta: (blockmeta
       (pair
-        (metakey_any
+        (metakey_word
           (view))
-        (metaval_any)))))
+        (metaval_word)))))
 
 
 ================================================================================
@@ -1670,13 +1670,13 @@ Table of Contents with orientation
     tag: (toc)
     meta: (blockmeta
       (pair
-        (metakey_any
+        (metakey_word
           (view))
-        (metaval_any))
+        (metaval_word))
       (pair
-        (metakey_any
+        (metakey_word
           (orientation))
-        (metaval_any)))))
+        (metaval_word)))))
 
 
 ================================================================================
@@ -1970,8 +1970,8 @@ Author with new metakeys
   (block
     tag: (config)
     meta: (blockmeta
-      (pair (metakey_any (author_display_first)) (metaval_any))
-      (pair (metakey_any (author_display_last)) (metaval_any))))
+      (pair (metakey_number (author_display_first)) (metaval_number))
+      (pair (metakey_number (author_display_last)) (metaval_number))))
   (block
     tag: (author)
     meta: (blockmeta
