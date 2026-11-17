@@ -812,6 +812,11 @@
     }
   },
   {
+    "type": "metaval_date",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "metaval_list",
     "named": true,
     "fields": {},
@@ -827,7 +832,17 @@
     }
   },
   {
+    "type": "metaval_number",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "metaval_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "metaval_word",
     "named": true,
     "fields": {}
   },
@@ -2048,30 +2063,18 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
-  },
-  {
-    "type": "metaval_date",
-    "named": true
+    "named": false
   },
   {
     "type": "metaval_list_item",
     "named": true
   },
   {
-    "type": "metaval_number",
-    "named": true
-  },
-  {
     "type": "metaval_path",
-    "named": true
-  },
-  {
-    "type": "metaval_word",
     "named": true
   },
   {

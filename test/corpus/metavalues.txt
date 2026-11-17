@@ -247,7 +247,7 @@ A :span: {:path: my dir/a.png, :label: x} hi ::.
     (text)))
 
 ================================================================================
-Number value of the wrong shape is a parse error
+Number value of the wrong shape parses as a pair (Python reports it)
 ================================================================================
 
 :figure: {
@@ -266,7 +266,30 @@ Number value of the wrong shape is a parse error
         (metakey_path
           (path))
         (metaval_path))
-      (ERROR
+      (pair
         (metakey_number
           (scale))
-        (text)))))
+        (metaval_number)))))
+
+================================================================================
+Lines of text that start with a number
+================================================================================
+
+Ordered list:
+1. First step
+2. Second step
+
+Some text
+2 apples and
+2025 was long.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (text))
+  (paragraph
+    (text)
+    (text)
+    (text)))

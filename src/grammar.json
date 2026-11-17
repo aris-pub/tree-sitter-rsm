@@ -2369,26 +2369,24 @@
         "value": "[^,}\\n]+"
       }
     },
-    "metaval_number": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\d+(\\.\\d+)?"
-      }
-    },
-    "metaval_word": {
+    "_metaval_bare": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
         "value": "[^\\s,{}]+"
       }
     },
+    "metaval_number": {
+      "type": "SYMBOL",
+      "name": "_metaval_bare"
+    },
+    "metaval_word": {
+      "type": "SYMBOL",
+      "name": "_metaval_bare"
+    },
     "metaval_date": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\d{4}-\\d{2}-\\d{2}"
-      }
+      "type": "SYMBOL",
+      "name": "_metaval_bare"
     },
     "metaval_text": {
       "type": "ALIAS",

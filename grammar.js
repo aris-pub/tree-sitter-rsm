@@ -371,15 +371,18 @@ module.exports = grammar({
 
     metaval_path_inline: $ => token(/[^,}\n]+/),
 
-    // Whole numbers and decimals. Python checks that the keys that take a
-    // count get a whole number.
-    metaval_number: $ => token(/\d+(\.\d+)?/),
+    // Number, word and date values share one token. A token of its own for
+    // numbers (\d+...) was matched at the start of ordinary lines of text, so
+    // a line such as "2. Second step" failed to parse. Python checks the form
+    // of each value against its key: a number, a whole number, a date written
+    // YYYY-MM-DD, or a word from the key's list.
+    _metaval_bare: $ => token(/[^\s,{}]+/),
 
-    // A single word. Python checks it against the allowed values of its key.
-    metaval_word: $ => token(/[^\s,{}]+/),
+    metaval_number: $ => $._metaval_bare,
 
-    // YYYY-MM-DD. Python checks that it is a real date.
-    metaval_date: $ => token(/\d{4}-\d{2}-\d{2}/),
+    metaval_word: $ => $._metaval_bare,
+
+    metaval_date: $ => $._metaval_bare,
 
     metaval_text: $ => alias($.text, 'text'),
 
