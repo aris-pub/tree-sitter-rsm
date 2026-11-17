@@ -880,6 +880,10 @@
       "required": true,
       "types": [
         {
+          "type": "block",
+          "named": true
+        },
+        {
           "type": "caption",
           "named": true
         },
@@ -901,6 +905,10 @@
         },
         {
           "type": "mathblock",
+          "named": true
+        },
+        {
+          "type": "specialblock",
           "named": true
         },
         {
@@ -1109,6 +1117,10 @@
           "named": true
         },
         {
+          "type": "block",
+          "named": true
+        },
+        {
           "type": "codeblock",
           "named": true
         },
@@ -1122,6 +1134,10 @@
         },
         {
           "type": "mathblock",
+          "named": true
+        },
+        {
+          "type": "specialblock",
           "named": true
         },
         {

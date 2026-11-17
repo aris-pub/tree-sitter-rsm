@@ -33,7 +33,7 @@ module.exports = grammar({
     source_file: $ => seq(
       optional(seq(field('tag', /# /), field('title', $.text))),
       optional(field('meta', $.blockmeta)),
-      repeat(choice($.section, $.appendix, $.mathblock, $.codeblock, $.specialblock, $.block, $.paragraph, $.references))),
+      repeat(choice($.section, $.appendix, $._terminalblock, $.specialblock, $.block, $.paragraph, $.references))),
 
     block: $ => prec(1, seq(
       field('tag', $.blocktag),
@@ -76,11 +76,11 @@ module.exports = grammar({
       seq(field('tag', /## /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph, $.subsection)),
+        repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph, $.subsection)),
       ),
       seq(field('tag', ':section:'),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph, $.subsection)),
+        repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph, $.subsection)),
       ),
     )),
 
@@ -89,12 +89,12 @@ module.exports = grammar({
         field('tag', /### /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph, $.subsubsection)),
+        repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph, $.subsubsection)),
       ),
       seq(
         field('tag', ':subsection:'),
         field('meta', $.blockmeta),
-        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph, $.subsubsection)),
+        repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph, $.subsubsection)),
       )
     )),
 
@@ -103,12 +103,12 @@ module.exports = grammar({
         field('tag', /#### /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph)),
+        repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph)),
       ),
       seq(
         field('tag', ':subsubsection:'),
         field('meta', optional($.blockmeta)),
-        repeat(choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph)),
+        repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph)),
       )
     )),
 
@@ -143,17 +143,38 @@ module.exports = grammar({
         alias($.asis_halmos_text, $.asis_text),
         '::')),
 
+    // A list holds only items; nested lists are written with the :--: and :---:
+    // markers. Lists are kept out of blocktag so that a list can be paragraph
+    // content (see $._terminalblock) while other blocks cannot. The aliases keep
+    // the tree the same as for any other block: block > paragraph > item.
+    _list: $ => alias($.list, $.block),
+
+    list: $ => prec(1, seq(
+      field('tag', choice(
+        alias(':enumerate:', $.enumerate),
+        alias(':itemize:', $.itemize))),
+      field('meta', optional($.blockmeta)),
+      repeat(alias($._listitem, $.paragraph)),
+      '::')),
+
+    _listitem: $ => prec(2, $.item),
+
+    // Algorithms have standard open and close delimiters and have as-is
+    // (i.e. not recursive) content. They are kept out of $.specialblock so that
+    // an algorithm can be paragraph content (see $._terminalblock); the alias
+    // keeps the tree the same as before.
+    _algorithm: $ => alias($.algorithmblock, $.specialblock),
+
+    algorithmblock: $ => prec.right(1, seq(
+      field('tag', alias(token(":algorithm:"), $.algorithm)),
+      field('meta', optional($.blockmeta)),
+      alias($.asis_halmos_text, $.asis_text),
+      '::')),
+
     specialblock: $ => prec.right(1, choice(
       $.table,
 
 
-
-      // Algorithms have standard open and close delimiters and have as-is
-      // (i.e. not recursive) content.
-      seq(field('tag', alias(token(":algorithm:"), $.algorithm)),
-        field('meta', optional($.blockmeta)),
-        alias($.asis_halmos_text, $.asis_text),
-        '::'),
 
       // Notation declares reader-rebindable macros as raw lines
       // (\macro $default$ label), parsed by the transformer.
@@ -182,7 +203,7 @@ module.exports = grammar({
     caption: $ => seq(
       token(':caption:'),
       optional(field('meta', $.inlinemeta)),
-      repeat1($.paragraphcontent),
+      repeat1($._itemcontent),
       alias($.paragraph_end, 'paragraph_end')),
 
     // The marker's dash count is the nesting depth: :-: level 1, :--: level 2,
@@ -192,7 +213,7 @@ module.exports = grammar({
     item: $ => seq(
       field('marker', choice(':-:', ':--:', ':---:')),
       optional(field('meta', $.inlinemeta)),
-      repeat1($.paragraphcontent),
+      repeat1($._itemcontent),
       alias($.paragraph_end, 'paragraph_end')),
 
     specialinline: $ => choice(
@@ -427,11 +448,20 @@ module.exports = grammar({
     /////////////////////////////////////////////////////////////
     // Content choices
     /////////////////////////////////////////////////////////////
-    blockcontent: $ => choice($.specialblock, $.mathblock, $.codeblock, $.block, $.paragraph),
+    blockcontent: $ => choice($.specialblock, $._terminalblock, $.block, $.paragraph),
+
+    // Terminal blocks are the blocks that may stand inside a paragraph, between
+    // two runs of its text. Anywhere else they stand as blocks of their own.
+    _terminalblock: $ => choice($.mathblock, $.codeblock, $._list, $._algorithm),
+
+    // The content of list items and captions. It is paragraph content without
+    // lists and algorithms: of the terminal blocks, items and captions accept
+    // only display math and code blocks.
+    _itemcontent: $ => choice($.mathblock, $.codeblock, $.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
     _paragraphcontent_no_special: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
-    paragraphcontent: $ => choice($.mathblock, $.codeblock, $.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
+    paragraphcontent: $ => choice($._terminalblock, $.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
     inlinecontent: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
@@ -470,12 +500,10 @@ module.exports = grammar({
       alias(':config:', $.config),
       alias(':corollary:', $.corollary),
       alias(':definition:', $.definition),
-      alias(':enumerate:', $.enumerate),
       alias(':example:', $.example),
       alias(':exercise:', $.exercise),
       alias(':figure:', $.figure),
       alias(':html:', $.html),
-      alias(':itemize:', $.itemize),
       alias(':lemma:', $.lemma),
       alias(':p:', $.subproof),
       alias(':porism:', $.porism),
