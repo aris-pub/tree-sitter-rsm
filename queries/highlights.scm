@@ -209,7 +209,7 @@
 [
   (accent) (dark) (typography) (author_display_first)
   (author_display_last) (numbering) (override_date)
-  (path) (scale) (static) (theme) (toc_depth)
+  (path) (scale) (static) (toc_depth)
 ] @property
 
 ;; Meta values
