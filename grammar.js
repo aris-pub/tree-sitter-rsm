@@ -351,7 +351,8 @@ module.exports = grammar({
       seq($.metakey_word, $.metaval_word),
       seq($.metakey_date, $.metaval_date),
       seq($.metakey_list, alias($.metaval_list_inline, $.metaval_list)),
-      $.metakey_bool),
+      $.metakey_bool,
+      seq($.metakey_unknown, optional(alias($.metaval_unknown_inline, $.metaval_unknown)))),
 
     pair: $ => choice(
       seq($.metakey_text, $.metaval_text),
@@ -360,7 +361,8 @@ module.exports = grammar({
       seq($.metakey_word, $.metaval_word),
       seq($.metakey_date, $.metaval_date),
       seq($.metakey_list, $.metaval_list),
-      $.metakey_bool),
+      $.metakey_bool,
+      seq($.metakey_unknown, optional($.metaval_unknown))),
 
     /////////////////////////////////////////////////////////////
     // Meta pair types
@@ -370,6 +372,18 @@ module.exports = grammar({
     metaval_path: $ => token(/[^}\n]+/),
 
     metaval_path_inline: $ => token(/[^,}\n]+/),
+
+    // A key that is not one of the known keys below, so that the parser still
+    // forms the meta block and Python can log the key by name. The known keys
+    // are strings of the same length as this pattern, and tree-sitter prefers a
+    // string over a pattern of the same length, so known keys still win.
+    metakey_unknown: $ => token(/:[a-z0-9][a-z0-9-]*:/),
+
+    // The value of an unknown key is optional, so it must start right after the
+    // key. Otherwise a key with no value would take the next line as its value.
+    metaval_unknown: $ => token.immediate(/[^}\n]+/),
+
+    metaval_unknown_inline: $ => token.immediate(/[^,}\n]+/),
 
     // Number, word and date values share one token. A token of its own for
     // numbers (\d+...) was matched at the start of ordinary lines of text, so
@@ -558,9 +572,10 @@ module.exports = grammar({
 
     metakey_bool: $ => choice(
       // :as-paragraph: comes after :collapsed: on purpose. When a meta block is
-      // empty ({ }), error recovery inserts the first key of this list as a
-      // MISSING node, and an inserted :as-paragraph: would change how the block
-      // is laid out and numbered.
+      // empty ({ }), error recovery inserts a MISSING key. Today that key is
+      // metakey_unknown, which Python ignores, but if recovery ever picks the
+      // first key of this list instead, an inserted :as-paragraph: would change
+      // how the block is laid out and numbered.
       alias(':collapsed:', $.collapsed),
       alias(':as-paragraph:', $.as_paragraph),
       alias(':emphas:', $.emphas),

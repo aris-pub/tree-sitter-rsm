@@ -212,9 +212,15 @@
   (path) (scale) (static) (toc_depth)
 ] @property
 
+;; Meta keys - unknown keys, which RSM logs and ignores. The pair is named in
+;; the pattern because an unknown tag in body text also parses as metakey_unknown
+;; inside an ERROR, and it is not a key there.
+(pair (metakey_unknown) @property)
+
 ;; Meta values
 (metaval_text) @string
 (metaval_list_item) @string
+(metaval_unknown) @string
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Delimiters and Operators

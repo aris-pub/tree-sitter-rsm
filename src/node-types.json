@@ -879,6 +879,10 @@
           "named": true
         },
         {
+          "type": "metakey_unknown",
+          "named": true
+        },
+        {
           "type": "metakey_word",
           "named": true
         },
@@ -900,6 +904,10 @@
         },
         {
           "type": "metaval_text",
+          "named": true
+        },
+        {
+          "type": "metaval_unknown",
           "named": true
         },
         {
@@ -2070,11 +2078,19 @@
     "named": false
   },
   {
+    "type": "metakey_unknown",
+    "named": true
+  },
+  {
     "type": "metaval_list_item",
     "named": true
   },
   {
     "type": "metaval_path",
+    "named": true
+  },
+  {
+    "type": "metaval_unknown",
     "named": true
   },
   {

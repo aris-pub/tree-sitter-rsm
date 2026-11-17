@@ -2265,6 +2265,32 @@
         {
           "type": "SYMBOL",
           "name": "metakey_bool"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "metakey_unknown"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "metaval_unknown_inline"
+                  },
+                  "named": true,
+                  "value": "metaval_unknown"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2352,6 +2378,27 @@
         {
           "type": "SYMBOL",
           "name": "metakey_bool"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "metakey_unknown"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "metaval_unknown"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2364,6 +2411,27 @@
     },
     "metaval_path_inline": {
       "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^,}\\n]+"
+      }
+    },
+    "metakey_unknown": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": ":[a-z0-9][a-z0-9-]*:"
+      }
+    },
+    "metaval_unknown": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^}\\n]+"
+      }
+    },
+    "metaval_unknown_inline": {
+      "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
         "value": "[^,}\\n]+"

@@ -1,0 +1,429 @@
+================================================================================
+Unknown key alone in multi-line block meta
+================================================================================
+
+:theorem: {
+  :colour: blue
+}
+Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)
+        (metaval_unknown)))
+    (paragraph
+      (text))))
+
+================================================================================
+Unknown key alone in one-line block meta
+================================================================================
+
+:theorem: {:colour: blue}
+Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)
+        (metaval_unknown)))
+    (paragraph
+      (text))))
+
+================================================================================
+Unknown key without a value in block meta
+================================================================================
+
+:theorem: {
+  :colour:
+  :label: thm
+}
+Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+Unknown key without a value at the closing brace
+================================================================================
+
+:theorem: {:colour:}
+Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)))
+    (paragraph
+      (text))))
+
+================================================================================
+Unknown key with digits and hyphens between known keys
+================================================================================
+
+:figure: {
+  :path: a.png
+  :max-width-2: 300
+  :nonum:
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path))
+      (pair
+        (metakey_unknown)
+        (metaval_unknown))
+      (pair
+        (metakey_bool
+          (nonum))))))
+
+================================================================================
+Known keys are not read as unknown keys
+================================================================================
+
+:figure: {
+  :label: f
+  :path: a.png
+  :scale: 0.5
+  :nonum:
+  :class: wide
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text))
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path))
+      (pair
+        (metakey_number
+          (scale))
+        (metaval_number))
+      (pair
+        (metakey_bool
+          (nonum)))
+      (pair
+        (metakey_list
+          (class))
+        (metaval_list
+          (metaval_list_item))))))
+
+================================================================================
+Unknown key alone in mathblock meta
+================================================================================
+
+:mathblock: {
+  :colour: blue
+}
+x = 1
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (mathblock
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)
+        (metaval_unknown)))
+    (asis_text)))
+
+================================================================================
+Unknown key alone in codeblock meta
+================================================================================
+
+:codeblock: {
+  :colour: blue
+}
+x = 1
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (codeblock
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)
+        (metaval_unknown)))
+    (asis_text)))
+
+================================================================================
+Unknown key alone in algorithm meta
+================================================================================
+
+:algorithm: {
+  :colour: blue
+}
+x = 1
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (algorithm)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)
+        (metaval_unknown)))
+    (asis_text)))
+
+================================================================================
+Unknown key alone in notation meta
+================================================================================
+
+:notation: {
+  :colour: blue
+}
+  \eig $\lambda$ eigenvalue
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (notation)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)
+        (metaval_unknown)))
+    (asis_text)))
+
+================================================================================
+Unknown key alone in table meta
+================================================================================
+
+:table: {
+  :colour: blue
+}
+:tbody:
+:tr: :td: a :: ::
+::
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    (table
+      meta: (blockmeta
+        (pair
+          (metakey_unknown)
+          (metaval_unknown)))
+      body: (tbody
+        (tr
+          (td
+            (tdcontent
+              (text))))))))
+
+================================================================================
+Unknown key alone in manuscript meta
+================================================================================
+
+# Title
+{
+  :colour: blue
+}
+
+Body.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  meta: (blockmeta
+    (pair
+      (metakey_unknown)
+      (metaval_unknown)))
+  (paragraph
+    (text)))
+
+================================================================================
+Unknown key in inline meta
+================================================================================
+
+:span: {:colour: blue, :strong:} word ::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (inline
+      tag: (span)
+      meta: (inlinemeta
+        (pair
+          (metakey_unknown)
+          (metaval_unknown))
+        (pair
+          (metakey_bool
+            (strong))))
+      (text))))
+
+================================================================================
+Unknown key without a value in inline meta
+================================================================================
+
+:span: {:colour:, :label: s} word ::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (inline
+      tag: (span)
+      meta: (inlinemeta
+        (pair
+          (metakey_unknown))
+        (pair
+          (metakey_text
+            (label))
+          (metaval_text)))
+      (text))))
+
+================================================================================
+Ordinary text with colons parses as before
+================================================================================
+
+Note: this is text
+
+Ratio 3:1 here
+
+The meeting is at time 10:30 today.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (paragraph
+    (text))
+  (paragraph
+    (text)))
+
+================================================================================
+Line that starts with a colon and a space parses as before
+================================================================================
+
+: a line that starts with a colon
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (ERROR)
+  (paragraph
+    (text)))
+
+================================================================================
+Colon before a word mid-sentence parses as before
+================================================================================
+
+Some :word in the middle of a sentence.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (ERROR)
+    (text)))
+
+================================================================================
+Unknown tag mid-sentence is one error that holds the whole tag
+================================================================================
+
+A key-like :colour: word mid-sentence.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (ERROR
+      (metakey_unknown))
+    (text)))
+
+================================================================================
+Ordinary text with colons inside a block parses as before
+================================================================================
+
+:theorem: {:label: t}
+Note: this is text. Ratio 3:1 at 10:30.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+Empty block meta gets a missing unknown key
+================================================================================
+
+:theorem: {}
+Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (MISSING metakey_unknown)))
+    (paragraph
+      (text))))
