@@ -1,3 +1,20 @@
+// A heading's title is everything up to the end of its line, inline markup
+// included. Whitespace is an extra, so the grammar cannot see the line break
+// itself: the scanner returns _line_end there. A meta block may follow on the
+// same line, in which case the line break comes after it. Links and raw HTML
+// are not allowed in a heading, but they are parsed here so the heading stays
+// whole and RSM can report them by name.
+function headingTitle($) {
+  return seq(
+    field('title', repeat1(choice(
+      $._reftext_inline,
+      alias($._refinline, $.specialinline),
+      alias($._rawinline, $.specialinline)))),
+    choice(
+      seq($._line_end, field('meta', optional($.blockmeta))),
+      field('meta', $.blockmeta)));
+}
+
 module.exports = grammar({
   name: 'rsm',
 
@@ -10,6 +27,7 @@ module.exports = grammar({
     $.asis_halmos_text,
     $.text,
     $.paragraph_end,
+    $._line_end,
   ],
 
   inline: $ => [
@@ -31,8 +49,9 @@ module.exports = grammar({
     // Main building blocks: manuscript, block, paragraph, inline
     ////////////////////////////////////////////////////////////////////////
     source_file: $ => seq(
-      optional(seq(field('tag', /# /), field('title', $.text))),
-      optional(field('meta', $.blockmeta)),
+      optional(choice(
+        seq(field('tag', /# /), headingTitle($)),
+        field('meta', $.blockmeta))),
       repeat(choice($.section, $.appendix, $._terminalblock, $.specialblock, $.block, $.paragraph, $.references))),
 
     block: $ => prec(1, seq(
@@ -74,8 +93,7 @@ module.exports = grammar({
     // Sections may begin with hashtags like in Markdown or with :section: tags.
     section: $ => prec.right(choice(
       seq(field('tag', /## /),
-        field('title', $.text),
-        field('meta', optional($.blockmeta)),
+        headingTitle($),
         repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph, $.subsection)),
       ),
       seq(field('tag', ':section:'),
@@ -87,8 +105,7 @@ module.exports = grammar({
     subsection: $ => prec.right(choice(
       seq(
         field('tag', /### /),
-        field('title', $.text),
-        field('meta', optional($.blockmeta)),
+        headingTitle($),
         repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph, $.subsubsection)),
       ),
       seq(
@@ -101,8 +118,7 @@ module.exports = grammar({
     subsubsection: $ => prec.right(choice(
       seq(
         field('tag', /#### /),
-        field('title', $.text),
-        field('meta', optional($.blockmeta)),
+        headingTitle($),
         repeat(choice($.specialblock, $._terminalblock, $.block, $.paragraph)),
       ),
       seq(

@@ -11,6 +11,7 @@ enum TokenType {
   ASIS_HALMOS_TEXT,
   TEXT,
   PARAGRAPH_END,
+  LINE_END,
   // Since the first one is assigned to zero and they are assigned consecutive integers,
   // the last one is a dummy value that is always equal to the number of values that
   // this Enum contains.  This is then used to iterate over valid_symbols, whose length
@@ -443,6 +444,24 @@ static bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
+// LINE_END ends a heading's title. It holds the spaces at the end of the line
+// but not the line break, which stays whitespace for the parser. Where the line
+// goes on, the same characters are read as TEXT instead, from the same
+// position, so the spaces before the next word stay part of the text.
+static bool scan_line_end_or_text(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+  debug_log("trying LINE_END");
+  while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+    lexer->advance(lexer, false);
+  }
+  if (lexer->lookahead == '\n' || lexer->lookahead == '\r' || lexer->lookahead == '\0') {
+    return success(lexer, LINE_END);
+  }
+  if (valid_symbols[TEXT]) {
+    return scan_arbitrary_text(payload, lexer);
+  }
+  return failure(lexer);
+}
+
 bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
   show_beginning_debug_message(valid_symbols);
   show_lookahead(lexer);
@@ -467,6 +486,10 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
   if (valid_symbols[ASIS_HALMOS_TEXT]) {
     return scan_asis_halmos_text(payload, lexer);
+  }
+
+  if (valid_symbols[LINE_END]) {
+    return scan_line_end_or_text(payload, lexer, valid_symbols);
   }
 
   if (looking_for_paragraph_end_only(valid_symbols)) {
