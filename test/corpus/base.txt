@@ -1376,10 +1376,10 @@ Figure as paragraph inside a remark
 
 
 ================================================================================
-Html and video as paragraph
+Figure with an HTML file and video as paragraph
 ================================================================================
 
-:html: {
+:figure: {
   :as-paragraph:
   :path: assets/widget.html
 }
@@ -1396,7 +1396,7 @@ Html and video as paragraph
 
 (source_file
   (block
-    tag: (html)
+    tag: (figure)
     meta: (blockmeta
       (pair
         (metakey_bool (as_paragraph)))
@@ -1441,10 +1441,10 @@ Video
 
 
 ================================================================================
-HTML Asset
+Figure with an HTML file
 ================================================================================
 
-:html: {
+:figure: {
   :path: assets/chart.html
 }
 
@@ -1457,7 +1457,7 @@ HTML Asset
 
 (source_file
   (block
-    tag: (html)
+    tag: (figure)
     meta: (blockmeta
       (pair
         (metakey_path (path))

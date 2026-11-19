@@ -1247,6 +1247,56 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "STRING",
+                      "value": ":htmlblock:"
+                    }
+                  },
+                  "named": true,
+                  "value": "htmlblock"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "meta",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "blockmeta"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "asis_halmos_text"
+                },
+                "named": true,
+                "value": "asis_text"
+              },
+              {
+                "type": "STRING",
+                "value": "::"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "tag",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "STRING",
                       "value": ":notation:"
                     }
                   },
@@ -1493,11 +1543,11 @@
               "type": "TOKEN",
               "content": {
                 "type": "STRING",
-                "value": ":rawhtml:"
+                "value": ":html:"
               }
             },
             "named": true,
-            "value": "rawhtml"
+            "value": "html"
           }
         },
         {
@@ -3486,15 +3536,6 @@
           },
           "named": true,
           "value": "figure"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":html:"
-          },
-          "named": true,
-          "value": "html"
         },
         {
           "type": "ALIAS",

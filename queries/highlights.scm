@@ -89,7 +89,11 @@
 
 ;; Raw HTML delimiters and content
 (specialinline
-  tag: (rawhtml) @operator
+  tag: (html) @operator
+  (asis_text) @markup.raw)
+
+(specialblock
+  tag: (htmlblock) @keyword.directive
   (asis_text) @markup.raw)
 
 ;; References
@@ -168,9 +172,6 @@
 
 ;; Appendix
 (appendix) @keyword.directive
-
-;; HTML embedding
-(html) @keyword.directive
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bibliography

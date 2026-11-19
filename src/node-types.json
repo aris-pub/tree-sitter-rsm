@@ -129,10 +129,6 @@
             "named": true
           },
           {
-            "type": "html",
-            "named": true
-          },
-          {
             "type": "itemize",
             "named": true
           },
@@ -1247,6 +1243,10 @@
             "named": true
           },
           {
+            "type": "htmlblock",
+            "named": true
+          },
+          {
             "type": "notation",
             "named": true
           },
@@ -1407,6 +1407,10 @@
             "named": true
           },
           {
+            "type": "html",
+            "named": true
+          },
+          {
             "type": "math",
             "named": true
           },
@@ -1416,10 +1420,6 @@
           },
           {
             "type": "previous",
-            "named": true
-          },
-          {
-            "type": "rawhtml",
             "named": true
           },
           {
@@ -2144,6 +2144,10 @@
     "named": true
   },
   {
+    "type": "htmlblock",
+    "named": true
+  },
+  {
     "type": "icon",
     "named": true
   },
@@ -2185,11 +2189,11 @@
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "metakey_unknown",
@@ -2300,10 +2304,6 @@
     "named": true
   },
   {
-    "type": "rawhtml",
-    "named": true
-  },
-  {
     "type": "ref",
     "named": true
   },
@@ -2365,11 +2365,11 @@
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "then",
