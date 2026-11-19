@@ -2,12 +2,14 @@
 // next key or to the closing brace, and newlines count as spaces. A comma after
 // a pair is optional, also after the last one: after a value it is part of the
 // value's text (see _metaval), and after a key with no value it is this ','.
+// A meta may be empty ({}).
 function metaBody($) {
   return seq(
     '{',
-    $.pair,
-    repeat(seq(optional(','), $.pair)),
-    optional(','),
+    optional(seq(
+      $.pair,
+      repeat(seq(optional(','), $.pair)),
+      optional(','))),
     '}');
 }
 
@@ -576,11 +578,6 @@ module.exports = grammar({
     metakey_title: $ => alias(':title:', $.title),
 
     metakey_bool: $ => choice(
-      // :as-paragraph: comes after :collapsed: on purpose. When a meta block is
-      // empty ({ }), error recovery inserts a MISSING key. Today that key is
-      // metakey_unknown, which Python ignores, but if recovery ever picks the
-      // first key of this list instead, an inserted :as-paragraph: would change
-      // how the block is laid out and numbered.
       alias(':collapsed:', $.collapsed),
       alias(':as-paragraph:', $.as_paragraph),
       alias(':emphas:', $.emphas),
