@@ -1,0 +1,711 @@
+================================================================================
+One-line block meta with commas between pairs
+================================================================================
+
+:theorem: {:title: A, :label: t, :nonum:}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text))
+      (pair
+        (metakey_bool
+          (nonum))))
+    (paragraph
+      (text))))
+
+================================================================================
+One-line block meta without commas
+================================================================================
+
+:theorem: {:title: A :label: t :nonum:}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text))
+      (pair
+        (metakey_bool
+          (nonum))))
+    (paragraph
+      (text))))
+
+================================================================================
+Bool key first, with and without a comma
+================================================================================
+
+:theorem: {:nonum:, :label: t}
+  Body.
+::
+
+:theorem: {:nonum: :label: t}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_bool
+          (nonum)))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_bool
+          (nonum)))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+Multi-line block meta with commas at the line ends
+================================================================================
+
+:theorem:
+  {
+  :title: A,
+  :label: t,
+  :nonum:
+  }
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text))
+      (pair
+        (metakey_bool
+          (nonum))))
+    (paragraph
+      (text))))
+
+================================================================================
+A value that runs over several lines
+================================================================================
+
+:theorem:
+  {
+  :title: A long title that runs
+          onto a second line
+          and a third
+  :label: t
+  }
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+A value that runs over several lines in one-line style
+================================================================================
+
+:theorem: {:title: A long title
+  that runs on, :label: t}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+A comment inside a multi-line value
+================================================================================
+
+:theorem:
+  {
+  :title: A long title % a note
+          onto a second line
+  :label: t
+  }
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text
+          (comment)))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+Commas, colons, hashes and escapes inside a value
+================================================================================
+
+:theorem: {:title: Lemma on a, b and c :label: t}
+  Body.
+::
+
+:theorem: {:title: Ratio 3:1, see http://a.org :label: t}
+  Body.
+::
+
+:theorem: {:title: Task #1\: Masked LM, :label: t}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+A colon word that is not a key stays in the value
+================================================================================
+
+:theorem: {:title: Note :x and a:b: c :label: t}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+Path value in one-line block meta stops at the next key
+================================================================================
+
+:figure: {:path: a.png, :alt: An x picture}
+::
+
+:figure: {:path: my figs/a b.png :label: f}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path))
+      (pair
+        (metakey_text
+          (alt))
+        (metaval_text))))
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))))
+
+================================================================================
+Number, word and date values in one-line block meta
+================================================================================
+
+:figure: {:path: a.png, :scale: 0.5, :label: f}
+::
+
+:config: {:toc-depth: 2 :lang: en-US :override-date: 2024-01-15 :no-minimap:}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_path
+          (path))
+        (metaval_path))
+      (pair
+        (metakey_number
+          (scale))
+        (metaval_number))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text))))
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair
+        (metakey_number
+          (toc_depth))
+        (metaval_number))
+      (pair
+        (metakey_word
+          (lang))
+        (metaval_word))
+      (pair
+        (metakey_date
+          (override_date))
+        (metaval_date))
+      (pair
+        (metakey_bool
+          (no_minimap))))))
+
+================================================================================
+A word value of two words is one value (Python reports it)
+================================================================================
+
+:config: {:accent: dark blue :lang: en}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair
+        (metakey_word
+          (accent))
+        (metaval_word))
+      (pair
+        (metakey_word
+          (lang))
+        (metaval_word)))))
+
+================================================================================
+List values are bare comma lists
+================================================================================
+
+:theorem: {:keywords: a, b, c :label: t}
+  Body.
+::
+
+:theorem: {:keywords: a, b, c, :label: t}
+  Body.
+::
+
+:theorem:
+  {
+  :keywords: graphs, cliques,
+             extremal problems
+  :label: t
+  }
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_list
+          (keywords))
+        (metaval_list))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_list
+          (keywords))
+        (metaval_list))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_list
+          (keywords))
+        (metaval_list))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+Unknown keys with and without values
+================================================================================
+
+:theorem: {:colour: blue, :label: t}
+  Body.
+::
+
+:theorem: {:colour: :label: t}
+  Body.
+::
+
+:theorem: {:colour: dark
+  blue :label: t}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)
+        (metaval_unknown))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_unknown)
+        (metaval_unknown))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
+
+================================================================================
+Heading meta without commas
+================================================================================
+
+## A title {:label: s :nonum:}
+
+Body.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    title: (text)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text))
+      (pair
+        (metakey_bool
+          (nonum))))
+    (paragraph
+      (text))))
+
+================================================================================
+Inline meta with and without commas
+================================================================================
+
+A :span:{:strong:, :label: x}b:: and :span:{:strong: :label: y}c::.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (inline
+      tag: (span)
+      meta: (inlinemeta
+        (pair
+          (metakey_bool
+            (strong)))
+        (pair
+          (metakey_text
+            (label))
+          (metaval_text)))
+      (text))
+    (text)
+    (inline
+      tag: (span)
+      meta: (inlinemeta
+        (pair
+          (metakey_bool
+            (strong)))
+        (pair
+          (metakey_text
+            (label))
+          (metaval_text)))
+      (text))
+    (text)))
+
+================================================================================
+Inline meta values hold commas and colons
+================================================================================
+
+:paragraph: {:title: Setup, part one :label: p} Body.
+
+:paragraph: {:title: Ratio 3:1, :label: q} Body.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (inlinemeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (text))
+  (paragraph
+    (inlinemeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (text)))
+
+================================================================================
+Inline meta over several lines
+================================================================================
+
+:paragraph:
+  {
+  :title: A setup that needs
+          a long name,
+  :label: p
+  } Body.
+
+A :span:{:label: x,
+  :strong:}b::.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    meta: (inlinemeta
+      (pair
+        (metakey_text
+          (title))
+        (metaval_text))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (text))
+  (paragraph
+    (text)
+    (inline
+      tag: (span)
+      meta: (inlinemeta
+        (pair
+          (metakey_text
+            (label))
+          (metaval_text))
+        (pair
+          (metakey_bool
+            (strong))))
+      (text))
+    (text)))
+
+================================================================================
+Path value in inline meta stops at the next key
+================================================================================
+
+A :span: {:path: my dir/a.png :label: x} hi ::.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (inline
+      tag: (span)
+      meta: (inlinemeta
+        (pair
+          (metakey_path
+            (path))
+          (metaval_path))
+        (pair
+          (metakey_text
+            (label))
+          (metaval_text)))
+      (text))
+    (text)))
+
+================================================================================
+A text key with no value is an error
+================================================================================
+
+:theorem: {:title: :label: t}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (ERROR
+        (metakey_text
+          (title)))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))

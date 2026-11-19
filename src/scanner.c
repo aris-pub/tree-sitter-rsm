@@ -3,7 +3,7 @@
 #include <wctype.h>
 
 enum TokenType {
-  UPTO_BRACE_OR_COMMA_TEXT = 0,
+  META_TEXT = 0,
   ASIS_DOLLAR_TEXT,
   ASIS_TWO_DOLLARS_TEXT,
   ASIS_BACKTICK_TEXT,
@@ -33,8 +33,8 @@ static void show_beginning_debug_message(const bool *valid_symbols) {
   if (!getenv("TREE_SITTER_DEBUG")) { return; }
 
   fprintf(stderr, "--> external scanner looking for: ");
-  if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
-    fprintf(stderr, "UPTO_BRACE_OR_COMMA_TEXT ");
+  if (valid_symbols[META_TEXT]) {
+    fprintf(stderr, "META_TEXT ");
   }
   if (valid_symbols[ASIS_DOLLAR_TEXT]) {
     fprintf(stderr, "ASIS_DOLLAR_TEXT ");
@@ -462,6 +462,53 @@ static bool scan_line_end_or_text(void *payload, TSLexer *lexer, const bool *val
   return failure(lexer);
 }
 
+// One line of a meta value. It ends at the end of the line, at a brace, at a
+// comment, or before a key: a colon after whitespace, then [a-z0-9][a-z0-9-]*,
+// then a colon. A colon word that is not a key, such as "3:1" or ":x", stays in
+// the value. A backslash keeps the next character in the value.
+static bool scan_meta_text(TSLexer *lexer) {
+  debug_log("trying META_TEXT");
+  skip_whitespace(lexer);
+  int count = 0;
+  bool last_was_whitespace = true;
+  while (lexer->lookahead != '\n' && lexer->lookahead != '\r' &&
+         lexer->lookahead != '{' && lexer->lookahead != '}' &&
+         lexer->lookahead != '%' && lexer->lookahead != '\0') {
+    if (lexer->lookahead == '\\') {
+      lexer->advance(lexer, false);
+      if (lexer->lookahead != '\0') {
+        lexer->advance(lexer, false);
+      }
+      count++;
+      last_was_whitespace = false;
+      continue;
+    }
+    if (lexer->lookahead == ':' && last_was_whitespace) {
+      lexer->mark_end(lexer);
+      lexer->advance(lexer, false);
+      if (iswlower(lexer->lookahead) || iswdigit(lexer->lookahead)) {
+        while (iswlower(lexer->lookahead) || iswdigit(lexer->lookahead) ||
+               lexer->lookahead == '-') {
+          lexer->advance(lexer, false);
+        }
+        if (lexer->lookahead == ':') {
+          return (count > 0) ? success(lexer, META_TEXT) : failure(lexer);
+        }
+      }
+      count++;
+      last_was_whitespace = false;
+      continue;
+    }
+    if (!iswspace(lexer->lookahead)) {
+      count++;
+    }
+    last_was_whitespace = iswspace(lexer->lookahead);
+    lexer->advance(lexer, false);
+  }
+  lexer->mark_end(lexer);
+  return (count > 0) ? success(lexer, META_TEXT) : failure(lexer);
+}
+
 bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
   show_beginning_debug_message(valid_symbols);
   show_lookahead(lexer);
@@ -514,33 +561,8 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
     return false;
   }
 
-  if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
-    skip_whitespace(lexer);
-    debug_log("trying UPTO_BRACE_OR_COMMA_TEXT");
-    while (
-	   lexer->lookahead != ':'
-	   && lexer->lookahead != '\n'
-	   && lexer->lookahead != '{'
-	   && lexer->lookahead != '}'
-	   && lexer->lookahead != ','
-	   && lexer->lookahead != '\0'
-	   ) {
-      // A backslash escapes the next character (e.g. \: for a literal colon in
-      // a meta value), so consume both and keep scanning past it.
-      if (lexer->lookahead == '\\') {
-        lexer->advance(lexer, false);
-        if (lexer->lookahead != '\0') {
-          lexer->advance(lexer, false);
-        }
-        continue;
-      }
-      lexer->advance(lexer, false);
-    }
-    if (lexer->lookahead == ',' || lexer->lookahead == '}') {
-      return success(lexer, UPTO_BRACE_OR_COMMA_TEXT);
-    } else {
-      return failure(lexer);
-    }
+  if (valid_symbols[META_TEXT]) {
+    return scan_meta_text(lexer);
   }
 
   if (valid_symbols[TEXT]) {
