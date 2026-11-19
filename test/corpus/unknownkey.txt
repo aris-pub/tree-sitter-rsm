@@ -410,10 +410,14 @@ Note: this is text. Ratio 3:1 at 10:30.
       (text))))
 
 ================================================================================
-Empty block meta gets a missing unknown key
+Empty block meta has no pairs
 ================================================================================
 
 :theorem: {}
+Body.
+::
+
+:theorem: { }
 Body.
 ::
 
@@ -422,8 +426,33 @@ Body.
 (source_file
   (block
     tag: (theorem)
-    meta: (blockmeta
-      (pair
-        (MISSING metakey_unknown)))
+    meta: (blockmeta)
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta)
     (paragraph
       (text))))
+
+================================================================================
+Empty inline meta has no pairs
+================================================================================
+
+:paragraph: {} Body.
+
+A :span:{}word:: here.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    meta: (inlinemeta)
+    (text))
+  (paragraph
+    (text)
+    (inline
+      tag: (span)
+      meta: (inlinemeta)
+      (text))
+    (text)))
