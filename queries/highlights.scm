@@ -219,7 +219,7 @@
 
 ;; Meta values
 (metaval_text) @string
-(metaval_list_item) @string
+(metaval_list) @string
 (metaval_unknown) @string
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

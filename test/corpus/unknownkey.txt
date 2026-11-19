@@ -150,8 +150,7 @@ Known keys are not read as unknown keys
       (pair
         (metakey_list
           (class))
-        (metaval_list
-          (metaval_list_item))))))
+        (metaval_list)))))
 
 ================================================================================
 Unknown key alone in mathblock meta
@@ -306,7 +305,7 @@ Unknown key in inline meta
       (text))))
 
 ================================================================================
-Unknown key without a value in inline meta
+Unknown key followed by a comma in inline meta (the comma is its value)
 ================================================================================
 
 :span: {:colour:, :label: s} word ::
@@ -319,7 +318,8 @@ Unknown key without a value in inline meta
       tag: (span)
       meta: (inlinemeta
         (pair
-          (metakey_unknown))
+          (metakey_unknown)
+          (metaval_unknown))
         (pair
           (metakey_text
             (label))

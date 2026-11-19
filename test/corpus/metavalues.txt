@@ -188,7 +188,7 @@ Number, word and date values in one-line block meta
         (metaval_date)))))
 
 ================================================================================
-Word value in inline meta stops at the comma
+Word value in inline meta stops at the next pair
 ================================================================================
 
 A :span: {:lang: en, :label: x} hi :: and :code:{:lang: python} x = 1 ::.
@@ -222,7 +222,7 @@ A :span: {:lang: en, :label: x} hi :: and :code:{:lang: python} x = 1 ::.
     (text)))
 
 ================================================================================
-Path value in inline meta stops at the comma
+Path value in inline meta stops at the next pair
 ================================================================================
 
 A :span: {:path: my dir/a.png, :label: x} hi ::.

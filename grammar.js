@@ -1,3 +1,15 @@
+// Block meta and inline meta are written the same way. A value runs to the
+// next key or to the closing brace, and newlines count as spaces. A comma
+// between pairs is optional: after a value it is part of the value's text (see
+// _metaval), and after a key with no value it is this ','.
+function metaBody($) {
+  return seq(
+    '{',
+    $.pair,
+    repeat(seq(optional(','), $.pair)),
+    '}');
+}
+
 // A heading's title is everything up to the end of its line, inline markup
 // included. Whitespace is an extra, so the grammar cannot see the line break
 // itself: the scanner returns _line_end there. A meta block may follow on the
@@ -19,7 +31,7 @@ module.exports = grammar({
   name: 'rsm',
 
   externals: $ => [
-    $.upto_brace_or_comma_text,
+    $.meta_text,
     $.asis_dollar_text,
     $.asis_two_dollars_text,
     $.asis_backtick_text,
@@ -345,30 +357,9 @@ module.exports = grammar({
     /////////////////////////////////////////////////////////////
     // Meta regions
     /////////////////////////////////////////////////////////////
-    inlinemeta: $ => seq(
-      '{',
-      // an inline meta either contains a single pair, or a sequence of pairs with
-      // an ending comma plus a final pair without comma
-      choice(
-        alias($.inlinemetapair, $.pair),
-        seq(repeat1(seq(alias($.inlinemetapair, $.pair), ',')),
-          alias($.inlinemetapair, $.pair))),
-      '}'),
+    inlinemeta: $ => metaBody($),
 
-    blockmeta: $ => seq(
-      '{',
-      repeat1(alias($.pair, $.pair)),
-      '}'),
-
-    inlinemetapair: $ => choice(
-      seq($.metakey_text, alias($.metaval_text_inline, $.metaval_text)),
-      seq($.metakey_path, alias($.metaval_path_inline, $.metaval_path)),
-      seq($.metakey_number, $.metaval_number),
-      seq($.metakey_word, $.metaval_word),
-      seq($.metakey_date, $.metaval_date),
-      seq($.metakey_list, alias($.metaval_list_inline, $.metaval_list)),
-      $.metakey_bool,
-      seq($.metakey_unknown, optional(alias($.metaval_unknown_inline, $.metaval_unknown)))),
+    blockmeta: $ => metaBody($),
 
     pair: $ => choice(
       seq($.metakey_text, $.metaval_text),
@@ -383,11 +374,11 @@ module.exports = grammar({
     /////////////////////////////////////////////////////////////
     // Meta pair types
     /////////////////////////////////////////////////////////////
-    // A path may contain spaces. It ends at the end of the line or at }, and
-    // in inline meta also at a comma.
-    metaval_path: $ => token(/[^}\n]+/),
-
-    metaval_path_inline: $ => token(/[^,}\n]+/),
+    // Every value is read the same way, and Python checks its form against its
+    // key. A value is one meta_text per line (comments may sit between them),
+    // and it ends before the next key or at the closing brace. A comma before
+    // the next key stays in the value here and Python drops it.
+    _metaval: $ => repeat1(alias($.meta_text, 'text')),
 
     // A key that is not one of the known keys below, so that the parser still
     // forms the meta block and Python can log the key by name. The known keys
@@ -395,44 +386,20 @@ module.exports = grammar({
     // string over a pattern of the same length, so known keys still win.
     metakey_unknown: $ => token(/:[a-z0-9][a-z0-9-]*:/),
 
-    // The value of an unknown key is optional, so it must start right after the
-    // key. Otherwise a key with no value would take the next line as its value.
-    metaval_unknown: $ => token.immediate(/[^}\n]+/),
+    metaval_unknown: $ => $._metaval,
 
-    metaval_unknown_inline: $ => token.immediate(/[^,}\n]+/),
+    metaval_text: $ => $._metaval,
 
-    // Number, word and date values share one token. A token of its own for
-    // numbers (\d+...) was matched at the start of ordinary lines of text, so
-    // a line such as "2. Second step" failed to parse. Python checks the form
-    // of each value against its key: a number, a whole number, a date written
-    // YYYY-MM-DD, or a word from the key's list.
-    _metaval_bare: $ => token(/[^\s,{}]+/),
+    metaval_path: $ => $._metaval,
 
-    metaval_number: $ => $._metaval_bare,
+    metaval_number: $ => $._metaval,
 
-    metaval_word: $ => $._metaval_bare,
+    metaval_word: $ => $._metaval,
 
-    metaval_date: $ => $._metaval_bare,
+    metaval_date: $ => $._metaval,
 
-    metaval_text: $ => alias($.text, 'text'),
-
-    metaval_text_inline: $ => alias($.upto_brace_or_comma_text, 'text'),
-
-    metaval_list: $ => choice(
-      seq('{',
-        repeat1(seq(alias($.upto_brace_or_comma_text, $.metaval_list_item), ',')),
-        alias($.upto_brace_or_comma_text, $.metaval_list_item),
-        '}'),
-      alias($.text, $.metaval_list_item)
-    ),
-
-    metaval_list_inline: $ => choice(
-      seq('{',
-        repeat1(seq(alias($.upto_brace_or_comma_text, $.metaval_list_item), ',')),
-        alias($.upto_brace_or_comma_text, $.metaval_list_item),
-        '}'),
-      alias($.upto_brace_or_comma_text, $.metaval_list_item),
-    ),
+    // Python splits a list at its commas.
+    metaval_list: $ => $._metaval,
 
     /////////////////////////////////////////////////////////////
     // Tables

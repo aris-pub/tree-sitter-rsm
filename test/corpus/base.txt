@@ -177,7 +177,7 @@ Section with meta
 
 :section: {
   :title: Section title
-  :class: {t1, t2}
+  :class: t1, t2
 }
 
   Foo.
@@ -193,9 +193,7 @@ Section with meta
         (metaval_text))
       (pair
         (metakey_list (class))
-        (metaval_list
-          (metaval_list_item)
-          (metaval_list_item))))
+        (metaval_list)))
     (paragraph
       (text))))
 
@@ -216,8 +214,8 @@ Author and abstract
 ::
 
 :abstract: {
-  :keywords: {spectral graph theory, non-backtracking, interlacing}
-  :msc: {05C50, 05C82, 15A18, 15B99}
+  :keywords: spectral graph theory, non-backtracking, interlacing
+  :msc: 05C50, 05C82, 15A18, 15B99
 }
 
   Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem
@@ -255,17 +253,10 @@ Author and abstract
     meta: (blockmeta
       (pair
         (metakey_list (keywords))
-        (metaval_list
-          (metaval_list_item)
-          (metaval_list_item)
-          (metaval_list_item)))
+        (metaval_list))
       (pair
         (metakey_list (msc))
-        (metaval_list
-          (metaval_list_item)
-          (metaval_list_item)
-          (metaval_list_item)
-          (metaval_list_item))))
+        (metaval_list)))
     (paragraph
       (text)
       (text)
@@ -503,8 +494,7 @@ Block code no shortcut and meta
    (metaval_text))
       (pair
         (metakey_list (class))
-        (metaval_list
-          (metaval_list_item))))
+        (metaval_list)))
     (asis_text)))
 
 
@@ -1499,7 +1489,7 @@ Lorem ipsum :-: Foo bar.
 List meta pair inside inline meta region
 ================================================================================
 
-Foo :span: {:class: {t1, t2}} bar :: baz.
+Foo :span: {:class: t1, t2} bar :: baz.
 
 
 --------------------------------------------------------------------------------
@@ -1512,9 +1502,7 @@ Foo :span: {:class: {t1, t2}} bar :: baz.
       meta: (inlinemeta
         (pair
           (metakey_list (class))
-          (metaval_list
-            (metaval_list_item)
-            (metaval_list_item))))
+          (metaval_list)))
       (text))
     (text)))
 

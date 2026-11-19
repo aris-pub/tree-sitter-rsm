@@ -819,17 +819,7 @@
   {
     "type": "metaval_list",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "metaval_list_item",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "metaval_number",
@@ -837,7 +827,17 @@
     "fields": {}
   },
   {
+    "type": "metaval_path",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "metaval_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "metaval_unknown",
     "named": true,
     "fields": {}
   },
@@ -2135,26 +2135,14 @@
   },
   {
     "type": "math",
-    "named": true
-  },
-  {
-    "type": "math",
     "named": false
   },
   {
+    "type": "math",
+    "named": true
+  },
+  {
     "type": "metakey_unknown",
-    "named": true
-  },
-  {
-    "type": "metaval_list_item",
-    "named": true
-  },
-  {
-    "type": "metaval_path",
-    "named": true
-  },
-  {
-    "type": "metaval_unknown",
     "named": true
   },
   {
