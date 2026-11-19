@@ -165,8 +165,9 @@ Section with title
   (section
     meta: (blockmeta
       (pair
-        (metakey_text (title))
-        (metaval_text)))
+        (metakey_title (title))
+        (metaval_title
+        (text))))
     (paragraph
       (text))))
 
@@ -189,8 +190,9 @@ Section with meta
   (section
     meta: (blockmeta
       (pair
-        (metakey_text (title))
-        (metaval_text))
+        (metakey_title (title))
+        (metaval_title
+        (text)))
       (pair
         (metakey_list (class))
         (metaval_list)))
@@ -1827,8 +1829,9 @@ Section with icon
   (section
     meta: (blockmeta
       (pair
-        (metakey_text (title))
-        (metaval_text))
+        (metakey_title (title))
+        (metaval_title
+        (text)))
       (pair
         (metakey_text (icon))
         (metaval_text)))
@@ -1918,8 +1921,9 @@ Lorem ipsum.
   (section
     meta: (blockmeta
       (pair
-        (metakey_text (title))
-        (metaval_text)))
+        (metakey_title (title))
+        (metaval_title
+        (text))))
     (paragraph
       (text))))
 ================================================================================
@@ -2256,9 +2260,10 @@ Escaped colon in a meta value
   (paragraph
     (inlinemeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text)))
+        (metaval_title
+        (text))))
     (text)))
 
 

@@ -250,7 +250,7 @@ Bar.
 
 --------------------------------------------------------------------------------
 
-(source_file (section meta: (blockmeta (pair (metakey_text (title)) (metaval_text))) (paragraph (text))))
+(source_file (section meta: (blockmeta (pair (metakey_title (title)) (metaval_title (text)))) (paragraph (text))))
 
 ================================================================================
 Heading: math mid
