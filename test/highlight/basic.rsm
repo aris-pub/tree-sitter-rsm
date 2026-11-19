@@ -49,7 +49,7 @@ code block
 % <- markup.raw.block
 ```
 
-:rawhtml: <b>raw</b> ::
+:html: <b>raw</b> ::
 % <- operator
 %          ^ markup.raw
 

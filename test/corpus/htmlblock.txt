@@ -1,0 +1,90 @@
+================================================================================
+HTML block on its own
+================================================================================
+
+:htmlblock:
+<div id="a">x</div>
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (htmlblock)
+    (asis_text)))
+
+================================================================================
+HTML block with alt, markup characters and a blank line in the body
+================================================================================
+
+:htmlblock: {:alt: A diagram of $x$}
+<div title="a: b">$x$ *y* `w` &amp;
+
+<span>after a blank line</span></div>
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (htmlblock)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (alt))
+        (metaval_text)))
+    (asis_text)))
+
+================================================================================
+HTML block inside a figure, with a caption
+================================================================================
+
+:figure: {:label: fig-a}
+
+  :htmlblock:
+  <canvas id="c"></canvas>
+  ::
+
+  :caption: A canvas.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (specialblock
+      tag: (htmlblock)
+      (asis_text))
+    (paragraph
+      (caption
+        (text)))))
+
+================================================================================
+HTML block between paragraphs
+================================================================================
+
+Before.
+
+:htmlblock:
+<hr>
+::
+
+After.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text))
+  (specialblock
+    tag: (htmlblock)
+    (asis_text))
+  (paragraph
+    (text)))

@@ -167,16 +167,16 @@ Title: block ref
 (source_file (block tag: (theorem) meta: (blockmeta (pair (metakey_title (title)) (metaval_title (text) (specialinline tag: (ref) target: (text)) (text)))) (paragraph (text))))
 
 ================================================================================
-Title: block rawhtml
+Title: block raw html
 ================================================================================
 
-:theorem: {:title: A :rawhtml:{:alt: s} <b>s</b> :: c}
+:theorem: {:title: A :html:{:alt: s} <b>s</b> :: c}
   B.
 ::
 
 --------------------------------------------------------------------------------
 
-(source_file (block tag: (theorem) meta: (blockmeta (pair (metakey_title (title)) (metaval_title (text) (specialinline tag: (rawhtml) meta: (inlinemeta (pair (metakey_text (alt)) (metaval_text))) (asis_text)) (text)))) (paragraph (text))))
+(source_file (block tag: (theorem) meta: (blockmeta (pair (metakey_title (title)) (metaval_title (text) (specialinline tag: (html) meta: (inlinemeta (pair (metakey_text (alt)) (metaval_text))) (asis_text)) (text)))) (paragraph (text))))
 
 ================================================================================
 Title: section tag math

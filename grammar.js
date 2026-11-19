@@ -206,6 +206,13 @@ module.exports = grammar({
 
 
 
+      // An HTML block is written into the page as is. Its :alt: stands in for it
+      // where HTML cannot be.
+      seq(field('tag', alias(token(":htmlblock:"), $.htmlblock)),
+        field('meta', optional($.blockmeta)),
+        alias($.asis_halmos_text, $.asis_text),
+        '::'),
+
       // Notation declares reader-rebindable macros as raw lines
       // (\macro $default$ label), parsed by the transformer.
       seq(field('tag', alias(token(":notation:"), $.notation)),
@@ -255,7 +262,7 @@ module.exports = grammar({
     // Raw HTML is written into the page as is, so it is kept out of
     // $._formatinline: a link's reftext must not hold it. Like :code:, its
     // content runs up to the first Halmos, so the HTML cannot contain "::".
-    _rawinline: $ => seq(field('tag', alias(token(':rawhtml:'), $.rawhtml)),
+    _rawinline: $ => seq(field('tag', alias(token(':html:'), $.html)),
       field('meta', optional($.inlinemeta)),
       alias($.asis_halmos_text, $.asis_text),
       '::'),
@@ -536,7 +543,6 @@ module.exports = grammar({
       alias(':example:', $.example),
       alias(':exercise:', $.exercise),
       alias(':figure:', $.figure),
-      alias(':html:', $.html),
       alias(':lemma:', $.lemma),
       alias(':p:', $.subproof),
       alias(':porism:', $.porism),

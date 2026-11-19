@@ -555,23 +555,23 @@ Text.
 Heading: raw html (parsed so RSM can report it)
 ================================================================================
 
-## Sec :rawhtml:{:alt: s} <b>s</b> ::
+## Sec :html:{:alt: s} <b>s</b> ::
 
 Text.
 
 --------------------------------------------------------------------------------
 
-(source_file (section title: (text) title: (specialinline tag: (rawhtml) meta: (inlinemeta (pair (metakey_text (alt)) (metaval_text))) (asis_text)) (paragraph (text))))
+(source_file (section title: (text) title: (specialinline tag: (html) meta: (inlinemeta (pair (metakey_text (alt)) (metaval_text))) (asis_text)) (paragraph (text))))
 
 ================================================================================
 Heading: raw html in document title (parsed so RSM can report it)
 ================================================================================
 
-# Doc :rawhtml:{:alt: d} <b>m</b> ::
+# Doc :html:{:alt: d} <b>m</b> ::
 
 Text.
 
 --------------------------------------------------------------------------------
 
-(source_file title: (text) title: (specialinline tag: (rawhtml) meta: (inlinemeta (pair (metakey_text (alt)) (metaval_text))) (asis_text)) (paragraph (text)))
+(source_file title: (text) title: (specialinline tag: (html) meta: (inlinemeta (pair (metakey_text (alt)) (metaval_text))) (asis_text)) (paragraph (text)))
 
