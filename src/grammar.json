@@ -2418,6 +2418,19 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "metakey_title"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "metaval_title"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
               "name": "metakey_text"
             },
             {
@@ -2544,6 +2557,62 @@
     "metaval_text": {
       "type": "SYMBOL",
       "name": "_metaval"
+    },
+    "metaval_title": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "meta_title_text"
+            },
+            "named": true,
+            "value": "text"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_formatinline"
+            },
+            "named": true,
+            "value": "specialinline"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "inline"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "specialconstruct"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "construct"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_refinline"
+            },
+            "named": true,
+            "value": "specialinline"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_rawinline"
+            },
+            "named": true,
+            "value": "specialinline"
+          }
+        ]
+      }
     },
     "metaval_path": {
       "type": "SYMBOL",
@@ -3656,17 +3725,17 @@
           },
           "named": true,
           "value": "reftext"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":title:"
-          },
-          "named": true,
-          "value": "title"
         }
       ]
+    },
+    "metakey_title": {
+      "type": "ALIAS",
+      "content": {
+        "type": "STRING",
+        "value": ":title:"
+      },
+      "named": true,
+      "value": "title"
     },
     "metakey_bool": {
       "type": "CHOICE",
@@ -3997,6 +4066,10 @@
     {
       "type": "SYMBOL",
       "name": "_line_end"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "meta_title_text"
     }
   ],
   "inline": [

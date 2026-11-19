@@ -12,6 +12,7 @@ enum TokenType {
   TEXT,
   PARAGRAPH_END,
   LINE_END,
+  META_TITLE_TEXT,
   // Since the first one is assigned to zero and they are assigned consecutive integers,
   // the last one is a dummy value that is always equal to the number of values that
   // this Enum contains.  This is then used to iterate over valid_symbols, whose length
@@ -466,14 +467,33 @@ static bool scan_line_end_or_text(void *payload, TSLexer *lexer, const bool *val
 // comment, or before a key: a colon after whitespace, then [a-z0-9][a-z0-9-]*,
 // then a colon. A colon word that is not a key, such as "3:1" or ":x", stays in
 // the value. A backslash keeps the next character in the value.
-static bool scan_meta_text(TSLexer *lexer) {
-  debug_log("trying META_TEXT");
-  skip_whitespace(lexer);
+//
+// A title holds inline markup, so its text (META_TITLE_TEXT) also ends at $, *
+// and `, and before a colon word after punctuation such as "(", where an inline
+// tag may start just as in body text. The grammar then reads the colon word as
+// a key or as an inline tag.
+static bool scan_meta_text(TSLexer *lexer, bool title) {
+  debug_log(title ? "trying META_TITLE_TEXT" : "trying META_TEXT");
+  enum TokenType type = title ? META_TITLE_TEXT : META_TEXT;
+  if (title) {
+    // Keep the spaces before a title piece, as body text does, so that the
+    // space between math and the next word is not lost. A line break moves the
+    // start of the token past it.
+    while (iswspace(lexer->lookahead)) {
+      bool newline = lexer->lookahead == '\n' || lexer->lookahead == '\r';
+      lexer->advance(lexer, newline);
+    }
+  } else {
+    skip_whitespace(lexer);
+  }
   int count = 0;
   bool last_was_whitespace = true;
+  bool last_was_punctuation = false;
   while (lexer->lookahead != '\n' && lexer->lookahead != '\r' &&
          lexer->lookahead != '{' && lexer->lookahead != '}' &&
-         lexer->lookahead != '%' && lexer->lookahead != '\0') {
+         lexer->lookahead != '%' && lexer->lookahead != '\0' &&
+         !(title && (lexer->lookahead == '$' || lexer->lookahead == '*' ||
+                     lexer->lookahead == '`'))) {
     if (lexer->lookahead == '\\') {
       lexer->advance(lexer, false);
       if (lexer->lookahead != '\0') {
@@ -481,9 +501,11 @@ static bool scan_meta_text(TSLexer *lexer) {
       }
       count++;
       last_was_whitespace = false;
+      last_was_punctuation = false;
       continue;
     }
-    if (lexer->lookahead == ':' && last_was_whitespace) {
+    if (lexer->lookahead == ':' &&
+        (last_was_whitespace || (title && last_was_punctuation))) {
       lexer->mark_end(lexer);
       lexer->advance(lexer, false);
       if (iswlower(lexer->lookahead) || iswdigit(lexer->lookahead)) {
@@ -492,21 +514,23 @@ static bool scan_meta_text(TSLexer *lexer) {
           lexer->advance(lexer, false);
         }
         if (lexer->lookahead == ':') {
-          return (count > 0) ? success(lexer, META_TEXT) : failure(lexer);
+          return (count > 0) ? success(lexer, type) : failure(lexer);
         }
       }
       count++;
       last_was_whitespace = false;
+      last_was_punctuation = false;
       continue;
     }
     if (!iswspace(lexer->lookahead)) {
       count++;
     }
     last_was_whitespace = iswspace(lexer->lookahead);
+    last_was_punctuation = is_punctuation(lexer->lookahead);
     lexer->advance(lexer, false);
   }
   lexer->mark_end(lexer);
-  return (count > 0) ? success(lexer, META_TEXT) : failure(lexer);
+  return (count > 0) ? success(lexer, type) : failure(lexer);
 }
 
 bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
@@ -562,7 +586,10 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
 
   if (valid_symbols[META_TEXT]) {
-    return scan_meta_text(lexer);
+    return scan_meta_text(lexer, false);
+  }
+  if (valid_symbols[META_TITLE_TEXT]) {
+    return scan_meta_text(lexer, true);
   }
 
   if (valid_symbols[TEXT]) {

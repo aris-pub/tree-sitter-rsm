@@ -764,7 +764,18 @@
         {
           "type": "reftext",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "metakey_title",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
         {
           "type": "title",
           "named": true
@@ -837,6 +848,37 @@
     "fields": {}
   },
   {
+    "type": "metaval_title",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "construct",
+          "named": true
+        },
+        {
+          "type": "inline",
+          "named": true
+        },
+        {
+          "type": "specialconstruct",
+          "named": true
+        },
+        {
+          "type": "specialinline",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "metaval_unknown",
     "named": true,
     "fields": {}
@@ -879,6 +921,10 @@
           "named": true
         },
         {
+          "type": "metakey_title",
+          "named": true
+        },
+        {
           "type": "metakey_unknown",
           "named": true
         },
@@ -904,6 +950,10 @@
         },
         {
           "type": "metaval_text",
+          "named": true
+        },
+        {
+          "type": "metaval_title",
           "named": true
         },
         {
@@ -2135,11 +2185,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "metakey_unknown",
@@ -2315,11 +2365,11 @@
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "then",

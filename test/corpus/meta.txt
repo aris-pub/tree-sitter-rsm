@@ -13,9 +13,10 @@ One-line block meta with commas between pairs
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -41,9 +42,10 @@ One-line block meta without commas
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -114,9 +116,10 @@ Multi-line block meta with commas at the line ends
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -148,9 +151,12 @@ A value that runs over several lines
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)
+          (text)
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -174,9 +180,11 @@ A value that runs over several lines in one-line style
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -204,10 +212,12 @@ A comment inside a multi-line value
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text
-          (comment)))
+        (metaval_title
+          (text)
+          (comment)
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -238,9 +248,10 @@ Commas, colons, hashes and escapes inside a value
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -251,9 +262,10 @@ Commas, colons, hashes and escapes inside a value
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -264,9 +276,10 @@ Commas, colons, hashes and escapes inside a value
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -289,9 +302,10 @@ A colon word that is not a key stays in the value
     tag: (theorem)
     meta: (blockmeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -598,9 +612,10 @@ Inline meta values hold commas and colons
   (paragraph
     (inlinemeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -609,9 +624,10 @@ Inline meta values hold commas and colons
   (paragraph
     (inlinemeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -638,9 +654,11 @@ A :span:{:label: x,
   (paragraph
     meta: (inlinemeta
       (pair
-        (metakey_text
+        (metakey_title
           (title))
-        (metaval_text))
+        (metaval_title
+          (text)
+          (text)))
       (pair
         (metakey_text
           (label))
@@ -701,7 +719,7 @@ A text key with no value is an error
     tag: (theorem)
     meta: (blockmeta
       (ERROR
-        (metakey_text
+        (metakey_title
           (title)))
       (pair
         (metakey_text

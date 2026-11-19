@@ -41,6 +41,7 @@ module.exports = grammar({
     $.text,
     $.paragraph_end,
     $._line_end,
+    $.meta_title_text,
   ],
 
   inline: $ => [
@@ -363,6 +364,7 @@ module.exports = grammar({
     blockmeta: $ => metaBody($),
 
     pair: $ => choice(
+      seq($.metakey_title, $.metaval_title),
       seq($.metakey_text, $.metaval_text),
       seq($.metakey_path, $.metaval_path),
       seq($.metakey_number, $.metaval_number),
@@ -390,6 +392,18 @@ module.exports = grammar({
     metaval_unknown: $ => $._metaval,
 
     metaval_text: $ => $._metaval,
+
+    // A title holds inline markup, as a heading does. Its text pieces are
+    // meta_title_text, which also stops at $, * and `. Links and raw HTML are
+    // parsed so that RSM can report them by name.
+    metaval_title: $ => repeat1(choice(
+      alias($.meta_title_text, $.text),
+      alias($._formatinline, $.specialinline),
+      $.inline,
+      $.specialconstruct,
+      $.construct,
+      alias($._refinline, $.specialinline),
+      alias($._rawinline, $.specialinline))),
 
     metaval_path: $ => $._metaval,
 
@@ -551,8 +565,9 @@ module.exports = grammar({
       alias(':of:', $.of),
       alias(':orcid:', $.orcid),
       alias(':reftext:', $.reftext),
-      alias(':title:', $.title),
     ),
+
+    metakey_title: $ => alias(':title:', $.title),
 
     metakey_bool: $ => choice(
       // :as-paragraph: comes after :collapsed: on purpose. When a meta block is
