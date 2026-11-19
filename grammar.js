@@ -1,12 +1,13 @@
 // Block meta and inline meta are written the same way. A value runs to the
-// next key or to the closing brace, and newlines count as spaces. A comma
-// between pairs is optional: after a value it is part of the value's text (see
-// _metaval), and after a key with no value it is this ','.
+// next key or to the closing brace, and newlines count as spaces. A comma after
+// a pair is optional, also after the last one: after a value it is part of the
+// value's text (see _metaval), and after a key with no value it is this ','.
 function metaBody($) {
   return seq(
     '{',
     $.pair,
     repeat(seq(optional(','), $.pair)),
+    optional(','),
     '}');
 }
 

@@ -709,3 +709,43 @@ A text key with no value is an error
         (metaval_text)))
     (paragraph
       (text))))
+
+================================================================================
+A comma after the last pair
+================================================================================
+
+:theorem: {:label: t, :nonum:,}
+  Body.
+::
+
+:theorem: {:nonum: :label: t,}
+  Body.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text))
+      (pair
+        (metakey_bool
+          (nonum))))
+    (paragraph
+      (text)))
+  (block
+    tag: (theorem)
+    meta: (blockmeta
+      (pair
+        (metakey_bool
+          (nonum)))
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (paragraph
+      (text))))
