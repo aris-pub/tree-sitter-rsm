@@ -554,6 +554,8 @@ module.exports = grammar({
       alias(':remark:', $.remark),
       alias(':sketch:', $.sketch),
       alias(':step:', $.step),
+      alias(':tab:', $.tab),
+      alias(':tabs:', $.tabs),
       alias(':theorem:', $.theorem),
       alias(':toc:', $.toc),
       alias(':video:', $.video),

@@ -169,6 +169,14 @@
             "named": true
           },
           {
+            "type": "tab",
+            "named": true
+          },
+          {
+            "type": "tabs",
+            "named": true
+          },
+          {
             "type": "theorem",
             "named": true
           },
@@ -2189,11 +2197,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "metakey_unknown",
@@ -2364,12 +2372,20 @@
     "named": true
   },
   {
-    "type": "text",
+    "type": "tab",
+    "named": true
+  },
+  {
+    "type": "tabs",
     "named": true
   },
   {
     "type": "text",
     "named": false
+  },
+  {
+    "type": "text",
+    "named": true
   },
   {
     "type": "then",
