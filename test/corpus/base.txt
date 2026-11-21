@@ -80,6 +80,32 @@ Manuscript with title and eyebrow
 
 
 ================================================================================
+Manuscript with a plain title that holds commas
+================================================================================
+
+# Floor, ceiling, slopes, and $K$-theory {
+  :plain-title: Floor, ceiling, slopes, and K-theory
+  :eyebrow: Note
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  title: (specialinline
+    tag: (math)
+    (asis_text))
+  title: (text)
+  meta: (blockmeta
+    (pair
+      (metakey_text (plain_title))
+      (metaval_text))
+    (pair
+      (metakey_text (eyebrow))
+      (metaval_text))))
+
+
+================================================================================
 Remark with blockname
 ================================================================================
 
