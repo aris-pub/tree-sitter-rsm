@@ -31,5 +31,5 @@ jobs:
     secrets:
       PYPI_API_TOKEN: ${{secrets.PYPI_API_TOKEN}}
     with:
-      generate: true
+      generate: false  # Build from the committed parser, the one RSM CI tested
       CIBW_BUILD: "cp311-* cp313-*"  # Build for Python 3.11 and 3.13
