@@ -1151,6 +1151,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "meta": {
         "multiple": false,
@@ -2093,7 +2094,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "config",
@@ -2201,11 +2203,11 @@
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "metakey_unknown",

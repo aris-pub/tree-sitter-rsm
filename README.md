@@ -14,7 +14,7 @@ grammar and the external scanner, respectively. The tests are defined in
 
 Compile the grammar locally by executing
 ```bash
-npx tree-sitter generate --abi 14
+npx tree-sitter generate
 ```
 and build locally by executing
 ```bash
