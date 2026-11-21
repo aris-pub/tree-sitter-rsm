@@ -14,7 +14,7 @@ classifiers = [
   "Topic :: Text Processing :: Linguistic",
   "Typing :: Typed"
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license.text = "MIT"
 readme = "README.md"
 
@@ -25,7 +25,7 @@ Homepage = "https://github.com/leotrs/tree-sitter-rsm"
 core = ["tree-sitter>=0.25"]
 
 [tool.cibuildwheel]
-build = "cp310-*"
+build = "cp311-*"
 build-frontend = "build"
 
 [tool.poetry]

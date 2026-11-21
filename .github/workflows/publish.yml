@@ -32,4 +32,4 @@ jobs:
       PYPI_API_TOKEN: ${{secrets.PYPI_API_TOKEN}}
     with:
       generate: true
-      CIBW_BUILD: "cp310-* cp313-*"  # Build for Python 3.10 and 3.13
+      CIBW_BUILD: "cp311-* cp313-*"  # Build for Python 3.11 and 3.13

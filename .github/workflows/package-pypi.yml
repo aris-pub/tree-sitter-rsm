@@ -23,7 +23,7 @@ on:
         type: boolean
       CIBW_BUILD:               # ######
         description: The CIBW_BUILD environment variable
-        default: "cp310-*"
+        default: "cp311-*"
         type: string
     secrets:
       # TODO: make optional when pypi/warehouse#11096 is fixed
