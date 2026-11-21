@@ -3752,6 +3752,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":plain-title:"
+          },
+          "named": true,
+          "value": "plain_title"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":goal:"
           },
           "named": true,
