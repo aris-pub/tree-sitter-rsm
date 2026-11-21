@@ -23,7 +23,7 @@ on:
         type: boolean
       CIBW_BUILD:               # ######
         description: The CIBW_BUILD environment variable
-        default: "cp39-*"
+        default: "cp310-*"
         type: string
     secrets:
       # TODO: make optional when pypi/warehouse#11096 is fixed
@@ -60,7 +60,7 @@ jobs:
           while read -r grammar; do
             grammar_dir=$(dirname "$grammar")
             cd "$grammar_dir"
-            tree-sitter generate --abi 14
+            tree-sitter generate
             cd - > /dev/null
           done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
       - name: Install dependencies
@@ -106,7 +106,7 @@ jobs:
           while read -r grammar; do
             grammar_dir=$(dirname "$grammar")
             cd "$grammar_dir"
-            tree-sitter generate --abi 14
+            tree-sitter generate
             cd - > /dev/null
           done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
       - name: Build wheels

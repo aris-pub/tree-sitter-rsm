@@ -169,6 +169,14 @@
             "named": true
           },
           {
+            "type": "tab",
+            "named": true
+          },
+          {
+            "type": "tabs",
+            "named": true
+          },
+          {
             "type": "theorem",
             "named": true
           },
@@ -758,6 +766,10 @@
           "named": true
         },
         {
+          "type": "plain_title",
+          "named": true
+        },
+        {
           "type": "reftext",
           "named": true
         }
@@ -1139,6 +1151,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "meta": {
         "multiple": false,
@@ -2081,7 +2094,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "config",
@@ -2260,6 +2274,10 @@
     "named": true
   },
   {
+    "type": "plain_title",
+    "named": true
+  },
+  {
     "type": "porism",
     "named": true
   },
@@ -2364,12 +2382,20 @@
     "named": true
   },
   {
-    "type": "text",
+    "type": "tab",
+    "named": true
+  },
+  {
+    "type": "tabs",
     "named": true
   },
   {
     "type": "text",
     "named": false
+  },
+  {
+    "type": "text",
+    "named": true
   },
   {
     "type": "then",

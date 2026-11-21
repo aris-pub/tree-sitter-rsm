@@ -1,0 +1,52 @@
+================================================================================
+Tabs with two tabs
+================================================================================
+
+:tabs: {:label: tabs-a}
+
+  :tab: {:title: Sketch}
+    :sketch: Short.::
+  ::
+
+  :tab: {:title: Proof}
+    :proof:
+      Long.
+    ::
+  ::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (tabs)
+    meta: (blockmeta
+      (pair
+        (metakey_text
+          (label))
+        (metaval_text)))
+    (block
+      tag: (tab)
+      meta: (blockmeta
+        (pair
+          (metakey_title
+            (title))
+          (metaval_title
+            (text))))
+      (block
+        tag: (sketch)
+        (paragraph
+          (text))))
+    (block
+      tag: (tab)
+      meta: (blockmeta
+        (pair
+          (metakey_title
+            (title))
+          (metaval_title
+            (text))))
+      (block
+        tag: (proof)
+        (paragraph
+          (text))))))
