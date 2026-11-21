@@ -3648,6 +3648,24 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":tab:"
+          },
+          "named": true,
+          "value": "tab"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":tabs:"
+          },
+          "named": true,
+          "value": "tabs"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":theorem:"
           },
           "named": true,
