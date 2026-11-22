@@ -1,3 +1,12 @@
+/**
+ * @file rsm mark-up language
+ * @author leotrs <leo@leotrs.com>
+ * @license MIT
+ */
+
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 // Block meta and inline meta are written the same way. A value runs to the
 // next key or to the closing brace, and newlines count as spaces. A comma after
 // a pair is optional, also after the last one: after a value it is part of the
@@ -30,7 +39,7 @@ function headingTitle($) {
       field('meta', $.blockmeta)));
 }
 
-module.exports = grammar({
+export default grammar({
   name: 'rsm',
 
   externals: $ => [
