@@ -1,4 +1,4 @@
-module github.com/leotrs/tree-sitter-rsm
+module github.com/aris-pub/tree-sitter-rsm
 
 go 1.22
 

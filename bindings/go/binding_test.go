@@ -3,8 +3,8 @@ package tree_sitter_rsm_test
 import (
 	"testing"
 
-	tree_sitter "github.com/smacker/go-tree-sitter"
-	"github.com/tree-sitter/tree-sitter-rsm"
+	tree_sitter "github.com/tree-sitter/go-tree-sitter"
+	tree_sitter_rsm "github.com/aris-pub/tree-sitter-rsm/bindings/go"
 )
 
 func TestCanLoadGrammar(t *testing.T) {

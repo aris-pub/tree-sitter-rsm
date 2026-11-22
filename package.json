@@ -1,41 +1,57 @@
 {
+  "name": "tree-sitter-rsm",
   "version": "1.5.0",
-  "devDependencies": {
-    "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.27.2"
+  "description": "rsm mark-up language",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aris-pub/tree-sitter-rsm.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "leotrs",
+    "email": "leo@leotrs.com",
+    "url": "https://leotrs.com/"
   },
   "main": "bindings/node",
   "types": "bindings/node",
-  "dependencies": {
-    "node-gyp-build": "^4.8.1",
-    "tree-sitter": "^0.25.1"
-  },
-  "peerDependencies": {
-    "tree-sitter": "^0.25.1"
-  },
-  "peerDependenciesMeta": {
-    "tree_sitter": {
-      "optional": true
-    }
-  },
-  "tree-sitter": [
-    {
-      "scope": "source.rsm",
-      "file-types": [
-        "rsm"
-      ]
-    }
+  "keywords": [
+    "incremental",
+    "parsing",
+    "tree-sitter",
+    "rsm"
   ],
-  "scripts": {
-    "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
-  },
   "files": [
     "grammar.js",
+    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
-    "src/**"
-  ]
+    "src/**",
+    "*.wasm"
+  ],
+  "dependencies": {
+    "node-addon-api": "^8.5.0",
+    "node-gyp-build": "^4.8.4"
+  },
+  "devDependencies": {
+    "prebuildify": "^6.0.1",
+    "tree-sitter": "^0.25.0",
+    "tree-sitter-cli": "^0.27.2"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "install": "node-gyp-build",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
+  }
 }

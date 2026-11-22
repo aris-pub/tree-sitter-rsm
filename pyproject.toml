@@ -1,36 +1,29 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
+requires = [ "setuptools>=62.4.0", "wheel" ]
 
 [project]
-name = "tree-sitter-rsm"
-description = "RSM grammar for tree-sitter"
-version = "1.5.0"
-keywords = ["incremental", "parsing", "tree-sitter", "rsm"]
+authors = [ { email = "leo@leotrs.com", name = "leotrs" } ]
 classifiers = [
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Topic :: Software Development :: Compilers",
   "Topic :: Text Processing :: Linguistic",
-  "Typing :: Typed"
+  "Typing :: Typed",
 ]
-requires-python = ">=3.11"
+description = "rsm mark-up language"
+keywords = [ "incremental", "parsing", "tree-sitter", "rsm" ]
 license.text = "MIT"
+name = "tree-sitter-rsm"
 readme = "README.md"
+requires-python = ">=3.11"
+version = "1.5.0"
 
 [project.urls]
-Homepage = "https://github.com/leotrs/tree-sitter-rsm"
+Homepage = "https://github.com/aris-pub/tree-sitter-rsm"
 
 [project.optional-dependencies]
-core = ["tree-sitter>=0.26,<0.27"]
+core = [ "tree-sitter>=0.26,<0.27" ]
 
 [tool.cibuildwheel]
 build = "cp311-*"
 build-frontend = "build"
-
-[tool.poetry]
-name = "tree-sitter-rsm"
-version = "1.5.0"
-description = "ReStructured Manuscript (RSM) markup language"
-authors = ["leotrs <leo@leotrs.com>"]
-license = "MIT"
