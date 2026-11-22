@@ -22,7 +22,7 @@ readme = "README.md"
 Homepage = "https://github.com/leotrs/tree-sitter-rsm"
 
 [project.optional-dependencies]
-core = ["tree-sitter>=0.25,<0.27"]
+core = ["tree-sitter>=0.26,<0.27"]
 
 [tool.cibuildwheel]
 build = "cp311-*"
