@@ -29,8 +29,13 @@ The grammar is released as a PyPI package by following these
 [intructions](https://tree-sitter.github.io/tree-sitter/creating-parsers/6-publishing.html).
 At the time of writing, a summarized version of the instructions are the following:
 
-+ Bump the grammar version with `npx tree-sitter version <version>` and commit the changes
-  generated.
-+ Tag the commit with `git tag -- v<version>`.
+`just release` in the RSM repository runs these steps. To release by hand:
+
++ Bump the grammar version with `npx tree-sitter version <version>`.
++ Update the version in `package-lock.json` with
+  `npm install --package-lock-only --ignore-scripts`.
++ Regenerate the parser with `npx tree-sitter generate`, so that the version
+  in `src/parser.c` matches. The workflow builds from the committed parser.
++ Commit the changes and tag the commit with `git tag -- v<version>`.
 + Push the commit and tag with `git push --tags origin main`.
 + The `publish.yml` GitHub workflow will take care of the rest.
