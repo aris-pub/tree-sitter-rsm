@@ -9,7 +9,7 @@ license = "MIT"
 name = "tree-sitter-rsm"
 readme = "README.md"
 repository = "https://github.com/aris-pub/tree-sitter-rsm"
-version = "1.5.0"
+version = "2.0.0"
 
 build = "bindings/rust/build.rs"
 include = [ "bindings/rust/*", "grammar.js", "queries/*", "src/*", "tree-sitter.json", "/LICENSE" ]

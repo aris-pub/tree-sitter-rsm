@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-rsm
-        VERSION "1.5.0"
+        VERSION "2.0.0"
         DESCRIPTION "rsm mark-up language"
         HOMEPAGE_URL "https://github.com/aris-pub/tree-sitter-rsm"
         LANGUAGES C)
