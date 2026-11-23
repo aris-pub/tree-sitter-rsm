@@ -49,7 +49,7 @@
 [(proof) (sketch) (subproof)] @keyword.function
 
 ;; Definitions and examples
-[(definition) (remark) (example)] @keyword
+[(definition) (remark) (example) (exercise) (problem) (porism)] @keyword
 
 ;; Proof steps
 [(step)] @keyword.modifier
@@ -130,6 +130,10 @@
 ;; Special Blocks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Block tags without a node of their own
+[":paragraph:" ":mathblock:" ":codeblock:"] @keyword.directive
+[(calc) (notation) (tab) (tabs)] @keyword.directive
+
 ;; Math blocks
 (mathblock
   (asis_text) @markup.math)
@@ -194,23 +198,10 @@
 ;; Metadata
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Meta keys - text values
+;; Meta keys
 [
-  (affiliation) (alt) (author_note) (blockname) (email) (eyebrow) (goal)
-  (icon) (label) (lang) (name) (orcid) (reftext) (title)
-] @property
-
-;; Meta keys - boolean values
-[(as_paragraph) (emphas) (isclaim) (nonum) (strong)] @property
-
-;; Meta keys - list values
-[(keywords) (msc) (class)] @property
-
-;; Meta keys - any values
-[
-  (accent) (dark) (typography) (author_display_first)
-  (author_display_last) (numbering) (override_date)
-  (path) (scale) (static) (toc_depth)
+  (metakey_bool) (metakey_date) (metakey_list) (metakey_number)
+  (metakey_path) (metakey_text) (metakey_title) (metakey_word)
 ] @property
 
 ;; Meta keys - unknown keys, which RSM logs and ignores. The pair is named in
