@@ -73,3 +73,17 @@ Text.
 % ^ property
 }
 ::
+
+:table:
+% <- keyword.directive
+  :thead:
+  % <- keyword.directive
+    :tr: A : B ::
+    % <- keyword.directive
+  ::
+  :tbody:
+  % <- keyword.directive
+    :tr: C : D ::
+    % <- keyword.directive
+  ::
+::
