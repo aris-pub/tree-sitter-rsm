@@ -87,3 +87,42 @@ Text.
     % <- keyword.directive
   ::
 ::
+
+:paragraph: {:class: tiny} Small text.
+% <- keyword.directive
+%            ^ property
+
+:problem:
+% <- keyword
+Text.
+::
+
+:mathblock:
+% <- keyword.directive
+x = 1
+::
+
+:codeblock:
+% <- keyword.directive
+x = 1
+::
+
+:notation:
+% <- keyword.directive
+  \eig $\lambda$ eigenvalue
+::
+
+:tabs:
+% <- keyword.directive
+
+  :tab: {:title: Sketch}
+  % <- keyword.directive
+    Short.
+  ::
+
+::
+
+:proof: {:of: thm-a}
+%        ^ property
+Text.
+::
