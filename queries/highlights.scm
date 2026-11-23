@@ -165,7 +165,7 @@
 
 ;; Lists
 [(enumerate) (itemize)] @keyword.directive
-":-:" @operator
+[":-:" ":--:" ":---:"] @operator
 
 ;; Captions
 ":caption:" @keyword.modifier
