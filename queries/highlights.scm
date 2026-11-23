@@ -77,19 +77,14 @@
 ;; Special Inlines
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Math delimiters and content
+;; Math, code and raw HTML: both delimiters and the content. The closing $
+;; is an anonymous "math" node, not the tag field.
+(specialinline [(math) (code) (html) "math"] @operator)
 (specialinline
-  tag: (math) @operator
+  tag: (math)
   (asis_text) @markup.math)
-
-;; Code delimiters and content
 (specialinline
-  tag: (code) @operator
-  (asis_text) @markup.raw)
-
-;; Raw HTML delimiters and content
-(specialinline
-  tag: (html) @operator
+  tag: [(code) (html)]
   (asis_text) @markup.raw)
 
 (specialblock
@@ -122,9 +117,10 @@
 ;; Previous references
 [(previous) (prev) (prev2) (prev3)] @function.builtin
 
-;; Emphasis and strong
+;; Emphasis and strong, opening and closing
 (spanemphas) @operator
 (spanstrong) @operator
+(specialinline ["*" "**"] @operator)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Special Blocks
@@ -210,9 +206,10 @@
 (pair (metakey_unknown) @property)
 
 ;; Meta values
-(metaval_text) @string
-(metaval_list) @string
-(metaval_unknown) @string
+[
+  (metaval_date) (metaval_list) (metaval_number) (metaval_path)
+  (metaval_text) (metaval_title) (metaval_unknown) (metaval_word)
+] @string
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Delimiters and Operators
