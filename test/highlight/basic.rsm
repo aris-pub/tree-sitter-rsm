@@ -126,3 +126,11 @@ x = 1
 %        ^ property
 Text.
 ::
+
+:theorem: {:title: Sum}
+%                  ^ string
+Then $x$ and **bold** and *it*.
+%      ^ operator
+%                   ^ operator
+%                            ^ operator
+::
