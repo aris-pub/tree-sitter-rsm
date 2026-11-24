@@ -846,7 +846,7 @@ Proof with sub-step and sub-proof
 
     :step: Sub-step.
 
-      :p: Sub-proof.::
+      :pf: Sub-proof.::
 
     ::
   ::
