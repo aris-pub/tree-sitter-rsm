@@ -3577,7 +3577,7 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":p:"
+            "value": ":pf:"
           },
           "named": true,
           "value": "subproof"

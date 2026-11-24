@@ -555,7 +555,7 @@ export default grammar({
       alias(':exercise:', $.exercise),
       alias(':figure:', $.figure),
       alias(':lemma:', $.lemma),
-      alias(':p:', $.subproof),
+      alias(':pf:', $.subproof),
       alias(':porism:', $.porism),
       alias(':problem:', $.problem),
       alias(':proof:', $.proof),
