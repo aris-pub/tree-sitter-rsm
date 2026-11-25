@@ -3064,8 +3064,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "bibitem"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "bibitem"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "bibstring"
+              }
+            ]
           }
         },
         {
@@ -3090,7 +3099,7 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "book|article|software|inproceedings|conference|misc|phdthesis|mastersthesis|techreport|incollection|unpublished|webpage"
+                "value": "[A-Za-z]+"
               }
             },
             "named": true,
@@ -3173,6 +3182,47 @@
         }
       ]
     },
+    "bibstring": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@"
+        },
+        {
+          "type": "FIELD",
+          "name": "kind",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[sS][tT][rR][iI][nN][gG]"
+                }
+              }
+            },
+            "named": true,
+            "value": "kind"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "bibitempair"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
     "bibitempair": {
       "type": "SEQ",
       "members": [
@@ -3185,7 +3235,7 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization|verbatim"
+                  "value": "[A-Za-z][A-Za-z0-9_-]*"
                 },
                 {
                   "type": "PATTERN",
@@ -3198,17 +3248,85 @@
           "value": "key"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "{"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "value"
+                },
+                {
+                  "type": "STRING",
+                  "value": "}"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\"[^\"]*\""
+              },
+              "named": true,
+              "value": "quotedvalue"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[^\\s,{}\"]+"
+              },
+              "named": true,
+              "value": "barevalue"
+            }
+          ]
+        }
+      ]
+    },
+    "value": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[^{}]+"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_bibbraces"
+          }
+        ]
+      }
+    },
+    "_bibbraces": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "STRING",
           "value": "{"
         },
         {
-          "type": "ALIAS",
+          "type": "REPEAT",
           "content": {
-            "type": "PATTERN",
-            "value": "[^}]+?"
-          },
-          "named": true,
-          "value": "value"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[^{}]+"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_bibbraces"
+              }
+            ]
+          }
         },
         {
           "type": "STRING",

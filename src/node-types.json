@@ -60,11 +60,45 @@
       "required": true,
       "types": [
         {
+          "type": "barevalue",
+          "named": true
+        },
+        {
           "type": "key",
           "named": true
         },
         {
+          "type": "quotedvalue",
+          "named": true
+        },
+        {
           "type": "value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bibstring",
+    "named": true,
+    "fields": {
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "kind",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "bibitempair",
           "named": true
         }
       ]
@@ -1074,6 +1108,10 @@
         {
           "type": "bibitem",
           "named": true
+        },
+        {
+          "type": "bibstring",
+          "named": true
         }
       ]
     }
@@ -1925,6 +1963,11 @@
     }
   },
   {
+    "type": "value",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "*",
     "named": false
   },
@@ -2066,6 +2109,10 @@
   },
   {
     "type": "author_note",
+    "named": true
+  },
+  {
+    "type": "barevalue",
     "named": true
   },
   {
@@ -2346,6 +2393,10 @@
     "named": true
   },
   {
+    "type": "quotedvalue",
+    "named": true
+  },
+  {
     "type": "ref",
     "named": true
   },
@@ -2447,10 +2498,6 @@
   },
   {
     "type": "url",
-    "named": true
-  },
-  {
-    "type": "value",
     "named": true
   },
   {

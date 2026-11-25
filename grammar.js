@@ -489,11 +489,14 @@ export default grammar({
     /////////////////////////////////////////////////////////////
     // Bibliography stuff
     /////////////////////////////////////////////////////////////
-    references: $ => seq(':references:', repeat($.bibitem), '::'),
+    // The grammar accepts any entry kind and any field name, and values in
+    // quotes or as bare words, so that Python can warn about each by name
+    // instead of tree-sitter error recovery dropping or merging entries.
+    references: $ => seq(':references:', repeat(choice($.bibitem, $.bibstring)), '::'),
 
     bibitem: $ => seq(
       '@',
-      field('kind', alias(token(/book|article|software|inproceedings|conference|misc|phdthesis|mastersthesis|techreport|incollection|unpublished|webpage/), $.kind)),
+      field('kind', alias(token(/[A-Za-z]+/), $.kind)),
       '{',
       field('label', alias(token(/[^,]+?/), $.label)),
       ',',
@@ -502,11 +505,25 @@ export default grammar({
         seq(repeat1(seq($.bibitempair, ',')), $.bibitempair, optional(','))),
       '}'),
 
-    bibitempair: $ => seq(
-      alias(token(seq(/title|author|year|publisher|journal|volume|number|doi|url|edition|booktitle|pages|note|howpublished|institution|school|editor|address|month|series|organization|verbatim/, /\s*=\s*/)), $.key),
+    // The word "string" also matches the kind of a bibitem, so it needs the
+    // higher precedence.
+    bibstring: $ => seq(
+      '@',
+      field('kind', alias(token(prec(1, /[sS][tT][rR][iI][nN][gG]/)), $.kind)),
       '{',
-      alias(/[^}]+?/, $.value),
+      $.bibitempair,
       '}'),
+
+    bibitempair: $ => seq(
+      alias(token(seq(/[A-Za-z][A-Za-z0-9_-]*/, /\s*=\s*/)), $.key),
+      choice(
+        seq('{', $.value, '}'),
+        alias(/"[^"]*"/, $.quotedvalue),
+        alias(/[^\s,{}"]+/, $.barevalue))),
+
+    value: $ => repeat1(choice(/[^{}]+/, $._bibbraces)),
+
+    _bibbraces: $ => seq('{', repeat(choice(/[^{}]+/, $._bibbraces)), '}'),
 
     /////////////////////////////////////////////////////////////
     // Content choices

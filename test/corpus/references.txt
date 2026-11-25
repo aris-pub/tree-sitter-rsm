@@ -275,3 +275,222 @@ Reference with verbatim field
       (bibitempair
         (key)
         (value)))))
+
+
+================================================================================
+Reference with an unknown field first, in the middle, last and before doi
+================================================================================
+
+:references:
+@book{knuth,
+  keywords = {sorting},
+  title = {Sorting},
+  abstract = {A book.},
+  year = {1998},
+  isbn = {0-201-89685-0},
+  doi = {10.5555/280635},
+  note-2 = {x}
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))))
+
+
+================================================================================
+Reference with values in quotes
+================================================================================
+
+:references:
+@article{a,
+  title = "Q",
+  author = {Doe, J.},
+  journal = "J. {Chem} Phys."
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (quotedvalue))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (quotedvalue)))))
+
+
+================================================================================
+Reference with braces inside values
+================================================================================
+
+:references:
+@article{erdos,
+  title = {A {B} C},
+  author = {Erd\H{o}s, Paul and Erd{\"o}s, P.},
+  journal = {{A {deep {nest}}} end},
+  year = {1959}
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))))
+
+
+================================================================================
+Reference block with string definitions and bare values
+================================================================================
+
+:references:
+@string{jcp = {J. Chem. Phys.}}
+@book{b,
+  title = {B},
+  year = {2001}
+}
+@String{pr = "Phys. Rev."}
+@article{a,
+  title = {A},
+  journal = jcp,
+  year = 2000
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibstring
+      kind: (kind)
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))
+    (bibstring
+      kind: (kind)
+      (bibitempair
+        (key)
+        (quotedvalue)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (barevalue))
+      (bibitempair
+        (key)
+        (barevalue)))))
+
+
+================================================================================
+Reference kinds in capitals and kinds that RSM does not know
+================================================================================
+
+:references:
+@Article{a,
+  title = {A}
+}
+@BOOK{b,
+  title = {B}
+}
+@manual{c,
+  title = {C}
+}
+@online{d,
+  title = {D}
+}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value)))))
