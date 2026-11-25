@@ -75,9 +75,21 @@ export default grammar({
     ////////////////////////////////////////////////////////////////////////
     source_file: $ => seq(
       optional(choice(
-        seq(field('tag', /# /), headingTitle($)),
+        seq(
+          optional(alias($._config_block, $.block)),
+          field('tag', /# /),
+          headingTitle($)),
         field('meta', $.blockmeta))),
       repeat(choice($.section, $.appendix, $._terminalblock, $.specialblock, $.block, $.paragraph, $.references))),
+
+    // A :config: block is the only thing allowed before the title. It has the
+    // same form as a block, and the alias keeps its node a block, so RSM reads
+    // it the same way wherever it is.
+    _config_block: $ => seq(
+      field('tag', alias(':config:', $.config)),
+      field('meta', optional($.blockmeta)),
+      repeat($.blockcontent),
+      '::'),
 
     block: $ => prec(1, seq(
       field('tag', $.blocktag),

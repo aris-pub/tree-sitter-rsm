@@ -214,3 +214,49 @@ Content.
       (pair (metakey_bool (no_minimap)))))
   (paragraph
     (text)))
+
+
+================================================================================
+Config block before the title
+================================================================================
+
+:config: {:citation-style: author-parens-year}
+::
+
+# Title
+
+Content.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_word (citation_style)) (metaval_word))))
+  title: (text)
+  (paragraph
+    (text)))
+
+
+================================================================================
+Title before the config block
+================================================================================
+
+# Title
+
+:config: {:citation-style: author-parens-year}
+::
+
+Content.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (block
+    tag: (config)
+    meta: (blockmeta
+      (pair (metakey_word (citation_style)) (metaval_word))))
+  (paragraph
+    (text)))
