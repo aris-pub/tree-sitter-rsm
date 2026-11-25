@@ -282,19 +282,12 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
         return (count > 0) ? success(lexer, TEXT) : failure(lexer);
       }
 
-      // Single colon not part of :: or tag or delimiter, consume it (e.g., "3:1")
-      // We called mark_end but don't want to use it, so consume and mark again
+      // Single colon not part of :: or tag or delimiter, keep it as text (e.g., "3:1").
+      // The character after the colon goes back through the loop condition, so a
+      // newline, dollar sign or other stop character still ends the text here.
       count++;  // the : counts as non-whitespace
+      last_was_whitespace = false;
       last_was_punctuation = true;  // ':' is punctuation
-      // Now process the current lookahead (char after :)
-      if (!iswspace(lexer->lookahead)) count++;
-      last_was_whitespace = iswspace(lexer->lookahead);
-      last_was_punctuation = !iswspace(lexer->lookahead) && is_punctuation(lexer->lookahead);
-      escape_next = lexer->lookahead == '\\';
-      lexer->advance(lexer, false);
-      // Mark end again at current position to override the earlier mark
-      lexer->mark_end(lexer);
-      // Continue loop with next character
     } else {
       // Normal character processing
       if (!iswspace(lexer->lookahead)) count++;

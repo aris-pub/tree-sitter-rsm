@@ -288,6 +288,7 @@ Some text
 (source_file
   (paragraph
     (text)
+    (text)
     (text))
   (paragraph
     (text)

@@ -446,3 +446,28 @@ An algorithm inside a caption is an error
 
 
 --------------------------------------------------------------------------------
+
+
+================================================================================
+List item ending with a colon before a nested item
+================================================================================
+
+:enumerate:
+
+  :-: Cross out the multiples of each prime:
+
+  :--: first of 2,
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (enumerate)
+    (paragraph
+      (item
+        (text)))
+    (paragraph
+      (item
+        (text)))))
