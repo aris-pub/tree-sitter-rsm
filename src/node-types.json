@@ -2056,10 +2056,6 @@
     "named": false
   },
   {
-    "type": "@",
-    "named": false
-  },
-  {
     "type": "abstract",
     "named": true
   },

@@ -495,8 +495,9 @@ export default grammar({
     references: $ => seq(':references:', repeat(choice($.bibitem, $.bibstring)), '::'),
 
     bibitem: $ => seq(
-      '@',
-      field('kind', alias(token(/[A-Za-z]+/), $.kind)),
+      // The '@' is part of the kind token so that the token cannot match a
+      // plain word during error recovery outside a references block.
+      field('kind', alias(token(seq('@', /[A-Za-z]+/)), $.kind)),
       '{',
       field('label', alias(token(/[^,]+?/), $.label)),
       ',',
@@ -505,11 +506,10 @@ export default grammar({
         seq(repeat1(seq($.bibitempair, ',')), $.bibitempair, optional(','))),
       '}'),
 
-    // The word "string" also matches the kind of a bibitem, so it needs the
+    // "@string" also matches the kind of a bibitem, so it needs the
     // higher precedence.
     bibstring: $ => seq(
-      '@',
-      field('kind', alias(token(prec(1, /[sS][tT][rR][iI][nN][gG]/)), $.kind)),
+      field('kind', alias(token(prec(1, seq('@', /[sS][tT][rR][iI][nN][gG]/))), $.kind)),
       '{',
       $.bibitempair,
       '}'),

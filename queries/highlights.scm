@@ -182,7 +182,6 @@
 ":references:" @keyword.directive
 
 (bibitem
-  "@" @punctuation.special
   kind: (kind) @type)
 
 (bibitem

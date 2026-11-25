@@ -3102,10 +3102,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "@"
-        },
-        {
           "type": "FIELD",
           "name": "kind",
           "content": {
@@ -3113,8 +3109,17 @@
             "content": {
               "type": "TOKEN",
               "content": {
-                "type": "PATTERN",
-                "value": "[A-Za-z]+"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "@"
+                  },
+                  {
+                    "type": "PATTERN",
+                    "value": "[A-Za-z]+"
+                  }
+                ]
               }
             },
             "named": true,
@@ -3201,10 +3206,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "@"
-        },
-        {
           "type": "FIELD",
           "name": "kind",
           "content": {
@@ -3215,8 +3216,17 @@
                 "type": "PREC",
                 "value": 1,
                 "content": {
-                  "type": "PATTERN",
-                  "value": "[sS][tT][rR][iI][nN][gG]"
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "@"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[sS][tT][rR][iI][nN][gG]"
+                    }
+                  ]
                 }
               }
             },
