@@ -131,7 +131,8 @@
 [":paragraph:" ":mathblock:" ":codeblock:"] @keyword.directive
 [(calc) (notation) (tab) (tabs)] @keyword.directive
 
-;; Math blocks
+;; Math blocks. The $$ fences are anonymous "math" nodes.
+(mathblock "math" @operator)
 (mathblock
   (asis_text) @markup.math)
 

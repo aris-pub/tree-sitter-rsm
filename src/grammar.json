@@ -970,11 +970,16 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "TOKEN",
+              "type": "ALIAS",
               "content": {
-                "type": "PATTERN",
-                "value": "\\$\\$"
-              }
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "\\$\\$"
+                }
+              },
+              "named": false,
+              "value": "math"
             },
             {
               "type": "FIELD",
@@ -1002,11 +1007,16 @@
               "value": "asis_text"
             },
             {
-              "type": "TOKEN",
+              "type": "ALIAS",
               "content": {
-                "type": "PATTERN",
-                "value": "\\$\\$"
-              }
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "\\$\\$"
+                }
+              },
+              "named": false,
+              "value": "math"
             }
           ]
         },

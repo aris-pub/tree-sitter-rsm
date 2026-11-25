@@ -177,10 +177,10 @@ export default grammar({
     // have some special parsing rule.  For example, $foo$ has the same meaning as
     // :math:foo::.
     mathblock: $ => choice(
-      seq(token(/\$\$/),
+      seq(alias(token(/\$\$/), "math"),
         field('meta', optional($.blockmeta)),
         alias($.asis_two_dollars_text, $.asis_text),
-        token(/\$\$/)),
+        alias(token(/\$\$/), "math")),
       seq(token(':mathblock:'),
         field('meta', optional($.blockmeta)),
         alias($.asis_halmos_text, $.asis_text),

@@ -40,9 +40,11 @@ Text.
 % <- function.builtin
 
 $$
+% <- operator
 math block
 % <- markup.math
 $$
+% <- operator
 
 ```
 code block

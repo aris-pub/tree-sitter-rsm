@@ -18,7 +18,7 @@
 #define STATE_COUNT 1027
 #define LARGE_STATE_COUNT 148
 #define SYMBOL_COUNT 243
-#define ALIAS_COUNT 1
+#define ALIAS_COUNT 0
 #define TOKEN_COUNT 162
 #define EXTERNAL_TOKEN_COUNT 10
 #define FIELD_COUNT 13
@@ -270,7 +270,6 @@ enum ts_symbol_identifiers {
   aux_sym_references_repeat1 = 240,
   aux_sym_bibitem_repeat1 = 241,
   aux_sym_value_repeat1 = 242,
-  anon_alias_sym_math = 243,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -286,7 +285,7 @@ static const char * const ts_symbol_names[] = {
   [aux_sym_subsubsection_token1] = "subsubsection_token1",
   [anon_sym_COLONsubsubsection_COLON] = ":subsubsection:",
   [anon_sym_COLONappendix_COLON] = ":appendix:",
-  [aux_sym_mathblock_token1] = "mathblock_token1",
+  [aux_sym_mathblock_token1] = "math",
   [anon_sym_COLONmathblock_COLON] = ":mathblock:",
   [aux_sym_codeblock_token1] = "code",
   [anon_sym_COLONcodeblock_COLON] = ":codeblock:",
@@ -517,7 +516,6 @@ static const char * const ts_symbol_names[] = {
   [aux_sym_references_repeat1] = "references_repeat1",
   [aux_sym_bibitem_repeat1] = "bibitem_repeat1",
   [aux_sym_value_repeat1] = "value_repeat1",
-  [anon_alias_sym_math] = "math",
 };
 
 static const TSSymbol ts_symbol_map[] = {
@@ -764,7 +762,6 @@ static const TSSymbol ts_symbol_map[] = {
   [aux_sym_references_repeat1] = aux_sym_references_repeat1,
   [aux_sym_bibitem_repeat1] = aux_sym_bibitem_repeat1,
   [aux_sym_value_repeat1] = aux_sym_value_repeat1,
-  [anon_alias_sym_math] = anon_alias_sym_math,
 };
 
 static const TSSymbolMetadata ts_symbol_metadata[] = {
@@ -817,7 +814,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [aux_sym_mathblock_token1] = {
-    .visible = false,
+    .visible = true,
     .named = false,
   },
   [anon_sym_COLONmathblock_COLON] = {
@@ -1740,10 +1737,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = false,
   },
-  [anon_alias_sym_math] = {
-    .visible = true,
-    .named = false,
-  },
 };
 
 enum ts_field_identifiers {
@@ -1980,13 +1973,13 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
     [0] = sym_specialinline,
   },
   [12] = {
-    [2] = anon_alias_sym_math,
+    [2] = aux_sym_mathblock_token1,
   },
   [13] = {
     [2] = aux_sym_codeblock_token1,
   },
   [21] = {
-    [3] = anon_alias_sym_math,
+    [3] = aux_sym_mathblock_token1,
   },
   [22] = {
     [3] = aux_sym_codeblock_token1,
