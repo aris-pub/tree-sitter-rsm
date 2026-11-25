@@ -2345,3 +2345,69 @@ Ratio:$x$ here.
       tag: (math)
       (asis_text))
     (text)))
+
+
+================================================================================
+Block whose paragraph is only inline math before the Halmos on the same line
+================================================================================
+
+:theorem: $x$ ::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    (paragraph
+      (specialinline
+        tag: (math)
+        (asis_text)))))
+
+
+================================================================================
+Subproof in a step whose paragraph is only inline math before the Halmos
+================================================================================
+
+:proof:
+  :step: $a = 2c$.
+
+    :pf: $a = 2c$ ::
+  ::
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (proof)
+    (block
+      tag: (step)
+      (paragraph
+        (specialinline
+          tag: (math)
+          (asis_text))
+        (text))
+      (block
+        tag: (subproof)
+        (paragraph
+          (specialinline
+            tag: (math)
+            (asis_text)))))))
+
+
+================================================================================
+Paragraph with text ending in inline math before the Halmos on the same line
+================================================================================
+
+:remark: since $a = 2c$ ::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (remark)
+    (paragraph
+      (text)
+      (specialinline
+        tag: (math)
+        (asis_text)))))

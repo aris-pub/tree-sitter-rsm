@@ -204,7 +204,7 @@ static bool is_punctuation(int32_t c) {
          c == '-' || c == 0x2018 || c == 0x201C;  // Unicode quotes
 }
 
-static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
+static bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool paragraph_end_valid) {
   // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
   int newlines_consumed = 0;
   while (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
@@ -264,7 +264,14 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
       if (lexer->lookahead == ':') {
         // It's :: (Halmos delimiter), stop TEXT here regardless of preceding whitespace
         // mark_end was already called before first :, so we're good
-        return (count > 0) ? success(lexer, TEXT) : failure(lexer);
+        if (count > 0) {
+          return success(lexer, TEXT);
+        }
+        // Only spaces stand between the last token and the Halmos, as in "$x$ ::".
+        // scan_paragraph_end cannot skip these spaces itself: when it fails, this
+        // function reads text from the same position, and spaces that it skipped
+        // would be lost from the start of that text.
+        return paragraph_end_valid ? success(lexer, PARAGRAPH_END) : failure(lexer);
       }
 
       // Single colon - check if it looks like a tag opening.
@@ -451,7 +458,7 @@ static bool scan_line_end_or_text(void *payload, TSLexer *lexer, const bool *val
     return success(lexer, LINE_END);
   }
   if (valid_symbols[TEXT]) {
-    return scan_arbitrary_text(payload, lexer);
+    return scan_arbitrary_text(payload, lexer, false);
   }
   return failure(lexer);
 }
@@ -533,7 +540,7 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   if (looking_for_everything(valid_symbols)) {
     // Sometimes the parser freaks out and wants to see if there is *any* token at the
     // current point.  In this case, just look for arbitrary TEXT.
-    return scan_arbitrary_text(payload, lexer);
+    return scan_arbitrary_text(payload, lexer, false);
   }
 
   if (valid_symbols[ASIS_DOLLAR_TEXT]) {
@@ -573,7 +580,7 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
     if (valid_symbols[TEXT] &&
         first_char != '\n' && first_char != '\r' &&
         first_char != ':' && first_char != '\0') {
-      return scan_arbitrary_text(payload, lexer);
+      return scan_arbitrary_text(payload, lexer, true);
     }
     return false;
   }
@@ -586,7 +593,7 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
 
   if (valid_symbols[TEXT]) {
-    return scan_arbitrary_text(payload, lexer);
+    return scan_arbitrary_text(payload, lexer, false);
   }
 
   debug_log("Reached the bottom!");
