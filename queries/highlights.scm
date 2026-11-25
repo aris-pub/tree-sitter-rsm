@@ -78,8 +78,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Math, code and raw HTML: both delimiters and the content. The closing $
-;; is an anonymous "math" node, not the tag field.
-(specialinline [(math) (code) (html) "math"] @operator)
+;; and the closing backtick are the anonymous nodes "math" and "code", not the
+;; tag field.
+(specialinline [(math) (code) (html) "math" "code"] @operator)
 (specialinline
   tag: (math)
   (asis_text) @markup.math)

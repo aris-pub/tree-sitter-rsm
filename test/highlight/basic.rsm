@@ -133,4 +133,7 @@ Then $x$ and **bold** and *it*.
 %      ^ operator
 %                   ^ operator
 %                            ^ operator
+Then `y` here.
+%    ^ operator
+%      ^ operator
 ::

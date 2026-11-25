@@ -187,10 +187,10 @@ export default grammar({
         '::')),
 
     codeblock: $ => choice(
-      seq(token(/```/),
+      seq(alias(token(/```/), "code"),
         field('meta', optional($.blockmeta)),
         alias($.asis_three_backticks_text, $.asis_text),
-        /```/),
+        alias(/```/, "code")),
       seq(token(':codeblock:'),
         field('meta', optional($.blockmeta)),
         alias($.asis_halmos_text, $.asis_text),
@@ -304,7 +304,7 @@ export default grammar({
       seq(field('tag', alias(token(/`/), $.code)),
         field('meta', optional($.inlinemeta)),
         alias($.asis_backtick_text, $.asis_text),
-        /`/),
+        alias(/`/, "code")),
       seq(field('tag', alias(token(':math:'), $.math)),
         field('meta', optional($.inlinemeta)),
         alias($.asis_halmos_text, $.asis_text),
