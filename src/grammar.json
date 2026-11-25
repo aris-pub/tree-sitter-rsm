@@ -3919,6 +3919,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":delete:"
+          },
+          "named": true,
+          "value": "delete"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":emphas:"
           },
           "named": true,
@@ -3928,10 +3937,28 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":insert:"
+          },
+          "named": true,
+          "value": "insert"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":isclaim:"
           },
           "named": true,
           "value": "isclaim"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":little:"
+          },
+          "named": true,
+          "value": "little"
         },
         {
           "type": "ALIAS",

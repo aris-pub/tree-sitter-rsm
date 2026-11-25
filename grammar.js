@@ -604,8 +604,11 @@ export default grammar({
     metakey_bool: $ => choice(
       alias(':collapsed:', $.collapsed),
       alias(':as-paragraph:', $.as_paragraph),
+      alias(':delete:', $.delete),
       alias(':emphas:', $.emphas),
+      alias(':insert:', $.insert),
       alias(':isclaim:', $.isclaim),
+      alias(':little:', $.little),
       alias(':no-minimap:', $.no_minimap),
       alias(':nonum:', $.nonum),
       alias(':preamble:', $.preamble),

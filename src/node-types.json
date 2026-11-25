@@ -595,11 +595,23 @@
           "named": true
         },
         {
+          "type": "delete",
+          "named": true
+        },
+        {
           "type": "emphas",
           "named": true
         },
         {
+          "type": "insert",
+          "named": true
+        },
+        {
           "type": "isclaim",
+          "named": true
+        },
+        {
+          "type": "little",
           "named": true
         },
         {
@@ -2118,6 +2130,10 @@
     "named": true
   },
   {
+    "type": "delete",
+    "named": true
+  },
+  {
     "type": "draft",
     "named": true
   },
@@ -2166,6 +2182,10 @@
     "named": true
   },
   {
+    "type": "insert",
+    "named": true
+  },
+  {
     "type": "isclaim",
     "named": true
   },
@@ -2199,6 +2219,10 @@
   },
   {
     "type": "let",
+    "named": true
+  },
+  {
+    "type": "little",
     "named": true
   },
   {
