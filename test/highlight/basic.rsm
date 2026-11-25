@@ -48,6 +48,13 @@ $$
 code block
 % <- markup.raw.block
 ```
+% <- operator
+
+```{
+% <- operator
+:label: fenced}
+x = 1
+```
 
 :html: <b>raw</b> ::
 % <- operator

@@ -135,7 +135,8 @@
 (mathblock
   (asis_text) @markup.math)
 
-;; Code blocks
+;; Code blocks. The ``` fences are anonymous "code" nodes.
+(codeblock "code" @operator)
 (codeblock
   (asis_text) @markup.raw.block)
 
