@@ -13,6 +13,7 @@ enum TokenType {
   PARAGRAPH_END,
   LINE_END,
   META_TITLE_TEXT,
+  ASIS_CODEBLOCK_TEXT,
   // Since the first one is assigned to zero and they are assigned consecutive integers,
   // the last one is a dummy value that is always equal to the number of values that
   // this Enum contains.  This is then used to iterate over valid_symbols, whose length
@@ -51,6 +52,9 @@ static void show_beginning_debug_message(const bool *valid_symbols) {
   }
   if (valid_symbols[ASIS_HALMOS_TEXT]) {
     fprintf(stderr, "ASIS_HALMOS_TEXT ");
+  }
+  if (valid_symbols[ASIS_CODEBLOCK_TEXT]) {
+    fprintf(stderr, "ASIS_CODEBLOCK_TEXT ");
   }
   if (valid_symbols[TEXT]) {
     fprintf(stderr, "TEXT ");
@@ -387,6 +391,49 @@ static bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
+// The code of a :codeblock:. Like ASIS_HALMOS_TEXT it ends before the Halmos, and
+// it also ends before a line that starts with :caption:, so that the block can end
+// with a caption, as a figure or table does. A :caption: later in a line is code.
+static bool scan_asis_codeblock_text(void *payload, TSLexer *lexer) {
+  skip_whitespace(lexer);
+  if (lexer->lookahead == '{' || lexer->lookahead == ':') {
+    return false;
+  }
+  static const char *caption = "caption:";
+  bool line_start = false;
+  while (lexer->lookahead != '\0') {
+    if (lexer->lookahead == '\n') {
+      line_start = true;
+      lexer->advance(lexer, false);
+      continue;
+    }
+    if (lexer->lookahead == ':') {
+      lexer->mark_end(lexer);
+      lexer->advance(lexer, false);
+      if (lexer->lookahead == ':') {
+        return success(lexer, ASIS_CODEBLOCK_TEXT);
+      }
+      if (line_start) {
+        int i = 0;
+        while (caption[i] != '\0' && lexer->lookahead == caption[i]) {
+          lexer->advance(lexer, false);
+          i++;
+        }
+        if (caption[i] == '\0') {
+          return success(lexer, ASIS_CODEBLOCK_TEXT);
+        }
+      }
+      line_start = false;
+      continue;
+    }
+    if (!iswspace(lexer->lookahead)) {
+      line_start = false;
+    }
+    lexer->advance(lexer, false);
+  }
+  return failure(lexer);
+}
+
 static bool scan_asis_two_dollars_text(void *payload, TSLexer *lexer) {
   skip_whitespace(lexer);
   // ASIS_TEXT usually occurs in the content of special tags such as :math:, :code: or
@@ -557,6 +604,9 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
   if (valid_symbols[ASIS_HALMOS_TEXT]) {
     return scan_asis_halmos_text(payload, lexer);
+  }
+  if (valid_symbols[ASIS_CODEBLOCK_TEXT]) {
+    return scan_asis_codeblock_text(payload, lexer);
   }
 
   if (valid_symbols[LINE_END]) {

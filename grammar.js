@@ -53,6 +53,7 @@ export default grammar({
     $.paragraph_end,
     $._line_end,
     $.meta_title_text,
+    $.asis_codeblock_text,
   ],
 
   inline: $ => [
@@ -193,7 +194,8 @@ export default grammar({
         alias(/```/, "code")),
       seq(token(':codeblock:'),
         field('meta', optional($.blockmeta)),
-        alias($.asis_halmos_text, $.asis_text),
+        alias($.asis_codeblock_text, $.asis_text),
+        field('caption', optional($.caption)),
         '::')),
 
     // A list holds only items; nested lists are written with the :--: and :---:

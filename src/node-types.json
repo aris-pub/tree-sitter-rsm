@@ -337,6 +337,16 @@
     "type": "codeblock",
     "named": true,
     "fields": {
+      "caption": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "caption",
+            "named": true
+          }
+        ]
+      },
       "meta": {
         "multiple": false,
         "required": false,

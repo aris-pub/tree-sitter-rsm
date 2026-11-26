@@ -527,6 +527,49 @@ Block code no shortcut and meta
 
 
 ================================================================================
+Block code with caption
+================================================================================
+
+:codeblock: {:label: some-code}
+  comp = [abs(x) for x in range(10)]
+  :caption: A list of *absolute* values.
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (codeblock
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (asis_text)
+    caption: (caption
+      (text)
+      (specialinline
+        tag: (spanemphas)
+        (text))
+      (text))))
+
+
+================================================================================
+Block code with caption mentioned inside a line
+================================================================================
+
+:codeblock:
+  s = "a :caption: b"
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (codeblock
+    (asis_text)))
+
+
+================================================================================
 Math inside claim
 ================================================================================
 
