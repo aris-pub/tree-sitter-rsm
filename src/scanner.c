@@ -170,7 +170,10 @@ static bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   }
   if (lexer->lookahead == '\n') {
     lexer->advance(lexer, true);
-    skip_carriage_return(lexer);
+    // A line that holds only spaces and tabs is a blank line.
+    while (lexer->lookahead == ' ' || lexer->lookahead == '\t' || lexer->lookahead == '\r') {
+      lexer->advance(lexer, true);
+    }
     if (lexer->lookahead == '\n') {
       return success(lexer, PARAGRAPH_END);
     } else if (lexer->lookahead == '\0') {
@@ -213,11 +216,22 @@ static bool is_punctuation(int32_t c) {
 }
 
 static bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool paragraph_end_valid) {
-  // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
-  int newlines_consumed = 0;
-  while (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+  // DO NOT call skip_whitespace as the spaces before a word on the same line are
+  // part of the text. Spaces and tabs at the end of a line are not: skipping the
+  // line break moves the start of the token past them, as if they were not there.
+  // Where a paragraph may end, the line break goes to scan_paragraph_end.
+  for (;;) {
+    while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+      lexer->advance(lexer, false);
+    }
+    bool newline = lexer->lookahead == '\n' || lexer->lookahead == '\r';
+    if (paragraph_end_valid && (newline || lexer->lookahead == '\0')) {
+      return scan_paragraph_end(payload, lexer);
+    }
+    if (!newline) {
+      break;
+    }
     lexer->advance(lexer, true);
-    newlines_consumed++;
   }
 
   int count = 0;
@@ -231,6 +245,13 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool paragraph_en
     int32_t saved_lookahead = lexer->lookahead;
     lexer->mark_end(lexer);
     lexer->advance(lexer, false);
+    if (lexer->lookahead == ':' && paragraph_end_valid) {
+      // Only spaces stand between the last token and the Halmos, as in "$x$ ::".
+      // scan_paragraph_end cannot skip these spaces itself: when it fails, this
+      // function reads text from the same position, and spaces that it skipped
+      // would be lost from the start of that text.
+      return success(lexer, PARAGRAPH_END);
+    }
     bool looks_like_tag = (lexer->lookahead == ':' ||  // ::
                            iswalnum(lexer->lookahead) ||  // :word:
                            lexer->lookahead == '|' ||     // :|-:
@@ -272,14 +293,7 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool paragraph_en
       if (lexer->lookahead == ':') {
         // It's :: (Halmos delimiter), stop TEXT here regardless of preceding whitespace
         // mark_end was already called before first :, so we're good
-        if (count > 0) {
-          return success(lexer, TEXT);
-        }
-        // Only spaces stand between the last token and the Halmos, as in "$x$ ::".
-        // scan_paragraph_end cannot skip these spaces itself: when it fails, this
-        // function reads text from the same position, and spaces that it skipped
-        // would be lost from the start of that text.
-        return paragraph_end_valid ? success(lexer, PARAGRAPH_END) : failure(lexer);
+        return (count > 0) ? success(lexer, TEXT) : failure(lexer);
       }
 
       // Single colon - check if it looks like a tag opening.
