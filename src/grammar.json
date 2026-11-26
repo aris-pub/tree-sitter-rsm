@@ -1050,7 +1050,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "asis_halmos_text"
+                "name": "asis_mathblock_text"
               },
               "named": true,
               "value": "asis_text"
@@ -4486,6 +4486,10 @@
     {
       "type": "SYMBOL",
       "name": "asis_codeblock_text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "asis_mathblock_text"
     }
   ],
   "inline": [

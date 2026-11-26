@@ -14,6 +14,7 @@ enum TokenType {
   LINE_END,
   META_TITLE_TEXT,
   ASIS_CODEBLOCK_TEXT,
+  ASIS_MATHBLOCK_TEXT,
   // Since the first one is assigned to zero and they are assigned consecutive integers,
   // the last one is a dummy value that is always equal to the number of values that
   // this Enum contains.  This is then used to iterate over valid_symbols, whose length
@@ -55,6 +56,9 @@ static void show_beginning_debug_message(const bool *valid_symbols) {
   }
   if (valid_symbols[ASIS_CODEBLOCK_TEXT]) {
     fprintf(stderr, "ASIS_CODEBLOCK_TEXT ");
+  }
+  if (valid_symbols[ASIS_MATHBLOCK_TEXT]) {
+    fprintf(stderr, "ASIS_MATHBLOCK_TEXT ");
   }
   if (valid_symbols[TEXT]) {
     fprintf(stderr, "TEXT ");
@@ -391,10 +395,13 @@ static bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
-// The code of a :codeblock:. Like ASIS_HALMOS_TEXT it ends before the Halmos, and
-// it also ends before a line that starts with :caption:, so that the block can end
-// with a caption, as a figure or table does. A :caption: later in a line is code.
-static bool scan_asis_codeblock_text(void *payload, TSLexer *lexer) {
+// The content of a :codeblock: or a :mathblock:. Unlike ASIS_HALMOS_TEXT it ends
+// only before a Halmos on a line of its own (spaces around it are allowed), so
+// that code such as std::vector or math such as a::b can contain a Halmos. With
+// stop_at_caption, as for a code block, it also ends before a line that starts
+// with :caption:, so that the block can end with a caption, as a figure or table
+// does. A :caption: later in a line is code.
+static bool scan_asis_block_text(TSLexer *lexer, bool stop_at_caption, enum TokenType type) {
   skip_whitespace(lexer);
   if (lexer->lookahead == '{' || lexer->lookahead == ':') {
     return false;
@@ -407,20 +414,26 @@ static bool scan_asis_codeblock_text(void *payload, TSLexer *lexer) {
       lexer->advance(lexer, false);
       continue;
     }
-    if (lexer->lookahead == ':') {
+    if (lexer->lookahead == ':' && line_start) {
       lexer->mark_end(lexer);
       lexer->advance(lexer, false);
       if (lexer->lookahead == ':') {
-        return success(lexer, ASIS_CODEBLOCK_TEXT);
-      }
-      if (line_start) {
+        lexer->advance(lexer, false);
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
+               lexer->lookahead == '\r') {
+          lexer->advance(lexer, false);
+        }
+        if (lexer->lookahead == '\n' || lexer->lookahead == '\0') {
+          return success(lexer, type);
+        }
+      } else if (stop_at_caption) {
         int i = 0;
         while (caption[i] != '\0' && lexer->lookahead == caption[i]) {
           lexer->advance(lexer, false);
           i++;
         }
         if (caption[i] == '\0') {
-          return success(lexer, ASIS_CODEBLOCK_TEXT);
+          return success(lexer, type);
         }
       }
       line_start = false;
@@ -606,7 +619,10 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
     return scan_asis_halmos_text(payload, lexer);
   }
   if (valid_symbols[ASIS_CODEBLOCK_TEXT]) {
-    return scan_asis_codeblock_text(payload, lexer);
+    return scan_asis_block_text(lexer, true, ASIS_CODEBLOCK_TEXT);
+  }
+  if (valid_symbols[ASIS_MATHBLOCK_TEXT]) {
+    return scan_asis_block_text(lexer, false, ASIS_MATHBLOCK_TEXT);
   }
 
   if (valid_symbols[LINE_END]) {

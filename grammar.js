@@ -54,6 +54,7 @@ export default grammar({
     $._line_end,
     $.meta_title_text,
     $.asis_codeblock_text,
+    $.asis_mathblock_text,
   ],
 
   inline: $ => [
@@ -184,7 +185,7 @@ export default grammar({
         alias(token(/\$\$/), "math")),
       seq(token(':mathblock:'),
         field('meta', optional($.blockmeta)),
-        alias($.asis_halmos_text, $.asis_text),
+        alias($.asis_mathblock_text, $.asis_text),
         '::')),
 
     codeblock: $ => choice(

@@ -570,6 +570,152 @@ Block code with caption mentioned inside a line
 
 
 ================================================================================
+Block code with a double colon inside a line
+================================================================================
+
+:codeblock: {:lang: cpp}
+  std::vector<int> v;
+  v.push_back(1);
+::
+
+After the code.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (codeblock
+    meta: (blockmeta
+      (pair
+        (metakey_word (lang))
+        (metaval_word)))
+    (asis_text))
+  (paragraph
+    (text)))
+
+
+================================================================================
+Block code with a line that starts with a double colon
+================================================================================
+
+:codeblock:
+  f
+    :: Int -> Int
+  f x = x
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (codeblock
+    (asis_text)))
+
+
+================================================================================
+Block code with spaces around the closing double colon
+================================================================================
+
+:codeblock:
+  x = a::b
+  ::  
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (codeblock
+    (asis_text)))
+
+
+================================================================================
+Block code with caption and a double colon inside a line
+================================================================================
+
+:codeblock: {:label: some-code}
+  std::vector<int> v;
+  :caption: A C++ vector.
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (codeblock
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (asis_text)
+    caption: (caption
+      (text))))
+
+
+================================================================================
+Block code with a double colon inside a paragraph
+================================================================================
+
+Foo.
+:codeblock:
+  std::cout << x;
+::
+bar.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (codeblock
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Block math with a double colon inside a line
+================================================================================
+
+:mathblock:
+  a::b = c
+::
+
+After the math.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (mathblock
+    (asis_text))
+  (paragraph
+    (text)))
+
+
+================================================================================
+Block math with spaces around the closing double colon
+================================================================================
+
+:mathblock: {:label: eq}
+  f :: A \to B
+   ::
+After the math.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (mathblock
+    meta: (blockmeta
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
+    (asis_text))
+  (paragraph
+    (text)))
+
+
+================================================================================
 Math inside claim
 ================================================================================
 
