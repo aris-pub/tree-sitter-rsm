@@ -88,3 +88,44 @@ After.
     (asis_text))
   (paragraph
     (text)))
+
+================================================================================
+HTML block with a double colon inside a line
+================================================================================
+
+:htmlblock:
+<style>p::before { content: "a::b"; }</style>
+<p>x</p>
+  ::
+
+After.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (htmlblock)
+    (asis_text))
+  (paragraph
+    (text)))
+
+================================================================================
+HTML block with a double colon inside a figure
+================================================================================
+
+:figure:
+
+  :htmlblock:
+  <style>p::after { content: "x"; }</style>
+  ::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (figure)
+    (specialblock
+      tag: (htmlblock)
+      (asis_text))))

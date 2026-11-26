@@ -38,3 +38,23 @@ Notation block with meta
     meta: (blockmeta
       (pair (metakey_text (label)) (metaval_text)))
     (asis_text)))
+
+================================================================================
+Notation block with a double colon inside a line
+================================================================================
+
+:notation:
+  \cons $a::b$ list with head a and tail b
+  \eig $\lambda$ general eigenvalue
+::
+
+After.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (notation)
+    (asis_text))
+  (paragraph
+    (text)))

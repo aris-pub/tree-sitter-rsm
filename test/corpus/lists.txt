@@ -471,3 +471,49 @@ List item ending with a colon before a nested item
     (paragraph
       (item
         (text)))))
+
+================================================================================
+Algorithm with a double colon inside a line
+================================================================================
+
+:algorithm:
+\begin{algorithm}
+\State $xs \gets x::xs$
+\end{algorithm}
+  ::
+
+After.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (specialblock
+    tag: (algorithm)
+    (asis_text))
+  (paragraph
+    (text)))
+
+
+================================================================================
+Algorithm with a double colon inside a paragraph
+================================================================================
+
+Before the algorithm
+:algorithm:
+\begin{algorithm}
+\State $xs \gets x::xs$
+\end{algorithm}
+::
+after the algorithm.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (specialblock
+      tag: (algorithm)
+      (asis_text))
+    (text)))

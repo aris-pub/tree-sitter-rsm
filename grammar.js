@@ -54,7 +54,7 @@ export default grammar({
     $._line_end,
     $.meta_title_text,
     $.asis_codeblock_text,
-    $.asis_mathblock_text,
+    $.asis_block_text,
   ],
 
   inline: $ => [
@@ -185,7 +185,7 @@ export default grammar({
         alias(token(/\$\$/), "math")),
       seq(token(':mathblock:'),
         field('meta', optional($.blockmeta)),
-        alias($.asis_mathblock_text, $.asis_text),
+        alias($.asis_block_text, $.asis_text),
         '::')),
 
     codeblock: $ => choice(
@@ -224,7 +224,7 @@ export default grammar({
     algorithmblock: $ => prec.right(1, seq(
       field('tag', alias(token(":algorithm:"), $.algorithm)),
       field('meta', optional($.blockmeta)),
-      alias($.asis_halmos_text, $.asis_text),
+      alias($.asis_block_text, $.asis_text),
       '::')),
 
     specialblock: $ => prec.right(1, choice(
@@ -236,14 +236,14 @@ export default grammar({
       // where HTML cannot be.
       seq(field('tag', alias(token(":htmlblock:"), $.htmlblock)),
         field('meta', optional($.blockmeta)),
-        alias($.asis_halmos_text, $.asis_text),
+        alias($.asis_block_text, $.asis_text),
         '::'),
 
       // Notation declares reader-rebindable macros as raw lines
       // (\macro $default$ label), parsed by the transformer.
       seq(field('tag', alias(token(":notation:"), $.notation)),
         field('meta', optional($.blockmeta)),
-        alias($.asis_halmos_text, $.asis_text),
+        alias($.asis_block_text, $.asis_text),
         '::'),
 
       // A note or aside definition holds one paragraph's content. Its meta block

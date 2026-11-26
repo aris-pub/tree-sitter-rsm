@@ -14,7 +14,7 @@ enum TokenType {
   LINE_END,
   META_TITLE_TEXT,
   ASIS_CODEBLOCK_TEXT,
-  ASIS_MATHBLOCK_TEXT,
+  ASIS_BLOCK_TEXT,
   // Since the first one is assigned to zero and they are assigned consecutive integers,
   // the last one is a dummy value that is always equal to the number of values that
   // this Enum contains.  This is then used to iterate over valid_symbols, whose length
@@ -57,8 +57,8 @@ static void show_beginning_debug_message(const bool *valid_symbols) {
   if (valid_symbols[ASIS_CODEBLOCK_TEXT]) {
     fprintf(stderr, "ASIS_CODEBLOCK_TEXT ");
   }
-  if (valid_symbols[ASIS_MATHBLOCK_TEXT]) {
-    fprintf(stderr, "ASIS_MATHBLOCK_TEXT ");
+  if (valid_symbols[ASIS_BLOCK_TEXT]) {
+    fprintf(stderr, "ASIS_BLOCK_TEXT ");
   }
   if (valid_symbols[TEXT]) {
     fprintf(stderr, "TEXT ");
@@ -395,9 +395,11 @@ static bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
-// The content of a :codeblock: or a :mathblock:. Unlike ASIS_HALMOS_TEXT it ends
-// only before a Halmos on a line of its own (spaces around it are allowed), so
-// that code such as std::vector or math such as a::b can contain a Halmos. With
+// The content of a block that is taken as is: :codeblock:, :mathblock:,
+// :algorithm:, :htmlblock: and :notation:. Unlike ASIS_HALMOS_TEXT, which the
+// inline tags use, it ends only before a Halmos on a line of its own (spaces
+// around it are allowed), so that code such as std::vector or math such as a::b
+// can contain a Halmos. With
 // stop_at_caption, as for a code block, it also ends before a line that starts
 // with :caption:, so that the block can end with a caption, as a figure or table
 // does. A :caption: later in a line is code.
@@ -621,8 +623,8 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   if (valid_symbols[ASIS_CODEBLOCK_TEXT]) {
     return scan_asis_block_text(lexer, true, ASIS_CODEBLOCK_TEXT);
   }
-  if (valid_symbols[ASIS_MATHBLOCK_TEXT]) {
-    return scan_asis_block_text(lexer, false, ASIS_MATHBLOCK_TEXT);
+  if (valid_symbols[ASIS_BLOCK_TEXT]) {
+    return scan_asis_block_text(lexer, false, ASIS_BLOCK_TEXT);
   }
 
   if (valid_symbols[LINE_END]) {
