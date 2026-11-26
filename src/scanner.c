@@ -219,19 +219,33 @@ static bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool paragraph_en
   // DO NOT call skip_whitespace as the spaces before a word on the same line are
   // part of the text. Spaces and tabs at the end of a line are not: skipping the
   // line break moves the start of the token past them, as if they were not there.
-  // Where a paragraph may end, the line break goes to scan_paragraph_end.
+  //
+  // Where a paragraph may end, a line break followed by a blank line or by the
+  // end of the file is a paragraph end, and a line that starts with :: is
+  // handled by the colon check below. Any other next line is read as text right
+  // here. The internal lexer then never runs at the start of a line of text, so
+  // a line that starts with a digit, with "key =" or with "@" cannot be taken
+  // for a token such as the target of :previous: or a BibTeX key, whatever
+  // tokens the grammar adds.
+  bool after_line_break = false;
   for (;;) {
     while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
       lexer->advance(lexer, false);
     }
-    bool newline = lexer->lookahead == '\n' || lexer->lookahead == '\r';
-    if (paragraph_end_valid && (newline || lexer->lookahead == '\0')) {
-      return scan_paragraph_end(payload, lexer);
+    if (lexer->lookahead == '\r') {
+      lexer->advance(lexer, true);
+      continue;
+    }
+    bool newline = lexer->lookahead == '\n';
+    if (paragraph_end_valid &&
+        (lexer->lookahead == '\0' || (newline && after_line_break))) {
+      return success(lexer, PARAGRAPH_END);
     }
     if (!newline) {
       break;
     }
     lexer->advance(lexer, true);
+    after_line_break = true;
   }
 
   int count = 0;
@@ -650,21 +664,12 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
 
   if (looking_for_paragraph_end_and_other(valid_symbols)) {
-    // Try paragraph_end first
-    int32_t first_char = lexer->lookahead;
-    bool found_end = scan_paragraph_end(payload, lexer);
-    if (found_end) {
-      return true;
-    }
-    // paragraph_end failed. scan_paragraph_end advances the lexer only when the
-    // first character is \n, \r, :, or \0. For all other characters it returns
-    // immediately without advancing, leaving the lexer state intact.
-    if (valid_symbols[TEXT] &&
-        first_char != '\n' && first_char != '\r' &&
-        first_char != ':' && first_char != '\0') {
+    // scan_arbitrary_text finds a paragraph end itself, at a line break
+    // included, and reads the next line as text when the paragraph goes on.
+    if (valid_symbols[TEXT] && lexer->lookahead != ':') {
       return scan_arbitrary_text(payload, lexer, true);
     }
-    return false;
+    return scan_paragraph_end(payload, lexer);
   }
 
   if (valid_symbols[META_TEXT]) {

@@ -1,0 +1,148 @@
+================================================================================
+Paragraph lines that start with a digit, a word and =, or @
+================================================================================
+
+Some text
+2 apples and
+2. The second
+2026 was long
+key = value
+x=1 holds
+@home is where
+@book is a word
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (text)
+    (text)
+    (text)
+    (text)
+    (text)
+    (text)
+    (text)))
+
+================================================================================
+Paragraph that starts with a digit
+================================================================================
+
+2026 was long
+2. The second
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (text)))
+
+================================================================================
+Indented paragraph lines that start with a digit, a word and =, or @
+================================================================================
+
+Some text
+  2 apples and
+  2. The second
+	2026 was long
+  key = value
+  @book is a word
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (paragraph
+    (text)
+    (text)
+    (text)
+    (text)
+    (text)
+    (text)))
+
+================================================================================
+List item lines that start with a digit, a word and =, or @
+================================================================================
+
+:enumerate:
+:-: Some text
+2 apples and
+2. The second
+2026 was long
+key = value
+@book is a word
+
+:-: 2026 was long
+2. The second
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (enumerate)
+    (paragraph
+      (item
+        (text)
+        (text)
+        (text)
+        (text)
+        (text)
+        (text)))
+    (paragraph
+      (item
+        (text)
+        (text)))))
+
+================================================================================
+Theorem lines that start with a digit, a word and =, or @
+================================================================================
+
+:theorem:
+2026 was long
+2 apples and
+2. The second
+key = value
+@book is a word
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (theorem)
+    (paragraph
+      (text)
+      (text)
+      (text)
+      (text)
+      (text))))
+
+================================================================================
+Step lines that start with a digit, a word and =, or @
+================================================================================
+
+:proof:
+:step:
+2026 was long
+2 apples and
+2. The second
+key = value
+@book is a word
+::
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block
+    tag: (proof)
+    (block
+      tag: (step)
+      (paragraph
+        (text)
+        (text)
+        (text)
+        (text)
+        (text)))))
