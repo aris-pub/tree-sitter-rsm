@@ -16,6 +16,22 @@
     }
   },
   {
+    "type": "bibcomment",
+    "named": true,
+    "fields": {
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "kind",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "bibitem",
     "named": true,
     "fields": {
@@ -1105,6 +1121,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "bibcomment",
+          "named": true
+        },
         {
           "type": "bibitem",
           "named": true

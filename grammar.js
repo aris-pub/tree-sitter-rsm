@@ -492,7 +492,7 @@ export default grammar({
     // The grammar accepts any entry kind and any field name, and values in
     // quotes or as bare words, so that Python can warn about each by name
     // instead of tree-sitter error recovery dropping or merging entries.
-    references: $ => seq(':references:', repeat(choice($.bibitem, $.bibstring)), '::'),
+    references: $ => seq(':references:', repeat(choice($.bibitem, $.bibstring, $.bibcomment)), '::'),
 
     bibitem: $ => seq(
       // The '@' is part of the kind token so that the token cannot match a
@@ -501,9 +501,9 @@ export default grammar({
       '{',
       field('label', alias(token(/[^,]+?/), $.label)),
       ',',
-      choice(
-        $.bibitempair,
-        seq(repeat1(seq($.bibitempair, ',')), $.bibitempair, optional(','))),
+      $.bibitempair,
+      repeat(seq(',', $.bibitempair)),
+      optional(','),
       '}'),
 
     // "@string" also matches the kind of a bibitem, so it needs the
@@ -512,6 +512,14 @@ export default grammar({
       field('kind', alias(token(prec(1, seq('@', /[sS][tT][rR][iI][nN][gG]/))), $.kind)),
       '{',
       $.bibitempair,
+      '}'),
+
+    // A BibTeX comment. "@comment" also matches the kind of a bibitem, so it
+    // needs the higher precedence.
+    bibcomment: $ => seq(
+      field('kind', alias(token(prec(1, seq('@', /[cC][oO][mM][mM][eE][nN][tT]/))), $.kind)),
+      '{',
+      repeat(choice(/[^{}]+/, $._bibbraces)),
       '}'),
 
     bibitempair: $ => seq(

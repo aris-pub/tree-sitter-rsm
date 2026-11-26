@@ -494,3 +494,60 @@ Reference kinds in capitals and kinds that RSM does not know
       (bibitempair
         (key)
         (value)))))
+
+================================================================================
+Reference with one field and a trailing comma
+================================================================================
+
+:references:
+@online{d,
+  title = {D},
+}
+@book{b, title = {B},}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value)))))
+
+================================================================================
+Reference block with comment entries
+================================================================================
+
+:references:
+@comment{x}
+@book{b,
+  title = {B}
+}
+@COMMENT{some {nested} text, with = signs}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibcomment
+      kind: (kind))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value)))
+    (bibcomment
+      kind: (kind))))
