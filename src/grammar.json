@@ -3378,8 +3378,8 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "[^{}]+"
+            "type": "SYMBOL",
+            "name": "_bibtext"
           },
           {
             "type": "SYMBOL",
@@ -3401,8 +3401,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "[^{}]+"
+                "type": "SYMBOL",
+                "name": "_bibtext"
               },
               {
                 "type": "SYMBOL",
@@ -3416,6 +3416,17 @@
           "value": "}"
         }
       ]
+    },
+    "_bibtext": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^{}]+"
+        }
+      }
     },
     "blockcontent": {
       "type": "CHOICE",

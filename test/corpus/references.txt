@@ -551,3 +551,43 @@ Reference block with comment entries
         (value)))
     (bibcomment
       kind: (kind))))
+
+================================================================================
+Reference with a percent sign in a value
+================================================================================
+
+:references:
+@article{a,
+  title = {Sales up 50% in a year},
+  note = {Up 50\% off},
+  year = {2000}
+}
+@book{b, title = {A {B}% off}, year = {2001}}
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (references
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))
+    (bibitem
+      kind: (kind)
+      label: (label)
+      (bibitempair
+        (key)
+        (value))
+      (bibitempair
+        (key)
+        (value)))))

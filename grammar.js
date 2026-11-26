@@ -529,9 +529,18 @@ export default grammar({
         alias(/"[^"]*"/, $.quotedvalue),
         alias(/[^\s,{}"]+/, $.barevalue))),
 
-    value: $ => repeat1(choice(/[^{}]+/, $._bibbraces)),
+    value: $ => repeat1(choice($._bibtext, $._bibbraces)),
 
-    _bibbraces: $ => seq('{', repeat(choice(/[^{}]+/, $._bibbraces)), '}'),
+    _bibbraces: $ => seq('{', repeat(choice($._bibtext, $._bibbraces)), '}'),
+
+    // The text of a value keeps any % in it, and Python cuts the value at the
+    // first % that has no backslash before it. A comment token would run to the
+    // end of the line and take the closing brace and the later fields with it.
+    // A second token for % that ends at a brace changes how tree-sitter merges
+    // lexer states, and lines of a paragraph that start with a digit then fail
+    // to parse. The precedence makes the text win over the comment of the
+    // extras when a % comes right after a brace.
+    _bibtext: $ => token(prec(1, /[^{}]+/)),
 
     /////////////////////////////////////////////////////////////
     // Content choices
