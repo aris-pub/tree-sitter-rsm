@@ -315,3 +315,57 @@ Title: colon words that are not keys
 --------------------------------------------------------------------------------
 
 (source_file (block tag: (theorem) meta: (blockmeta (pair (metakey_title (title)) (metaval_title (text) (specialinline tag: (math) (asis_text)))) (pair (metakey_text (label)) (metaval_text))) (paragraph (text))))
+
+================================================================================
+Eyebrow: math tag
+================================================================================
+
+# Title
+  {:eyebrow: The :math:K:: case}
+
+Hello.
+
+--------------------------------------------------------------------------------
+
+(source_file title: (text) meta: (blockmeta (pair (metakey_title (eyebrow)) (metaval_title (text) (specialinline tag: (math) (asis_text)) (text)))) (paragraph (text)))
+
+================================================================================
+Eyebrow: dollar math then key
+================================================================================
+
+# Title
+  {:eyebrow: The $K$ case, :plain-title: Title}
+
+Hello.
+
+--------------------------------------------------------------------------------
+
+(source_file title: (text) meta: (blockmeta (pair (metakey_title (eyebrow)) (metaval_title (text) (specialinline tag: (math) (asis_text)) (text))) (pair (metakey_text (plain_title)) (metaval_text))) (paragraph (text)))
+
+================================================================================
+Author: markup in name, affiliation and note
+================================================================================
+
+:author: {
+  :name: Ada **B** Lovelace
+  :affiliation: Lab of $K_4$ graphs
+  :author-note: Note *one*
+  :email: a@x.org
+}
+::
+
+--------------------------------------------------------------------------------
+
+(source_file (block tag: (author) meta: (blockmeta (pair (metakey_title (name)) (metaval_title (text) (specialinline tag: (spanstrong) (text)) (text))) (pair (metakey_title (affiliation)) (metaval_title (text) (specialinline tag: (math) (asis_text)) (text))) (pair (metakey_title (author_note)) (metaval_title (text) (specialinline tag: (spanemphas) (text)))) (pair (metakey_text (email)) (metaval_text)))))
+
+================================================================================
+Blockname and reftext: math
+================================================================================
+
+:theorem: {:blockname: $K_4$ lemma, :reftext: the $K$ lemma, :label: t}
+  B.
+::
+
+--------------------------------------------------------------------------------
+
+(source_file (block tag: (theorem) meta: (blockmeta (pair (metakey_title (blockname)) (metaval_title (specialinline tag: (math) (asis_text)) (text))) (pair (metakey_title (reftext)) (metaval_title (text) (specialinline tag: (math) (asis_text)) (text))) (pair (metakey_text (label)) (metaval_text))) (paragraph (text))))

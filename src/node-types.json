@@ -790,27 +790,11 @@
       "required": true,
       "types": [
         {
-          "type": "affiliation",
-          "named": true
-        },
-        {
           "type": "alt",
           "named": true
         },
         {
-          "type": "author_note",
-          "named": true
-        },
-        {
-          "type": "blockname",
-          "named": true
-        },
-        {
           "type": "email",
-          "named": true
-        },
-        {
-          "type": "eyebrow",
           "named": true
         },
         {
@@ -826,10 +810,6 @@
           "named": true
         },
         {
-          "type": "name",
-          "named": true
-        },
-        {
           "type": "of",
           "named": true
         },
@@ -839,10 +819,6 @@
         },
         {
           "type": "plain_title",
-          "named": true
-        },
-        {
-          "type": "reftext",
           "named": true
         }
       ]
@@ -856,6 +832,30 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "affiliation",
+          "named": true
+        },
+        {
+          "type": "author_note",
+          "named": true
+        },
+        {
+          "type": "blockname",
+          "named": true
+        },
+        {
+          "type": "eyebrow",
+          "named": true
+        },
+        {
+          "type": "name",
+          "named": true
+        },
+        {
+          "type": "reftext",
+          "named": true
+        },
         {
           "type": "title",
           "named": true

@@ -618,23 +618,27 @@ export default grammar({
     ),
 
     metakey_text: $ => choice(
-      alias(':affiliation:', $.affiliation),
       alias(':alt:', $.alt),
-      alias(':author-note:', $.author_note),
-      alias(':blockname:', $.blockname),
       alias(':email:', $.email),
-      alias(':eyebrow:', $.eyebrow),
       alias(':plain-title:', $.plain_title),
       alias(':goal:', $.goal),
       alias(':icon:', $.icon),
       alias(':label:', $.label),
-      alias(':name:', $.name),
       alias(':of:', $.of),
       alias(':orcid:', $.orcid),
-      alias(':reftext:', $.reftext),
     ),
 
-    metakey_title: $ => alias(':title:', $.title),
+    // The values of these keys are shown to the reader, so they hold inline
+    // markup, as a title does.
+    metakey_title: $ => choice(
+      alias(':affiliation:', $.affiliation),
+      alias(':author-note:', $.author_note),
+      alias(':blockname:', $.blockname),
+      alias(':eyebrow:', $.eyebrow),
+      alias(':name:', $.name),
+      alias(':reftext:', $.reftext),
+      alias(':title:', $.title),
+    ),
 
     metakey_bool: $ => choice(
       alias(':collapsed:', $.collapsed),

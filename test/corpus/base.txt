@@ -75,8 +75,8 @@ Manuscript with title and eyebrow
   title: (text)
   meta: (blockmeta
     (pair
-      (metakey_text (eyebrow))
-      (metaval_text))))
+      (metakey_title (eyebrow))
+      (metaval_title (text)))))
 
 
 ================================================================================
@@ -101,8 +101,8 @@ Manuscript with a plain title that holds commas
       (metakey_text (plain_title))
       (metaval_text))
     (pair
-      (metakey_text (eyebrow))
-      (metaval_text))))
+      (metakey_title (eyebrow))
+      (metaval_title (text)))))
 
 
 ================================================================================
@@ -125,8 +125,8 @@ Remark with blockname
     tag: (remark)
     meta: (blockmeta
       (pair
-        (metakey_text (blockname))
-        (metaval_text))
+        (metakey_title (blockname))
+        (metaval_title (text)))
       (pair
         (metakey_bool (nonum))))
     (paragraph
@@ -148,8 +148,8 @@ Remark with blockname in inline meta
     tag: (remark)
     meta: (blockmeta
       (pair
-        (metakey_text (blockname))
-        (metaval_text))
+        (metakey_title (blockname))
+        (metaval_title (text)))
       (pair
         (metakey_text (label))
         (metaval_text)))
@@ -268,11 +268,11 @@ Author and abstract
     tag: (author)
     meta: (blockmeta
       (pair
-        (metakey_text (name))
-        (metaval_text))
+        (metakey_title (name))
+        (metaval_title (text)))
       (pair
-        (metakey_text (affiliation))
-        (metaval_text))
+        (metakey_title (affiliation))
+        (metaval_title (text)))
       (pair
         (metakey_text (email))
         (metaval_text))))
@@ -1636,8 +1636,8 @@ Figure as paragraph inside a remark
     tag: (remark)
     meta: (blockmeta
       (pair
-        (metakey_text (blockname))
-        (metaval_text)))
+        (metakey_title (blockname))
+        (metaval_title (text))))
     (paragraph
       (text))
     (block
@@ -2243,14 +2243,14 @@ Author with new metakeys
     tag: (author)
     meta: (blockmeta
       (pair
-        (metakey_text (name))
-        (metaval_text))
+        (metakey_title (name))
+        (metaval_title (text)))
       (pair
-        (metakey_text (affiliation))
-        (metaval_text))
+        (metakey_title (affiliation))
+        (metaval_title (text)))
       (pair
-        (metakey_text (author_note))
-        (metaval_text))
+        (metakey_title (author_note))
+        (metaval_title (text)))
       (pair
         (metakey_text (orcid))
         (metaval_text))
@@ -2261,11 +2261,11 @@ Author with new metakeys
     tag: (author)
     meta: (blockmeta
       (pair
-        (metakey_text (name))
-        (metaval_text))
+        (metakey_title (name))
+        (metaval_title (text)))
       (pair
-        (metakey_text (affiliation))
-        (metaval_text))
+        (metakey_title (affiliation))
+        (metaval_title (text)))
       (pair
         (metakey_text (orcid))
         (metaval_text)))))
