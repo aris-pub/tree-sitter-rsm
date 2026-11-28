@@ -24,6 +24,16 @@ Homepage = "https://github.com/aris-pub/tree-sitter-rsm"
 [project.optional-dependencies]
 core = [ "tree-sitter>=0.26,<0.27" ]
 
+# uv rebuilds an installed package only when one of its cache keys changes. A
+# grammar change edits the generated parser, so without these keys uv keeps
+# the old compiled parser.
+[tool.uv]
+cache-keys = [
+  { file = "pyproject.toml" },
+  { file = "src/parser.c" },
+  { file = "src/scanner.c" },
+]
+
 [tool.cibuildwheel]
 build = "cp311-*"
 build-frontend = "build"
